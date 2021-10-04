@@ -18,7 +18,7 @@ class CreateRatingProductsTable extends Migration
             $table->bigInteger('product_id')->unsigned();
             $table->bigInteger('customer_id')->unsigned();
             $table->text('comment');
-            $table->string('vote');
+            $table->string('vote',1);
             $table->timestamps();
             $table->foreign('product_id')->references('product_id')
             ->on('products')->onDelete('cascade')->onUpdate('cascade');
