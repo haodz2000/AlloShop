@@ -11,4 +11,11 @@ class RatingProduct extends Model
     protected $primaryKey = "id";
     // protected $fillable = [];
     protected $guarded = [];
+
+    public function customers(){
+        return $this->belongsTo('App\Model\Customer', 'customer_id', 'customer_id');
+    }
+    public function products(){
+        return $this->belongsTo('App\Model\Product', 'product_id', 'product_id');
+    }
 }
