@@ -12,7 +12,7 @@ class Category extends Model
     // protected $fillable = ["category_id", "category_name", "description"];
     protected $guarded = [];
 
-    // public function products(){
-    //     return  $this->hasMany('App\Model\Post', 'foreign_key', 'local_key');
-    // }
+    public function products(){
+        return  $this->hasMany('App\Model\Post', 'category_id', 'category_id');
+    }
 }

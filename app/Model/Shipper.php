@@ -11,4 +11,8 @@ class Shipper extends Model
     protected $primaryKey = "shipper_id";
     // protected $fillable = [];
     protected $guarded = [];
+
+    public function orders(){
+        return  $this->hasMany('App\Model\Order', 'shipper_id', 'shipper_id');
+    }
 }

@@ -11,4 +11,8 @@ class Order extends Model
     protected $primaryKey = "order_id";
     // protected $fillable = [];
     protected $guarded = [];
+
+    public function order_details(){
+        return  $this->hasMany('App\Model\OrderDetail', 'order_id', 'order_id');
+    }
 }

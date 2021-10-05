@@ -9,6 +9,17 @@ class Product extends Model
 {
     protected $table = "products"; 
     protected $primaryKey = "product_id";
-    // protected $fillable = [];
-    protected $guarded = [];
+    // protected $fillable = []; //chỉ định các trường sử dụng
+    protected $guarded = []; // sử dụng tất cả các trường
+
+    //khởi tạo quan hệ 
+    public function rating_products(){
+        return  $this->hasMany('App\Model\RatingProduct', 'product_id', 'product_id');
+    }
+    public function order_details(){
+        return  $this->hasMany('App\Model\OrderDetail', 'product_id', 'product_id');
+    }
+    public function product_details(){
+        return  $this->hasMany('App\Model\ProductDetail', 'category_id', 'category_id');
+    }
 }
