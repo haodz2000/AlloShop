@@ -11,4 +11,8 @@ class Post extends Model
     protected $primaryKey = "post_id";
     // protected $fillable = [];
     protected $guarded = [];
+
+    public function Users(){
+        return $this->belongsTo('App\Model\User', 'post_id', 'post_id');
+    }
 }
