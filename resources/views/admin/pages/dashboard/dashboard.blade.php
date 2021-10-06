@@ -2,7 +2,7 @@
 @section('title','Dashboard')
 
 @section('content')
-   <main class="page-content">
+   
 
     <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-4">
       <div class="col">
@@ -730,7 +730,6 @@
       </div>
     </div><!--end row-->
 
-  </main>
 
 
 
