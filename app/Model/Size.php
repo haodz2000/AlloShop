@@ -9,6 +9,6 @@ class Size extends Model
 {
     protected $table = "sizes";
     protected $primaryKey = "size_id";
-    // protected $fillable = [];
-    protected $guarded = [];    
+    protected $fillable = ['size'];
+    protected $guarded = [];
 }
