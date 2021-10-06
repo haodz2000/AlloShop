@@ -193,7 +193,7 @@
           <div class="menu-title">Authentication</div>
         </a>
         <ul>
-          <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
+          <li> <a href="{{route('signin')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
           </li>
           <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
           </li>

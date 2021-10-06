@@ -43,4 +43,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/signup', function () {
         return view('admin.pages.authentication.signup');
     })->name("signup");
+    Route::get('/signin', function () {
+        return view('admin.pages.authentication.signin');
+    })->name("signin");
 });
