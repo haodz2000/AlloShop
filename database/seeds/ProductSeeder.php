@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Quần thể thao frestyle',
                 'slug'=>'Quan-the-thao-freestyle',
-                'category_id '=>1,
+                'category_id'=>1,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Quần jean nam dạo phố mùa hè',
                 'slug'=>'Quan-jean-nam-dao-pho-mua-he',
-                'category_id '=>2,
+                'category_id'=>2,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Váy ngắn dạo phố nữ tính',
                 'slug'=>'Vay-ngan-dao-pho-nu-tinh',
-                'category_id '=>3,
+                'category_id'=>3,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -65,7 +65,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Đầm dự tiệc frestyle',
                 'slug'=>'Dam-du-tiec-freestyle',
-                'category_id '=>1,
+                'category_id'=>1,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Aó phông thể thao frestyle',
                 'slug'=>'ao-phong-the-thao-freestyle',
-                'category_id '=>1,
+                'category_id'=>1,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -89,7 +89,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Quần thể thao tập gym',
                 'slug'=>'Quan-the-thao-tap-gym',
-                'category_id '=>1,
+                'category_id'=>1,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
@@ -101,7 +101,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Quần đùi chạy bộ',
                 'slug'=>'Quan-dui-chay-bo',
-                'category_id '=>1,
+                'category_id'=>1,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',
