@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductDetail extends Model
 {
-    protected $table = "product_detail"; 
+    protected $table = "product_details";
     protected $primaryKey = "product_id";
-    // protected $fillable = [];
+    protected $fillable = ['quantity'];
     protected $guarded = [];
+
+    public function products(){
+        return $this->belongsTo('App\Model\Product', 'product_id', 'product_id');
+    }
+    public function sizes(){
+        return $this->belongsTo('App\Model\Size', 'size_id', 'size_id');
+    }
+    public function colors(){
+        return $this->belongsTo('App\Model\Color', 'color_id', 'color_id');
+    }
 }

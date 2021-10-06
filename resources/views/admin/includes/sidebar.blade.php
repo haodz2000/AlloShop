@@ -193,13 +193,9 @@
           <div class="menu-title">Authentication</div>
         </a>
         <ul>
-          <li> <a href="authentication-signin.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Sign In</a>
+          <li> <a href="{{route('signin')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
           </li>
-          <li> <a href="authentication-signup.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Sign Up</a>
-          </li>
-          <li> <a href="authentication-signin-with-header-footer.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Sign In with Header & Footer</a>
-          </li>
-          <li> <a href="authentication-signup-with-header-footer.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Sign Up with Header & Footer</a>
+          <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
           </li>
           <li> <a href="authentication-forgot-password.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Forgot Password</a>
           </li>

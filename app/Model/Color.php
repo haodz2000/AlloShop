@@ -11,4 +11,8 @@ class Color extends Model
     protected $primaryKey = "color_id";
     // protected $fillable = [];
     protected $guarded = [];
+
+    public function product_details(){
+        return  $this->hasMany('App\Model\ProductDetail', 'color_id', 'color_id');
+    }
 }

@@ -7,19 +7,12 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
-  <!-- Bootstrap CSS -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/css/bootstrap-extended.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-  <link href="assets/css/icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../../../../cdn.jsdelivr.net/npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css">
-
-  <!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet" />
-
+  <link rel="icon" href="{{ asset('./assets/admin/images/favicon-32x32.png') }}" type="image/png" />
   <title>Sign In</title>
+
+  {{-- CSS --}}
+  @include('admin.includes.authentication.css')
+
 </head>
 
 <body>
@@ -34,7 +27,7 @@
             <div class="card shadow rounded-0 overflow-hidden">
               <div class="row g-0">
                 <div class="col-lg-6 bg-login d-flex align-items-center justify-content-center">
-                  <img src="assets/images/error/login-img.jpg" class="img-fluid" alt="">
+                  <img src="{{asset('assets/admin/images/error/login-img.jpg')}}" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6">
                   <div class="card-body p-4 p-sm-5">
@@ -43,7 +36,7 @@
                     <form class="form-body">
                       <div class="d-grid">
                         <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
-                            <img class="me-2" src="assets/images/icons/search.svg" width="16" alt="">
+                            <img class="me-2" src="{{asset('assets/admin/images/icons/search.svg')}}" width="16" alt="">
                             <span>Sign in with Google</span>
                           </span>
                         </a>
@@ -98,9 +91,8 @@
   <!--end wrapper-->
 
 
-  <!--plugins-->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/js/pace.min.js"></script>
+    {{-- JS --}}
+    @include('admin.includes.authentication.js')
 
 
 </body>
