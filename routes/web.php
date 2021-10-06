@@ -40,4 +40,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/add-new-product', function () {
         return view('admin.pages.eCommerce.add-new-product');
     })->name("add-new-product");
+    Route::get('/signup', function () {
+        return view('admin.pages.authentication.signup');
+    })->name("signup");
 });
