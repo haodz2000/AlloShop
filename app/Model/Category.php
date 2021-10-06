@@ -9,9 +9,8 @@ class Category extends Model
 {
     protected $table = "categories";
     protected $primaryKey = "category_id";
-    // protected $fillable = ["category_id", "category_name", "description"];
+    protected $fillable = ["category_name", "description"];
     protected $guarded = [];
-
     public function products(){
         return  $this->hasMany('App\Model\Product', 'category_id', 'category_id');
     }

@@ -10,9 +10,9 @@ class User extends Model
     protected $table = "users";
     protected $primaryKey = "user_id";
     // protected $fillable = [];
-    protected $guarded = [];    
+    protected $guarded = [];
 
     public function posts(){
-        return  $this->hasMany('App\Model\Pot', 'user_id', 'user_id');
+        return  $this->hasMany('App\Model\Post', 'user_id', 'user_id');
     }
 }

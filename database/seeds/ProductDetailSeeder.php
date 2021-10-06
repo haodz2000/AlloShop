@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductDetailSeeder extends Seeder
 {
@@ -12,5 +13,55 @@ class ProductDetailSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('product_details')->insert([
+            [
+                'product_id'=>1,
+                'color_id' =>1,
+                'size_id' =>1,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>2,
+                'color_id' =>2,
+                'size_id' =>2,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>3,
+                'color_id' =>1,
+                'size_id' =>3,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>4,
+                'color_id' =>2,
+                'size_id' =>4,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>5,
+                'color_id' =>1,
+                'size_id' =>4,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>6,
+                'color_id' =>2,
+                'size_id' =>1,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>7,
+                'color_id' =>3,
+                'size_id' =>3,
+                'quantity'=>100
+            ],
+            [
+                'product_id'=>8,
+                'color_id' =>1,
+                'size_id' =>4,
+                'quantity'=>100
+            ],
+        ]);
     }
 }
