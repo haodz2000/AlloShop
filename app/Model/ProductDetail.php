@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductDetail extends Model
 {
-    protected $table = "product_details"; 
+    protected $table = "product_details";
     protected $primaryKey = "product_id";
     // protected $fillable = [];
     protected $guarded = [];
