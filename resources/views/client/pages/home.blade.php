@@ -207,7 +207,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -269,7 +269,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -295,7 +295,7 @@
                                                     <span class="product-position color1">New</span>
                                                     <span class="price">${{ $newProducts[$i]->price }}</span>
                                                     <ul>
-                                                        <li><a data-id="{{ $newProducts[$i]->product_id }}" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
@@ -482,7 +482,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $product->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $product->product_id }}" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a data-id="{{ $product->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -567,7 +567,7 @@
                                                 <img class="hover" src="{{asset('./assets/client/images/product/11h.jpg')}}" alt=""/>
                                                 <span class="price">$59</span>
                                                 <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-shopping-cart "></i></a></li>
                                                     <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                     <li><a href="#"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
@@ -658,4 +658,5 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
+        <script src="{{ asset('./assets/client/js/jquery.addtocart.js') }}"></script>
 @endsection
