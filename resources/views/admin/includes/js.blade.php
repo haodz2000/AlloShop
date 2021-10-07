@@ -3,7 +3,7 @@
 
 
 <!--plugins-->
-  <script src="{{asset('./assets/admin/js/jquery.min.js')}}"></script>
+  <script src="{{asset('./assets/admin/js/jquery-3.6.0.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/simplebar/js/simplebar.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/metismenu/js/metisMenu.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/easyPieChart/jquery.easypiechart.js')}}"></script>

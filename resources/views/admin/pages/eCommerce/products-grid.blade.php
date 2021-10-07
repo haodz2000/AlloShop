@@ -81,217 +81,33 @@
          <div class="card-body">
            <div class="product-grid">
              <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3">
-               <div class="col">
-                  <div class="card border shadow-none mb-0">
-                    <div class="card-body text-center">
-                      <img src="{{asset('./assets/admin/images/products/01.png')}}" class="img-fluid mb-3" alt=""/>
-                      <h6 class="product-title">Men White Polo T-shirt</h6>
-                      <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-                      <div class="rating mb-0">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
+               @if ($product_grid)
+                   @foreach ($product_grid as $item)
+                   <div class="col">
+                    <div class="card border shadow-none mb-0">
+                      <div class="card-body text-center">
+                        <img src="{{asset('./assets/admin/images/products/'.$item['url_image'])}}" class="img-fluid mb-3" alt=""/>
+                        <h6 class="product-title">{{$item['product_name']}}</h6>
+                        <p class="product-price fs-5 mb-1"><span>${{$item["price"]}}.00</span></p>
+                        <div class="rating mb-0">
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <small>74 Reviews</small>
+                        <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
+                          <a href="" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill" id="delete"></i> Edit</a>
+                          <a href="{{route('products-grid.delete', $item['product_id'])}}"><button class="btn btn-sm btn-outline-danger delete" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                        </div>
                       </div>
-                      <small>74 Reviews</small>
-                      <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-                        <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-                      </div>
                     </div>
-                  </div>
-               </div>
-               <div class="col">
-                <div class="card border shadow-none mb-0">
-                  <div class="card-body text-center">
-                    <img src="{{asset('./assets/admin/images/products/02.png')}}" class="img-fluid mb-3" alt=""/>
-                    <h6 class="product-title">Men White Polo T-shirt</h6>
-                    <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-                    <div class="rating mb-0">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </div>
-                    <small>65 Reviews</small>
-                    <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                      <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-                      <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-                    </div>
-                  </div>
-                </div>
-             </div>
-             <div class="col">
-              <div class="card border shadow-none mb-0">
-                <div class="card-body text-center">
-                  <img src="assets/admin/images/products/03.png" class="img-fluid mb-3" alt=""/>
-                  <h6 class="product-title">Men White Polo T-shirt</h6>
-                  <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-                  <div class="rating mb-0">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-secondary"></i>
-                    <i class="bi bi-star-fill text-secondary"></i>
-                  </div>
-                  <small>96 Reviews</small>
-                  <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                    <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-                    <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-                  </div>
-                </div>
-              </div>
-           </div>
-           <div class="col">
-            <div class="card border shadow-none mb-0">
-              <div class="card-body text-center">
-                <img src="assets/admin/images/products/04.png" class="img-fluid mb-3" alt=""/>
-                <h6 class="product-title">Men White Polo T-shirt</h6>
-                <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-                <div class="rating mb-0">
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-secondary"></i>
-                </div>
-                <small>65 Reviews</small>
-                <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                  <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-                  <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-                </div>
-              </div>
-            </div>
-         </div>
-         <div class="col">
-          <div class="card border shadow-none mb-0">
-            <div class="card-body text-center">
-              <img src="assets/admin/images/products/05.png" class="img-fluid mb-3" alt=""/>
-              <h6 class="product-title">Men White Polo T-shirt</h6>
-              <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-              <div class="rating mb-0">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-secondary"></i>
-              </div>
-              <small>35 Reviews</small>
-              <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-                <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-              </div>
-            </div>
+                 </div>
+                   @endforeach
+               @endif
           </div>
-       </div>
-       <div class="col">
-        <div class="card border shadow-none mb-0">
-          <div class="card-body text-center">
-            <img src="assets/admin/admin/images/products/06.png" class="img-fluid mb-3" alt=""/>
-            <h6 class="product-title">Men White Polo T-shirt</h6>
-            <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-            <div class="rating mb-0">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-            </div>
-            <small>74 Reviews</small>
-            <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-              <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-              <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-            </div>
-          </div>
-        </div>
-     </div>
-     <div class="col">
-      <div class="card border shadow-none mb-0">
-        <div class="card-body text-center">
-          <img src="assets/admin/images/products/07.png" class="img-fluid mb-3" alt=""/>
-          <h6 class="product-title">Men White Polo T-shirt</h6>
-          <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-          <div class="rating mb-0">
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-            <i class="bi bi-star-fill text-warning"></i>
-          </div>
-          <small>42 Reviews</small>
-          <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-            <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-            <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-          </div>
-        </div>
-      </div>
-   </div>
-   <div class="col">
-    <div class="card border shadow-none mb-0">
-      <div class="card-body text-center">
-        <img src="assets/admin/images/products/08.png" class="img-fluid mb-3" alt=""/>
-        <h6 class="product-title">Men White Polo T-shirt</h6>
-        <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-        <div class="rating mb-0">
-          <i class="bi bi-star-fill text-warning"></i>
-          <i class="bi bi-star-fill text-warning"></i>
-          <i class="bi bi-star-fill text-secondary"></i>
-          <i class="bi bi-star-fill text-secondary"></i>
-          <i class="bi bi-star-fill text-secondary"></i>
-        </div>
-        <small>24 Reviews</small>
-        <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-          <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-          <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-        </div>
-      </div>
-    </div>
- </div>
- <div class="col">
-  <div class="card border shadow-none mb-0">
-    <div class="card-body text-center">
-      <img src="assets/admin/images/products/09.png" class="img-fluid mb-3" alt=""/>
-      <h6 class="product-title">Men White Polo T-shirt</h6>
-      <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-      <div class="rating mb-0">
-        <i class="bi bi-star-fill text-warning"></i>
-        <i class="bi bi-star-fill text-warning"></i>
-        <i class="bi bi-star-fill text-warning"></i>
-        <i class="bi bi-star-fill text-warning"></i>
-        <i class="bi bi-star-fill text-secondary"></i>
-      </div>
-      <small>55 Reviews</small>
-      <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-        <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-        <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="col">
-<div class="card border shadow-none mb-0">
-  <div class="card-body text-center">
-    <img src="assets/admin/images/products/10.png" class="img-fluid mb-3" alt=""/>
-    <h6 class="product-title">Men White Polo T-shirt</h6>
-    <p class="product-price fs-5 mb-1"><span>$250.99</span></p>
-    <div class="rating mb-0">
-      <i class="bi bi-star-fill text-warning"></i>
-      <i class="bi bi-star-fill text-warning"></i>
-      <i class="bi bi-star-fill text-warning"></i>
-      <i class="bi bi-star-fill text-warning"></i>
-      <i class="bi bi-star-fill text-warning"></i>
-    </div>
-    <small>74 Reviews</small>
-    <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-      <a href="javascript:;" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
-      <a href="javascript:;" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</a>
-    </div>
-  </div>
-</div>
-</div>
-</div><!--end row-->
+      </div><!--end row-->
 </div>
 <nav class="float-end mt-4" aria-label="Page navigation">
 <ul class="pagination">
@@ -300,6 +116,30 @@
 <li class="page-item"><a class="page-link" href="#">2</a></li>
 <li class="page-item"><a class="page-link" href="#">3</a></li>
 <li class="page-item"><a class="page-link" href="#">Next</a></li>
+{{-- <script src="{{asset('./assets/admin/js/jquery-3.6.0.min.js')}}"></script>
+<script>
+  $(document).ready(function () {
+    // e.preventDefault();
+    $(".delete").click(function(){
+      var id = $(this).data("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      var url = "{{route('products-grid')}}";
+      $.ajax({
+        type: "GET",
+        url: "/admin/products-grid/"+id,
+        data: {
+          "id": id,
+          "_token": token,
+        },
+        success: function (response) {
+          console.log("Ok");
+          // window.location.reload();
+          // $(".col").html(ajax_load).load(url);
+        }
+      });
+    });
+  });
+</script> --}}
 </ul>
 </nav>
 

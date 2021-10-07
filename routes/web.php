@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +26,9 @@ Route::group(["prefix" => "admin"], function(){
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', function () {
-        return view('admin.pages.eCommerce.products-list');
-    })->name("products-list");
-    Route::get('/products-grid', function () {
-        return view('admin.pages.eCommerce.products-grid');
-    })->name("products-grid");
+    Route::get('/products-list', [ProductController::class, 'product_list'])->name("products-list");
+    Route::get('/products-grid', [ProductController::class, 'product_grid'])->name("products-grid");
+    Route::get('/products-grid/{id}', [ProductController::class, 'delete_product_grid'])->name("products-grid.delete");
     Route::get('/products-categories', function () {
         return view('admin.pages.eCommerce.products-categories');
     })->name("products-categories");
