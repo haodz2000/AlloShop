@@ -32,20 +32,12 @@
         <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bi bi-grid"></i>
           </div>
-          <div class="menu-title">Application</div>
+          <div class="menu-title">Category</div>
         </a>
         <ul>
-          <li> <a href="app-emailbox.html"><i class="bi bi-arrow-right-short"></i>Email</a>
+          <li> <a href="{{route('category.index')}}"><i class="bi bi-arrow-right-short"></i>List Category</a>
           </li>
-          <li> <a href="app-chat-box.html"><i class="bi bi-arrow-right-short"></i>Chat Box</a>
-          </li>
-          <li> <a href="app-file-manager.html"><i class="bi bi-arrow-right-short"></i>File Manager</a>
-          </li>
-          <li> <a href="app-to-do.html"><i class="bi bi-arrow-right-short"></i>Todo List</a>
-          </li>
-          <li> <a href="app-invoice.html"><i class="bi bi-arrow-right-short"></i>Invoice</a>
-          </li>
-          <li> <a href="app-fullcalender.html"><i class="bi bi-arrow-right-short"></i>Calendar</a>
+          <li> <a href="{{route('category.create')}}"><i class="bi bi-arrow-right-short"></i>Add Category</a>
           </li>
         </ul>
       </li>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controller\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('client.pages.home');
+Route::get('/','HomeController@index')->name('home');
+Route::prefix('')->group(function () {
+    Route::post('/addCart/{id}','CartController@store');
 });
 
 
@@ -22,6 +24,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
+
     Route::get('/products-list', function () {
         return view('admin.pages.eCommerce.products-list');
     })->name("products-list");
@@ -40,10 +43,14 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/add-new-product', function () {
         return view('admin.pages.eCommerce.add-new-product');
     })->name("add-new-product");
+
     Route::get('/signup', function () {
         return view('admin.pages.authentication.signup');
     })->name("signup");
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
     })->name("signin");
+
+    Route::resource('/category','CategoryController');
+
 });
