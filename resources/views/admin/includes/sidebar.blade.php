@@ -62,17 +62,17 @@
           <div class="menu-title">eCommerce</div>
         </a>
         <ul>
-          <li> <a href="ecommerce-products-list.html"><i class="bi bi-arrow-right-short"></i>Products List</a>
+          <li> <a href="{{route('products-list')}}"><i class="bi bi-arrow-right-short"></i>Products List</a>
           </li>
-          <li> <a href="ecommerce-products-grid.html"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
+          <li> <a href="{{route('products-grid')}}"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
           </li>
-          <li> <a href="ecommerce-products-categories.html"><i class="bi bi-arrow-right-short"></i>Categories</a>
+          <li> <a href="{{route('products-categories')}}"><i class="bi bi-arrow-right-short"></i>Categories</a>
           </li>
-          <li> <a href="ecommerce-orders.html"><i class="bi bi-arrow-right-short"></i>Orders</a>
+          <li> <a href="{{route('orders')}}"><i class="bi bi-arrow-right-short"></i>Orders</a>
           </li>
-          <li> <a href="ecommerce-orders-detail.html"><i class="bi bi-arrow-right-short"></i>Order details</a>
+          <li> <a href="{{route('orders-detail')}}"><i class="bi bi-arrow-right-short"></i>Order details</a>
           </li>
-          <li> <a href="ecommerce-add-new-product.html"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
+          <li> <a href="{{route('add-new-product')}}"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
           </li>
           <li> <a href="ecommerce-add-new-product-2.html"><i class="bi bi-arrow-right-short"></i>Add New Product 2</a>
           </li>
