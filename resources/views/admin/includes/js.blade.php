@@ -15,7 +15,7 @@
   <script src="{{asset('./assets/admin/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
-
+  <script src="{{asset('./assets/admin/js/product-ajax.js')}}"></script>
 <!--app-->
   <script src="{{asset('./assets/admin/js/app.js')}}"></script>
   <script src="{{asset('./assets/admin/js/index.js')}}"></script>

@@ -38,9 +38,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/orders-detail', function () {
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
-    Route::get('/add-new-product', function () {
-        return view('admin.pages.eCommerce.add-new-product');
-    })->name("add-new-product");
+    Route::get('/add-new-product', [ProductController::class, 'product_list_add'])->name("add-new-product");
 
     Route::get('/signup', function () {
         return view('admin.pages.authentication.signup');
@@ -48,6 +46,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
     })->name("signin");
+    Route::post('/add-new-product/add', [ProductController::class, 'add_new_product'])->name("add-new-product.add");
 
     Route::resource('/category','CategoryController');
 

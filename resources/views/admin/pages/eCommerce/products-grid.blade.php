@@ -33,7 +33,7 @@
       <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
-                                <a href="javascript:;" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Product</a>
+                                <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Product</a>
                             </div>
                             <div class="col-lg-9 col-xl-10">
                                 <form class="float-lg-end">
@@ -79,8 +79,8 @@
           </div>
          </div>
          <div class="card-body">
-           <div class="product-grid">
-             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3">
+           <div class="product-grid" id="product-list">
+             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 product-list">
                @if ($product_grid)
                    @foreach ($product_grid as $item)
                    <div class="col">
@@ -99,7 +99,7 @@
                         <small>74 Reviews</small>
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
                           <a href="" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill" id="delete"></i> Edit</a>
-                          <a href="{{route('products-grid.delete', $item['product_id'])}}"><button class="btn btn-sm btn-outline-danger delete" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <a href="#"><button class="btn btn-sm btn-outline-danger delete" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
                     </div>
@@ -116,30 +116,6 @@
 <li class="page-item"><a class="page-link" href="#">2</a></li>
 <li class="page-item"><a class="page-link" href="#">3</a></li>
 <li class="page-item"><a class="page-link" href="#">Next</a></li>
-{{-- <script src="{{asset('./assets/admin/js/jquery-3.6.0.min.js')}}"></script>
-<script>
-  $(document).ready(function () {
-    // e.preventDefault();
-    $(".delete").click(function(){
-      var id = $(this).data("id");
-      var token = $("meta[name='csrf-token']").attr("content");
-      var url = "{{route('products-grid')}}";
-      $.ajax({
-        type: "GET",
-        url: "/admin/products-grid/"+id,
-        data: {
-          "id": id,
-          "_token": token,
-        },
-        success: function (response) {
-          console.log("Ok");
-          // window.location.reload();
-          // $(".col").html(ajax_load).load(url);
-        }
-      });
-    });
-  });
-</script> --}}
 </ul>
 </nav>
 
