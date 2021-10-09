@@ -18,24 +18,34 @@ class Cart extends Model
             $this->totalQuantity = $cart->totalQuantity;
         }
     }
-    public function addCart($product,$id)
+    public function addCart($product,$sku,$color ='Trắng',$size = 'S',$quantity = 1)
     {
         $newProduct = [
+            'sku'=>$sku,
             'quantity'=>0 ,'price'=>$product->price,
-            'color'=>'Đen','size'=>'S',
+            'color'=>$color,'size'=>$size,
             'productInfo'=>$product
         ];
         if($this->products)
         {
-            if(array_key_exists($id,$this->products))
+            if(array_key_exists($sku,$this->products) )
             {
-                $newProduct = $this->products[$id];
+                $newProduct = $this->products[$sku];
             }
         }
-        $newProduct['quantity']++;
+        $newProduct['quantity'] += $quantity;
         $newProduct['price'] = $newProduct['quantity']*$product->price;
-        $this->products[$id] = $newProduct;
-        $this->totalQuantity++;
-        $this->totalPrice += $product->price;
+        $this->products[$sku] = $newProduct;
+        $this->totalQuantity += $quantity;
+        $this->totalPrice += $product->price*$quantity;
+    }
+    public function deleteItem($sku)
+    {
+        if(array_key_exists($sku,$this->products)){
+            $this->totalPrice -= $this->products[$sku]['price'];
+            $this->totalQuantity -= $this->products[$sku]['quantity'];
+            unset($this->products[$sku]);
+        }
+        
     }
 }

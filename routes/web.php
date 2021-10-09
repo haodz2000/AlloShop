@@ -17,7 +17,11 @@ use App\Http\Controller\CategoryController;
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
     Route::post('/addCart/{id}','CartController@store');
+    Route::post('/deleteItemCart','CartController@delete');
 });
+Route::get('/shipping','CartController@index')->name('shipping');
+Route::get('/products/{slug}','ProductController@product_detail');
+Route::post('/products/detail','ProductController@getInfoProduct');
 
 
 Route::group(["prefix" => "admin"], function(){

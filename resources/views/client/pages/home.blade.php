@@ -202,14 +202,14 @@
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
-                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
-                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
                                                             <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                         <div class="product-des">
                                                             <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
@@ -264,14 +264,14 @@
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
-                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
-                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
                                                             <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                         <div class="product-des">
                                                             <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
@@ -290,14 +290,14 @@
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
                                                 <figure>
-                                                    <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
-                                                    <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt=""/>
+                                                    <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                     <span class="product-position color1">New</span>
                                                     <span class="price">${{ $newProducts[$i]->price }}</span>
                                                     <ul>
                                                         <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="'/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                     <div class="product-des">
                                                         <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
@@ -477,14 +477,14 @@
                                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
-                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt=""/>
-                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt=""/>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $product->price }}</span>
                                                         <ul>
                                                             <li><a data-id="{{ $product->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                         <div class="product-des">
                                                             <a href="#"><h4>{{ $product->product_name }}</h4></a>
