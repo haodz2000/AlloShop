@@ -1054,5 +1054,5 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addtocart.js') }}"></script>
+        <script src="{{ asset('./assets/client/js/jquery.cart.js') }}"></script>
 @endsection
