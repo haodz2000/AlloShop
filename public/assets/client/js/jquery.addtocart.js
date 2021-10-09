@@ -81,7 +81,7 @@ $(document).on('click','.close-item',function(){
                 $("#shiping").load(" #shiping");
             },
             error: function(){
-                console.log('error')
+                console.log('errors')
             }
         })
     }
