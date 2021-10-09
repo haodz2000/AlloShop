@@ -47,7 +47,7 @@ class CartController extends Controller
                         'totalQuantity'=>Session('Cart')->totalQuantity,
                         'totalPrice'=>Session('Cart')->totalPrice,
                         'success'=>'Thêm mới thành công',
-                        'class'=>'alert alert-success'
+                        'class'=>'alert alert-success  '
                    ]);
                }
              }
