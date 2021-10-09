@@ -15,26 +15,26 @@ class CategorySeeder extends Seeder
         //
         DB::table('categories')->insert([
             [
-                'category_name'=>'Quần',
-                'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
-                 ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
-                '
+                'category_name'=> 'Quần',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+             Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
+              ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
+            '
             ],
             [
-                'category_name'=>'Áo',
-                'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
-                 ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
-                '
+                'category_name'=> 'Áo',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+             Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
+              ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
+            '
             ],
             [
-                'category_name'=>'Váy',
-                'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
-                 ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
-                '
-            ]
+                'category_name'=> 'Váy',
+            'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+             Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
+              ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.
+            '
+            ],
         ]);
     }
 }

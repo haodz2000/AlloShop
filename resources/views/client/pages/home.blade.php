@@ -259,6 +259,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
+<<<<<<< Updated upstream
                                         @if ($newProducts)
                                             @for ($i=2;$i<4;$i++)
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
@@ -302,12 +303,36 @@
                                                     <div class="product-des">
                                                         <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
                                                         <p>{{ $newProducts[$i]->categories->category_name }}</p>
+
                                                     </div>
                                                 </figure>
                                             </div>
                                         </div>
                                         @endfor
                                     @endif
+                                    </div>
+                                </div>
+                                <div class="row accurate">
+                                    @for ($i =4; $i<8; $i++)
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
+                                        <div class="product-single">
+                                            <figure>
+                                                <img class="normal" src="{{asset('./assets/client/images/product/'.$products[$i]->url_image)}}" alt=""/>
+                                                <img class="hover" src="{{asset('./assets/client/images/product/'.$products[$i]->url_image)}}" alt=""/>
+                                                <span class="price">{{ $products[$i]->price }}</span>
+                                                <ul>
+                                                    <li><a data-id="{{$products[$i]->product_id}}" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a data-id="{{$products[$i]->product_id}}" href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                    <li><a data-id="{{$products[$i]->product_id}}" href="#"><i class="fa fa-eye"></i></a></li>
+                                                </ul>
+                                                <div class="product-des">
+                                                    <a href="#"><h4>{{ $products[$i]->product_name }}</h4></a>
+                                                    <p>{{ $products[$i]->category->category_name }}</p>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    @endfor
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="men">
@@ -495,6 +520,8 @@
                                             </div>
                                         @endforeach
                                     @endif
+
+
                                 </div>
                             </div>
                             <div class="tab-pane" id="popular-products">
@@ -629,7 +656,6 @@
         <!--support area end here-->
 @endsection
 
-
 @section('js_by_page')
         <script src="{{ asset('./assets/client/js/vendor/./jquery-1.12.0.min.js')}}"></script>
 		<!-- bootstrap js -->
@@ -658,5 +684,5 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addtocart.js') }}"></script>
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
 @endsection

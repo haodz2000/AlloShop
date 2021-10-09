@@ -29,6 +29,7 @@ class SizeSeeder extends Seeder
             [
                 'size'=>'XXL'
             ]
+
         ]);
     }
 }

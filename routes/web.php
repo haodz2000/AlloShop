@@ -54,7 +54,5 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
     })->name("signin");
-
     Route::resource('/category','CategoryController');
-
 });

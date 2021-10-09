@@ -3,31 +3,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-function changeCart(data){
-    var cart ='';
-    cart = '<div class="hove"><i class="fa fa-shopping-cart"></i><p class="be"><span>'+data.totalQuantity+'</span></p><div class="cart-list"><ul class="list">';
-    $.each(data.products, function (index,val){
-        cart +=' <li>\
-                                <a href="#" title="" class="cart-product-image floatleft"><img style="width: 100px" src="/store/images/product/'+val.productInfo.image+'" alt="Product"></a>\
-                            <div class="text">\
-                                <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>\
-                                <h4>'+val.productInfo.name+'</h4>\
-                                <div class="product-price">\
-                                    <div class="price">'+ Intl.NumberFormat('en-US', {style : 'currency', currency : 'USD'}).format(val.price)+'</div>\
-                                    <div class="price-old">Quantity: <strong>'+ val.quantity+'</strong></div>\
-                                </div>\
-                            </div>\
-                        </li>';
-    })
-    cart += '</ul>\
-                            <div class="total"><span class="left">Total:</span> <span class="right">$'+data.totalPrice+'</span></div>\
-                    <div class="bottom">\
-                    <a class="btn4" href="#" title="viewcart">View Cart</a>\
-                    <a class="btn4" href="#" title="checkout">Check out</a>\
-                    </div>\
-                    </div>';
-    return cart;
-}
 $(document).on('change',"input#quantity",function(){
     var quantity = parseInt($("#quantity").val());
     quantity = (isNaN(quantity)&&quantity>0)?quantity:1;
@@ -109,8 +84,5 @@ $(document).on('click','.close-item',function(){
                 console.log('error')
             }
         })
-    };
-
-
+    }
 })
-

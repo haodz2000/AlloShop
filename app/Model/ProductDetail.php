@@ -9,9 +9,9 @@ class ProductDetail extends Model
 {
     protected $table = "product_details";
     protected $primaryKey = "product_id";
-    protected $fillable = ['quantity'];
-    protected $guarded = [];
 
+    protected $fillable = ['size_id','color_id','quantity'];
+    protected $guarded = [];
     public function products(){
         return $this->belongsTo('App\Model\Product', 'product_id', 'product_id');
     }

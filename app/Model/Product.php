@@ -9,10 +9,10 @@ class Product extends Model
 {
     protected $table = "products";
     protected $primaryKey = "product_id";
-    protected $fillable = ['product_name','slug','category_id','description','url_image','quantity_orderd','price','discount']; //chỉ định các trường sử dụng
-    protected $guarded = []; // sử dụng tất cả các trường
 
-    //khởi tạo quan hệ
+    protected $fillable = ['product_name','slug','category_id','description',
+    'url_image','quantity_orderd','gender','price','discount','status'];
+    protected $guarded = [];
     public function rating_products(){
         return  $this->hasMany('App\Model\RatingProduct', 'product_id', 'product_id');
     }
@@ -25,4 +25,5 @@ class Product extends Model
     public function categories(){
         return $this->belongsTo('App\Model\Category', 'category_id', 'category_id');
     }
+
 }
