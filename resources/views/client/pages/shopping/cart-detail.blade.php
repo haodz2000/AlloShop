@@ -142,7 +142,7 @@
                                         <td><i class="fa fa-times close-item" data-sku="{{ $product['sku'] }}"></i></td>
                                     </tr>
                                     @endforeach
-                                    
+
                                 </table>
                                 <div class="total text-right">
 
@@ -392,7 +392,7 @@
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                       <div class="panel-body">
-                                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account. 
+                                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
                                       </div>
                                     </div>
                                   </div>
@@ -427,7 +427,7 @@
                                 </div>
                             </div>
                         </div>
-           
+
                         <div class="next-step text-center">
 
                         <button>Next Step</button>
@@ -445,9 +445,9 @@
                     <a class="btn btn-success" href="{{ route('home') }}">Quay lại </a>
                 </div>
                 @endif
-               
 
-            </div> 
+
+            </div>
 
         </div>
 
