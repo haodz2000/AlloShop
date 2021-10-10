@@ -28,19 +28,6 @@
           </li>
         </ul>
       </li>
-      <li>
-        <a href="javascript:;" class="has-arrow">
-          <div class="parent-icon"><i class="bi bi-grid"></i>
-          </div>
-          <div class="menu-title">Category</div>
-        </a>
-        <ul>
-          <li> <a href="{{route('category.index')}}"><i class="bi bi-arrow-right-short"></i>List Category</a>
-          </li>
-          <li> <a href="{{route('category.create')}}"><i class="bi bi-arrow-right-short"></i>Add Category</a>
-          </li>
-        </ul>
-      </li>
       <li class="menu-label">UI Elements</li>
       <li>
         <a href="javascript:;" class="has-arrow">
@@ -66,7 +53,7 @@
           </li>
           <li> <a href="{{route('products-grid')}}"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
           </li>
-          <li> <a href="{{route('products-categories')}}"><i class="bi bi-arrow-right-short"></i>Categories</a>
+          <li> <a href="{{route('category.index')}}"><i class="bi bi-arrow-right-short"></i>Categories</a>
           </li>
           <li> <a href="{{route('orders')}}"><i class="bi bi-arrow-right-short"></i>Orders</a>
           </li>

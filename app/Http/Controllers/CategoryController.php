@@ -14,8 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $listCategory = Category::orderBy('category_id','desc')->get();
-        return view('admin.pages.category.index',compact('listCategory'));
+
+        $listCategory = Category::orderBy('category_id','desc')->paginate(3);
+        return view('admin.pages.eCommerce.category.index',compact('listCategory'));
     }
 
     /**
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.category.create');
+
     }
 
     /**
@@ -35,30 +36,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $data = $request->validate(
             [
                 'category_name'   => 'required|unique:categories|max:100',
                 'description'   => 'required'
-            ],
-            [
-                'category_name.required'    => 'Field Name is required',
-                'category_name.unique'      => 'This name is exist',
-                'description.required'  => 'Field description is required',
             ]
         );
 
         $category = new Category();
         $category->category_name   = $data['category_name'];
         $category->description = $data['description'];
-        
         $addSuccess = $category->save();
-        if ($addSuccess) {
-            return redirect()->route('category.index')->with('success','Add category is success!');
-        }
-        else {
-            return redirect()->back()->with('error','Has been error!');
-        }
+
+        return Response()->json($category);
     }
 
     /**
@@ -67,7 +58,7 @@ class CategoryController extends Controller
      * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
     }
@@ -78,10 +69,9 @@ class CategoryController extends Controller
      * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-       $category = Category::find($id);
-       return view('admin.pages.category.edit', compact('category'));
+
     }
 
     /**
@@ -91,30 +81,16 @@ class CategoryController extends Controller
      * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $data = $request->validate(
-            [
-                'category_name'   => 'required|max:100',
-                'description'   => 'required'
-            ],
-            [
-                'category_name.required'    => 'Field Name is required',
-                'description.required'  => 'Field description is required'
-            ]
-        );
 
-        $category = Category::find($id);
-        $category->category_name   = $data['category_name'];
-        $category->description = $data['description'];
+        $category = Category::find($request['id']);
+        $category->category_name = $request['category_name'];
+        $category->description = $request['description'];
+        $category->save();
         
-        $updateSuccess = $category->save();
-        if ($updateSuccess) {
-            return redirect()->route('category.index')->with('success','Update category is success!');
-        }
-        else {
-            return redirect()->back()->with('error','Has been error!');
-        }
+        return Response()->json($category);
+
     }
 
     /**
@@ -125,7 +101,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->with('success','Delete category success!');
+        $category = Category::find($id);
+        $category->delete($id);
+        return Response()->json($category);
     }
 }
