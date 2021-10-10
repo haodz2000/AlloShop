@@ -8,6 +8,7 @@
         <title>@yield('title')</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">​
         @include('admin.includes.css')
     </head>
     <body>
@@ -22,7 +23,21 @@
         <!--end sidebar -->
 
        <!--start content-->
-        @yield('content')
+
+       <main class="page-content">
+            @if ( Session::has('success') )
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>{{ Session::get('success') }}</strong>
+                </div>
+            @endif
+        
+            @if ( Session::has('error') )
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>{{ Session::get('error') }}</strong>
+                </div>
+            @endif
+            @yield('content')
+        </main>
        <!--end page main-->
 
         @include('admin.includes.customizer')

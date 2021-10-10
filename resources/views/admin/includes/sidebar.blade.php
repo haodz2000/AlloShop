@@ -74,7 +74,10 @@
           </li>
           <li> <a href="ecommerce-products-grid.html"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
           </li>
+
           <li> <a href="ecommerce-products-categories.html"><i class="bi bi-arrow-right-short"></i>Categories</a>
+          <li> <a href="{{route('category.index')}}"><i class="bi bi-arrow-right-short"></i>Categories</a>
+
           </li>
           <li> <a href="ecommerce-orders.html"><i class="bi bi-arrow-right-short"></i>Orders</a>
           </li>

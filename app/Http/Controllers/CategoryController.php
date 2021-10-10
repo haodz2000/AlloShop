@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $listCategory = Category::orderBy('category_id','desc')->paginate(3);
+        return view('admin.pages.eCommerce.category.index',compact('listCategory'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,8 +36,20 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $data = $request->validate(
+            [
+                'category_name'   => 'required|unique:categories|max:100',
+                'description'   => 'required'
+            ]
+        );
+
+        $category = new Category();
+        $category->category_name   = $data['category_name'];
+        $category->description = $data['description'];
+        $addSuccess = $category->save();
+
+        return Response()->json($category);
     }
 
     /**
@@ -57,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
     }
 
     /**
@@ -69,7 +83,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $category = Category::find($request['id']);
+        $category->category_name = $request['category_name'];
+        $category->description = $request['description'];
+        $category->save();
+        
+        return Response()->json($category);
+
     }
 
     /**
@@ -80,6 +101,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category = Category::find($id);
+        $category->delete($id);
+        return Response()->json($category);
     }
 }
