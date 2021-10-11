@@ -55,7 +55,6 @@
          </div>
         </div>
         <div class="card-body">
-
           <div class="table-responsive">
             <table class="table align-middle table-striped">
               <tbody>
@@ -84,7 +83,7 @@
                           <div class="d-flex align-items-center gap-3 fs-6">
                             <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi   bi-eye-fill"></i></a>
                             <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi  bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi  bi-trash-fill"></i></a>
+                            <a href="#" class="delete-list" class="text-danger" data-id="{{$item['product_id']}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi  bi-trash-fill"></i></a>
                           </div>
                         </td>
                       </tr>

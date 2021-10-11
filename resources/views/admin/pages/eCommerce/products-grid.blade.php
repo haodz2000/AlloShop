@@ -31,11 +31,16 @@
 
     <div class="card">
       <div class="card-body">
+        @if (session()->has('noti'))
+        <div class="alert alert-success" role="alert">
+            <strong>{{session('noti')}}</strong>
+        </div>
+        @endif
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
                                 <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Product</a>
                             </div>
-                            <div class="col-lg-9 col-xl-10">
+                            {{-- <div class="col-lg-9 col-xl-10">
                                 <form class="float-lg-end">
                                     <div class="row row-cols-lg-auto g-2">
                                         <div class="col-12">
@@ -46,11 +51,10 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
     </div>
-
       <div class="card">
          <div class="card-header py-3"> 
           <div class="row g-3 align-items-center">
@@ -98,8 +102,8 @@
                         </div>
                         <small>74 Reviews</small>
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                          <a href="" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill" id="delete"></i> Edit</a>
-                          <a href="#"><button class="btn btn-sm btn-outline-danger delete" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <a href="" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
+                          <a href="#"><button class="btn btn-sm btn-outline-danger delete-grid" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
                     </div>

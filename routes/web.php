@@ -26,9 +26,11 @@ Route::group(["prefix" => "admin"], function(){
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', [ProductController::class, 'product_list'])->name("products-list");
-    Route::get('/products-grid', [ProductController::class, 'product_grid'])->name("products-grid");
-    Route::get('/products-grid/{id}', [ProductController::class, 'delete_product_grid'])->name("products-grid.delete");
+    Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
+    Route::get('/products-grid/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
+    Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
+    Route::post('/add-new-product/add', [ProductController::class, 'addProductGrid'])->name("add-new-product.add");
     Route::get('/products-categories', function () {
         return view('admin.pages.eCommerce.products-categories');
     })->name("products-categories");
@@ -38,15 +40,14 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/orders-detail', function () {
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
-    Route::get('/add-new-product', [ProductController::class, 'product_list_add'])->name("add-new-product");
+    Route::get('/add-new-product', [ProductController::class, 'listCategory'])->name("add-new-product");
 
     Route::get('/signup', function () {
         return view('admin.pages.authentication.signup');
     })->name("signup");
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
-    })->name("signin");
-    Route::post('/add-new-product/add', [ProductController::class, 'add_new_product'])->name("add-new-product.add");
+    })->name("signin"); 
 
     Route::resource('/category','CategoryController');
 

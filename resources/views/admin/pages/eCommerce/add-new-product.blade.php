@@ -46,19 +46,19 @@
                  <div class="col-12 col-lg-12">
                     <div class="card shadow-none bg-light border">
                       <div class="card-body">
-                        <form class="row g-3" action="{{route('add-new-product.add')}}" method="POST" enctype="multipart/form-data">
+                        <form class="row g-3" enctype="multipart/form-data" id="add-new-product" method="POST" action="{{route('add-new-product.add')}}">
                           @csrf
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Product name</label>
-                            <input type="text" class="form-control" placeholder="Product name" name="product_name">
+                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="product_name">
                           </div>
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" placeholder="Slug" name="slug">
+                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="slug">
                           </div>
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Category</label>
-                            <select class="form-select" aria-label="Default select example" name="category_id">
+                            <select class="form-select" aria-label="Default select example" name="category_id" id="category_id">
                               <option selected>Please select category</option>
                               @foreach ($category_name_list as $item)
                                 <option value="{{$item['category_id']}}">{{$item['category_name']}}</option>
@@ -70,7 +70,7 @@
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Gender</label>
                             {{-- <input type="text" class="form-control" placeholder="Gender"> --}}
-                            <select class="form-select" aria-label="Default select example" name="gender">
+                            <select class="form-select" aria-label="Default select example" name="gender" id="gender">
                                 <option selected>Please select gender</option>
                                 <option value="1">Nam</option>
                                 <option value="2">Nữ</option>
@@ -79,11 +79,11 @@
                           </div>
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Price</label>
-                            <input type="text" class="form-control" placeholder="Price" name="price">
+                            <input type="text" class="form-control" required placeholder="Price" name="price" id="price">
                           </div>
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Discount</label>
-                            <input type="text" class="form-control" placeholder="Discount" name="discount">
+                            <input type="text" class="form-control" required placeholder="Discount" name="discount" id="discount">
                           </div>
                           {{-- <div class="col-12">
                             <label class="form-label">Brand</label>
@@ -91,13 +91,13 @@
                           </div> --}}
                           <div class="col-12">
                             <label class="form-label">Images</label>
-                            <input class="form-control" type="file" name="url_image">
+                            <input class="form-control" required type="file" name="url_image" id="url_image">
                           </div>
                           <div class="col-12">
                             <label class="form-label">Full description</label>
-                            <textarea class="form-control" placeholder="Full description" rows="4" cols="4" name="description"></textarea>
+                            <textarea class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
                           </div>
-                          <button type="submit" class="btn btn-primary add-new-product">Add New Product</button>
+                          <button type="submit" class="btn btn-primary add-new-product" value="submit" name="add">Add New Product</button>
                         </form>
                       </div>
                     </div>

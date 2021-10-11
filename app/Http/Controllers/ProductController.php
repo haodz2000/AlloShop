@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function product_list(){
+    public function productList(){
         $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
         return view("admin.pages.eCommerce.products-list", [
             'product_list' => $product_list,
@@ -18,18 +18,23 @@ class ProductController extends Controller
             'product_grid' => $product_list,
         ]);
     }
-    public function product_grid(){
+    public function productGrid(){
         $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
         return view("admin.pages.eCommerce.products-grid", [
             'product_grid' => $product_list,
         ]);
     }
-    public function delete_product_grid($id)
+    public function destroyProductGrid($id)
     {
         $delete = Product::find($id)->delete();
         return redirect()->route('products-grid');
     }
-    public function product_list_add(){
+    public function destroyProductList($id)
+    {
+        $delete = Product::find($id)->delete();
+        return redirect()->route('products-list');
+    }
+    public function listCategory(){
         // $gender_list = Product::select('gender')->get();
         $category_name_list = Category::select('category_name', 'category_id')->get();
         return view("admin.pages.eCommerce.add-new-product", [
@@ -37,13 +42,37 @@ class ProductController extends Controller
             'category_name_list' => $category_name_list,
         ]);
     }
-    public function add_new_product(Request $request){
-        $data = $request->except('_token');
-        // $data = $request->input('url_image');
-        $photo = $request->file('url_image')->getClientOriginalName();
-        $destination = base_path() . '/public/assets/admin/images';
-        $request->file('url_image')->move($destination, $photo);
-        // dd($data);
-        return redirect()->route('add-new-product');
+    public function addProductGrid(Request $request){
+        // dd($request->all());
+
+        if ($request->has('add')) {
+            $product_name = $request->input('product_name');
+            $slug = $request->input('slug');
+            $category_id = $request->input('category_id');
+            $gender = $request->input('gender');
+            $price = $request->input('price');
+            $discount = $request->input('discount');
+            $description = $request->input('description');
+            // $data = $request->except('_token', 'add');
+            $data = $request->input('url_image');
+            $photo = $request->file('url_image')->getClientOriginalName();
+
+            $destination = base_path() . '/public/assets/admin/images/products';               
+            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh 
+            // dd($data);
+            // $create = Product::create($data);
+            Product::create([
+                'product_name' => $product_name,
+                'slug' => $slug,
+                'category_id' => $category_id,
+                'gender' => $gender,
+                'price' => $price,
+                'discount' => $discount,
+                'url_image' => $photo,
+                'description' => $description
+            ]);
+            return redirect()->route('products-grid')->with('noti', 'Add successfull');
+        }
+        return redirect()->route('products-grid');
     }
 }
