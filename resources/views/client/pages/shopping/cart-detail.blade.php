@@ -1,6 +1,6 @@
 @extends('client.index')
 @section('css_by_page')
-<link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
         <!-- Place favicon.ico in the root directory -->
         <!-- all css here -->
         <!-- bootstrap v3.3.6 css -->
