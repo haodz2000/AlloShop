@@ -75,4 +75,54 @@ class ProductController extends Controller
         }
         return redirect()->route('products-grid');
     }
+    public function updateView($id){
+        $product = Product::find($id);
+        $category_name_list = Category::select('category_name', 'category_id')->get();
+        return view('admin.pages.eCommerce.update-product', [
+            'product' => $product,
+            'category' => $category_name_list,
+        ]);
+    }
+    public function updateProductGrid(Request $request, $id){
+        if ($request->has('update')) {
+            // $data = $request->except('_token', 'update');
+            // dd($product->product_name);
+            $product_name = $request->input('product_name');
+            $slug = $request->input('slug');
+            $category_id = $request->input('category_id');
+            $gender = $request->input('gender');
+            $price = $request->input('price');
+            $discount = $request->input('discount');
+            $description = $request->input('description');
+            $data = $request->input('url_image');
+            $photo = $request->file('url_image')->getClientOriginalName();
+            $destination = base_path() . '/public/assets/admin/images/products';               
+            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh 
+            // dd($data);
+            // $create = Product::create($data);
+            // Product::create([
+            //     'product_name' => $product_name,
+            //     'slug' => $slug,
+            //     'category_id' => $category_id,
+            //     'gender' => $gender,
+            //     'price' => $price,
+            //     'discount' => $discount,
+            //     'url_image' => $photo,
+            //     'description' => $description
+            // ]);
+            $product = Product::find($id);
+            $product->product_name = $product_name;
+            $product->slug = $slug;
+            $product->category_id = $category_id;
+            $product->gender = $gender;
+            $product->price = $price;
+            $product->discount = $discount;
+            $product->url_image = $photo;
+            $product->description = $description;
+            // dd($product);
+            $product->save();
+            return redirect()->route('products-grid')->with('noti', 'Add successfull');
+        }
+        return redirect()->route('products-grid');
+    }
 }

@@ -74,8 +74,8 @@
           </li>
           <li> <a href="{{route('add-new-product')}}"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
           </li>
-          <li> <a href="ecommerce-add-new-product-2.html"><i class="bi bi-arrow-right-short"></i>Add New Product 2</a>
-          </li>
+          {{-- <li> <a href="{{route('update-product')}}"><i class="bi bi-arrow-right-short"></i>Update Product</a>
+          </li> --}}
           <li> <a href="ecommerce-transactions.html"><i class="bi bi-arrow-right-short"></i>Transactions</a>
           </li>
         </ul>

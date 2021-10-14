@@ -102,7 +102,7 @@
                         </div>
                         <small>74 Reviews</small>
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                          <a href="" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-fill"></i> Edit</a>
+                          <a href="{{route('products-grid.update-view', $item['product_id'])}}" class="btn btn-sm btn-outline-primary" data-id="{{$item['product_id']}}"><i class="bi bi-pencil-fill"></i> Edit</a>
                           <a href="#"><button class="btn btn-sm btn-outline-danger delete-grid" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
