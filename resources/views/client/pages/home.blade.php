@@ -197,8 +197,9 @@
                             <div role="tabpanel" class="tab-pane active" id="all">
                                 <div class="row accurate">
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
-                                        @if ($newProducts)
+                                        @if (isset($newProducts))
                                             @for ($i = 0;$i<2;$i++)
+                                            @if (isset($newProduct[$i]))
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
@@ -207,7 +208,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -218,11 +219,13 @@
                                                     </figure>
                                                 </div>
                                             </div>
+                                            @endif
+
                                             @endfor
                                         @endif
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accurate">
-                                        <div class="product-banner-slider">
+                                        <div  class="product-banner-slider">
                                             <div class="single-banner">
                                                 <div class="product-img">
                                                     <img src="{{asset('./assets/client/images/banner/1.jpg')}}" alt=""/>
@@ -259,8 +262,9 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
-                                        @if ($newProducts)
+                                        @if (isset($newProducts))
                                             @for ($i=2;$i<4;$i++)
+                                            @if (isset($newProduct[$i]))
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
@@ -269,7 +273,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $newProducts[$i]->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -280,13 +284,16 @@
                                                     </figure>
                                                 </div>
                                             </div>
+                                            @endif
+
                                             @endfor
                                         @endif
                                     </div>
                                 </div>
                                 <div class="row accurate">
-                                    @if ($newProducts)
+                                    @if (isset($newProducts))
                                         @for ($i=4;$i<8;$i++)
+                                        @if (isset($newProduct[$i]))
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
                                                 <figure>
@@ -295,7 +302,7 @@
                                                     <span class="product-position color1">New</span>
                                                     <span class="price">${{ $newProducts[$i]->price }}</span>
                                                     <ul>
-                                                        <li><a data-id="{{ $newProducts[$i]->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                         <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
@@ -306,6 +313,8 @@
                                                 </figure>
                                             </div>
                                         </div>
+                                        @endif
+
                                         @endfor
                                     @endif
                                     </div>
@@ -355,7 +364,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="best-seller">
                                 <div class="row accurate">
-                                    @if ($listProducts)
+                                    @if (isset($listProducts))
                                         @foreach ($listProducts as $product )
                                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
@@ -365,7 +374,7 @@
                                                         <span class="product-position color1">New</span>
                                                         <span class="price">${{ $product->price }}</span>
                                                         <ul>
-                                                            <li><a data-id="{{ $product->product_id }}" class="addCart" href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="/products/{{ $product->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                             <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
