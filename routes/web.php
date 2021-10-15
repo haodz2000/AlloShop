@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\CategoryController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -52,6 +53,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
     })->name("signin"); 
+    Route::get('/banner', [BannerController::class, 'show'])->name("banners"); 
 
     Route::resource('/category','CategoryController');
 

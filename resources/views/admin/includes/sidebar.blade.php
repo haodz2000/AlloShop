@@ -57,6 +57,19 @@
       </li>
       <li>
         <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class="bi bi-award"></i>
+          </div>
+          <div class="menu-title">Banners</div>
+        </a>
+        <ul>
+          <li> <a href={{Route('banners')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
+          </li>
+          <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bi bi-bag-check"></i>
           </div>
           <div class="menu-title">eCommerce</div>
