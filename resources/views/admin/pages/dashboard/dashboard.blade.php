@@ -1,3 +1,4 @@
+
 @extends('admin.index')  
 @section('title','Dashboard')
 
@@ -730,8 +731,12 @@
       </div>
     </div><!--end row-->
 
+<<<<<<< Updated upstream
   </main>
 
 
 
 @endsection
+=======
+@endsection
+>>>>>>> Stashed changes

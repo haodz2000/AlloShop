@@ -197,6 +197,7 @@
                             <div role="tabpanel" class="tab-pane active" id="all">
                                 <div class="row accurate">
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
+<<<<<<< Updated upstream
                                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
                                                 <figure>
@@ -235,9 +236,37 @@
                                                 </figure>
                                             </div>
                                         </div>
+=======
+                                        @if (isset($newProducts))
+                                            @for ($i = 0;$i<2;$i++)
+                                            @if (isset($newProduct[$i]))
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
+                                                <div class="product-single">
+                                                    <figure>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <span class="product-position color1">New</span>
+                                                        <span class="price">${{ $newProducts[$i]->price }}</span>
+                                                        <ul>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
+                                                            <p>{{ $newProducts[$i]->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                            @endfor
+                                        @endif
+>>>>>>> Stashed changes
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 accurate">
-                                        <div class="product-banner-slider">
+                                        <div  class="product-banner-slider">
                                             <div class="single-banner">
                                                 <div class="product-img">
                                                     <img src="{{asset('./assets/client/images/banner/1.jpg')}}" alt=""/>
@@ -274,6 +303,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
+<<<<<<< Updated upstream
                                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
                                                 <figure>
@@ -293,6 +323,41 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
+=======
+                                        @if (isset($newProducts))
+                                            @for ($i=2;$i<4;$i++)
+                                            @if (isset($newProduct[$i]))
+                                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
+                                                <div class="product-single">
+                                                    <figure>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$newProducts[$i]->url_image)}}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <span class="product-position color1">New</span>
+                                                        <span class="price">${{ $newProducts[$i]->price }}</span>
+                                                        <ul>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
+                                                            <p>{{ $newProducts[$i]->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            @endif
+
+                                            @endfor
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row accurate">
+                                    @if (isset($newProducts))
+                                        @for ($i=4;$i<8;$i++)
+                                        @if (isset($newProduct[$i]))
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
+>>>>>>> Stashed changes
                                             <div class="product-single">
                                                 <figure>
                                                     <img class="normal" src="{{asset('./assets/client/images/product/4.jpg')}}" alt=""/>
@@ -300,6 +365,7 @@
                                                     <span class="product-position color1">New</span>
                                                     <span class="price">$40</span>
                                                     <ul>
+<<<<<<< Updated upstream
                                                         <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-eye"></i></a></li>
@@ -307,10 +373,20 @@
                                                     <div class="product-des">
                                                         <a href="#"><h4>Froge Vintage</h4></a>
                                                         <p>Women Dress</p>
+=======
+                                                        <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                        <li><a href="/products/{{ $newProducts[$i]->slug }}"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                    <div class="product-des">
+                                                        <a href="#"><h4>{{ $newProducts[$i]->product_name }}</h4></a>
+                                                        <p>{{ $newProducts[$i]->categories->category_name }}</p>
+>>>>>>> Stashed changes
                                                     </div>
                                                 </figure>
                                             </div>
                                         </div>
+<<<<<<< Updated upstream
                                     </div>
                                 </div>
                                 <div class="row accurate">
@@ -387,124 +463,12 @@
                                                 </div>
                                             </figure>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="men">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/2.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/2h.jpg')}}" alt=""/>
-                                            <span class="price">$20</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>Pumaa Redwine</h4></a>
-                                                <p>Men -shirt</p>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="women">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/8.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/8h.jpg')}}" alt=""/>
-                                            <span class="price">$60</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>Nikea Sports Shoe</h4></a>
-                                                <p>Women Shoes</p>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="electronics">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/5.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/5h.jpg')}}" alt=""/>
-                                            <span class="price">$30</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>Beat HeadPhone</h4></a>
-                                                <p>Accessories</p>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="accessories">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/5.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/5h.jpg')}}" alt=""/>
-                                            <span class="price">$30</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>Beat HeadPhone</h4></a>
-                                                <p>Accessories</p>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/6.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/6h.jpg')}}" alt=""/>
-                                            <span class="product-position color1">New</span>
-                                            <span class="price">$19</span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>GUCCI Glass</h4></a>
-                                                <p>Accessories</p>
-                                            </div>
-                                        </figure>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                    <div class="product-single">
-                                        <figure>
-                                            <img class="normal" src="{{asset('./assets/client/images/product/7.jpg')}}" alt=""/>
-                                            <img class="hover" src="{{asset('./assets/client/images/product/7h.jpg')}}" alt=""/>
-                                            <span class="product-position color2">Sale!</span>
-                                            <span class="price"><del>$360</del><strong>$200</strong></span>
-                                            <ul>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                            <div class="product-des">
-                                                <a href="#"><h4>Sony 4k  Smart Tv</h4></a>
-                                                <p>Accessories</p>
-                                            </div>
-                                        </figure>
+=======
+                                        @endif
+
+                                        @endfor
+                                    @endif
+>>>>>>> Stashed changes
                                     </div>
                                 </div>
                             </div>
@@ -552,6 +516,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="best-seller">
                                 <div class="row accurate">
+<<<<<<< Updated upstream
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                         <div class="product-single">
                                             <figure>
@@ -567,6 +532,27 @@
                                                 <div class="product-des">
                                                     <a href="#"><h4>Rolex Machine</h4></a>
                                                     <p>Accessories</p>
+=======
+                                    @if (isset($listProducts))
+                                        @foreach ($listProducts as $product )
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
+                                                <div class="product-single">
+                                                    <figure>
+                                                        <img class="normal" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        <span class="product-position color1">New</span>
+                                                        <span class="price">${{ $product->price }}</span>
+                                                        <ul>
+                                                            <li><a href="/products/{{ $product->slug }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="#"><h4>{{ $product->product_name }}</h4></a>
+                                                            <p>{{ $product->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
+>>>>>>> Stashed changes
                                                 </div>
                                             </figure>
                                         </div>
@@ -864,4 +850,9 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
+<<<<<<< Updated upstream
 @endsection
+=======
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
+@endsection
+>>>>>>> Stashed changes

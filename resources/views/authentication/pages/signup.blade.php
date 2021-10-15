@@ -10,7 +10,7 @@
   <link rel="icon" href="{{ asset('./assets/admin/images/favicon-32x32.png') }}" type="image/png" />
   
   {{-- CSS --}}
-   @include('admin.includes.authentication.css')
+   @include('authentication.includes.css')
 
 
   <title>Sigh Up</title>
@@ -34,7 +34,8 @@
                   <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title">Sign Up</h5>
                     <p class="card-text mb-5">See your growth and get consulting support!</p>
-                    <form class="form-body">
+                    <form class="form-body" action="{{route('signup.store')}}" method="post">
+                      @csrf
                       <div class="d-grid">
                         <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
                             <img class="me-2" src="{{asset('assets/admin/images/icons/search.svg')}}" width="16" alt="">
@@ -50,22 +51,48 @@
                             <label for="inputName" class="form-label">Name</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5" id="inputName" placeholder="Enter Name">
+                              <input type="text" name="name" value="{{old('name')}}" class="form-control radius-30 ps-5" id="inputName" placeholder="Enter Name">
                             </div>
+                            @if ($errors->has('name'))
+                              <span class="text-danger">{{$errors->first('name')}}</span>
+                            @endif
                           </div>
                           <div class="col-12">
                             <label for="inputEmailAddress" class="form-label">Email Address</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" placeholder="Email Address">
+                              <input type="email" value="{{old('email')}}" name="email" class="form-control radius-30 ps-5" id="inputEmailAddress" placeholder="Email Address">
                             </div>
+                            @if ($errors->has('email'))
+                              <span class="text-danger">{{$errors->first('email')}}
+                            @endif
                           </div>
                           <div class="col-12">
                             <label for="inputChoosePassword" class="form-label">Enter Password</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" placeholder="Enter Password">
+                              <input type="password" name="password" class="form-control radius-30 ps-5" id="inputChoosePassword" placeholder="Enter Password">
                             </div>
+                            @if ($errors->has('password'))
+                              <span class="text-danger">{{$errors->first('password')}}</span>
+                            @endif
+                          </div>
+                          <div class="col-12">
+                            <label for="inputChoosePassword" class="form-label">Confirm Password</label>
+                            <div class="ms-auto position-relative">
+                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
+                              <input type="password" name="confirm-password" class="form-control radius-30 ps-5" id="inputConfirmPassword" placeholder="Confirm Password">
+                            </div>
+                            @if ($errors->has('confirm-password'))
+                                <span class="text-danger">{{$errors->first('confirm-password')}}</span>
+                            @endif
+                          </div>
+                          <div class="col-12">
+                              @if ( Session::has('error') )
+                                  <div class="alert alert-danger alert-dismissible" role="alert">
+                                      <strong>{{ Session::get('error') }}</strong>
+                                  </div>
+                              @endif
                           </div>
                           <div class="col-12">
                             <div class="form-check form-switch">
@@ -75,11 +102,11 @@
                           </div>
                           <div class="col-12">
                             <div class="d-grid">
-                              <button type="submit" class="btn btn-primary radius-30">Sign in</button>
+                              <button type="submit" class="btn btn-primary radius-30">Sign Up</button>
                             </div>
                           </div>
                           <div class="col-12">
-                            <p class="mb-0">Already have an account? <a href="authentication-signin.html">Sign up here</a></p>
+                            <p class="mb-0">Already have an account? <a href="{{route('signin.index')}}">Sign in here</a></p>
                           </div>
                         </div>
                     </form>
@@ -98,7 +125,7 @@
 
 
   {{-- JS --}}
-  @include('admin.includes.authentication.js')
+  @include('authentication.includes.js')
 
   
 </body>

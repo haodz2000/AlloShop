@@ -1,3 +1,4 @@
+@if (Auth::check())
 <!Doctype html>
 <html class="no-js" lang="en">
 
@@ -52,3 +53,11 @@
 
 <!-- Mirrored from staging-themelocation.com/allo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Aug 2021 16:32:14 GMT -->
 </html>
+
+
+@else
+    @extends('authentication.pages.signin');
+@endif
+
+
+

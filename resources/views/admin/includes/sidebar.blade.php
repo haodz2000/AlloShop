@@ -196,9 +196,13 @@
           <div class="menu-title">Authentication</div>
         </a>
         <ul>
+<<<<<<< Updated upstream
           <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
+=======
+          <li> <a href="{{route('signin.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
+>>>>>>> Stashed changes
           </li>
-          <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
+          <li> <a href="{{route('signup.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
           </li>
           <li> <a href="authentication-forgot-password.html" target="_blank"><i class="bi bi-arrow-right-short"></i>Forgot Password</a>
           </li>
