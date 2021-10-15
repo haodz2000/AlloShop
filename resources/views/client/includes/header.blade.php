@@ -16,51 +16,58 @@
                             <li><a href="#"><i class="fa fa-user"></i>Account</a></li>
                             <li><a href="#"><i class="fa fa-heart-o"></i>Wishlist</a></li>
                             <li class="cart cart-area">
+                                @if ($cart = Session('Cart'))
                                 <div class="hove">
                                     <i class="fa fa-shopping-cart"></i>
-                                    <p class="be"><span>02</span></p>
+                                    <p class="be"><span>{{ $cart->totalQuantity }}</span></p>
                                     <div class="cart-list">
                                         <ul class="list">
+                                            @foreach ($cart->products as $product )
                                             <li>
-                                                <a href="#" title="" class="cart-product-image floatleft"><img src="{{asset('./assets/client/images/blog/1-sm.jpg')}}" alt="Product"></a>
+                                                <a href="#" title="" class="cart-product-image floatleft"><img style="width: 108px; height:85px" src="{{asset('./assets/client/images/product/'.$product['productInfo']->url_image)}}" alt="Product"></a>
                                                 <div class="text">
-                                                    <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
-                                                    <h4>Legging Cathedral</h4>
+                                                    <a class="close close-item" data-sku="{{ $product['sku'] }}" title="close"><i class="fa fa-times-circle"></i></a>
+                                                    <h4>{{ $product['productInfo']->product_name }}</h4>
+                                                    <div>
+                                                        <span>Quantity:{{ $product['quantity'] }}</span>
+                                                    </div>
                                                     <div class="product-price">
-                                                        <div class="price-old"><del>$700.00</del></div>
-                                                        <div class="price">$350.00</div>
+                                                        <div class="price"><del>${{ number_format($product['productInfo']->price,2) }}</del></div>
+                                                        <div class="price">
+                                                            TotalPrice:  ${{ number_format($product['price'],2) }}
+                                                        </div>
+                                                        <div>
+                                                            <span>Color:{{ $product['color'] }}</span>|
+                                                            <span>Size:{{ $product['size']  }}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <a href="#" title="" class="cart-product-image floatleft"><img src="{{asset('./assets/client/images/blog/2-sm.jpg')}}" alt="Product"></a>
-                                                <div class="text">
-                                                    <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
-                                                    <h4>Legging Cathedral</h4>
-                                                    <div class="product-price">
-                                                        <div class="price-old"><del>$350.00</del></div>
-                                                        <div class="price">$300.00</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="#" title="" class="cart-product-image floatleft"><img src="{{asset('./assets/client/images/blog/3-sm.jpg')}}" alt="Product"></a>
-                                                <div class="text">
-                                                    <a class="close" href="#" title="close"><i class="fa fa-times-circle"></i></a>
-                                                    <h4>Legging Cathedral</h4>
-                                                    <div class="product-price">
-                                                        <div class="price">$50.00</div>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
-                                        <div class="total"><span class="left">Total:</span> <span class="right">$1121.98</span></div>
+                                        <div class="total"><span class="left">Total:</span> <span class="right">${{ number_format($cart->totalPrice,2) }}</span></div>
+                                        <div class="bottom">
+                                            <a class="btn4" href="{{ route('shipping') }}" title="viewcart">View Cart</a>
+                                            <a class="btn4" href="{{ route('shipping') }}" title="checkout">Check out</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
+                                <div class="hove">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <p class="be"><span>0</span></p>
+                                    <div class="cart-list">
+                                        <ul class="list">
+                                        </ul>
+                                        <div class="total"><span class="left">Total:</span> <span class="right">$0</span></div>
                                         <div class="bottom">
                                             <a class="btn4" href="#" title="viewcart">View Cart</a>
                                             <a class="btn4" href="#" title="checkout">Check out</a>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+
                             </li>
                         </ul>
                     </div>

@@ -28,27 +28,6 @@
           </li>
         </ul>
       </li>
-      <li>
-        <a href="javascript:;" class="has-arrow">
-          <div class="parent-icon"><i class="bi bi-grid"></i>
-          </div>
-          <div class="menu-title">Application</div>
-        </a>
-        <ul>
-          <li> <a href="app-emailbox.html"><i class="bi bi-arrow-right-short"></i>Email</a>
-          </li>
-          <li> <a href="app-chat-box.html"><i class="bi bi-arrow-right-short"></i>Chat Box</a>
-          </li>
-          <li> <a href="app-file-manager.html"><i class="bi bi-arrow-right-short"></i>File Manager</a>
-          </li>
-          <li> <a href="app-to-do.html"><i class="bi bi-arrow-right-short"></i>Todo List</a>
-          </li>
-          <li> <a href="app-invoice.html"><i class="bi bi-arrow-right-short"></i>Invoice</a>
-          </li>
-          <li> <a href="app-fullcalender.html"><i class="bi bi-arrow-right-short"></i>Calendar</a>
-          </li>
-        </ul>
-      </li>
       <li class="menu-label">UI Elements</li>
       <li>
         <a href="javascript:;" class="has-arrow">
@@ -65,28 +44,38 @@
       </li>
       <li>
         <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class="bi bi-award"></i>
+          </div>
+          <div class="menu-title">Banners</div>
+        </a>
+        <ul>
+          <li> <a href={{Route('banners')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
+          </li>
+          <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bi bi-bag-check"></i>
           </div>
           <div class="menu-title">eCommerce</div>
         </a>
         <ul>
-          <li> <a href="ecommerce-products-list.html"><i class="bi bi-arrow-right-short"></i>Products List</a>
+          <li> <a href="{{route('products-list')}}"><i class="bi bi-arrow-right-short"></i>Products List</a>
           </li>
-          <li> <a href="ecommerce-products-grid.html"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
+          <li> <a href="{{route('products-grid')}}"><i class="bi bi-arrow-right-short"></i>Products Grid</a>
           </li>
-
-          <li> <a href="ecommerce-products-categories.html"><i class="bi bi-arrow-right-short"></i>Categories</a>
           <li> <a href="{{route('category.index')}}"><i class="bi bi-arrow-right-short"></i>Categories</a>
-
           </li>
-          <li> <a href="ecommerce-orders.html"><i class="bi bi-arrow-right-short"></i>Orders</a>
+          <li> <a href="{{route('orders')}}"><i class="bi bi-arrow-right-short"></i>Orders</a>
           </li>
-          <li> <a href="ecommerce-orders-detail.html"><i class="bi bi-arrow-right-short"></i>Order details</a>
+          <li> <a href="{{route('orders-detail')}}"><i class="bi bi-arrow-right-short"></i>Order details</a>
           </li>
-          <li> <a href="ecommerce-add-new-product.html"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
+          <li> <a href="{{route('add-new-product')}}"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
           </li>
-          <li> <a href="ecommerce-add-new-product-2.html"><i class="bi bi-arrow-right-short"></i>Add New Product 2</a>
-          </li>
+          {{-- <li> <a href="{{route('update-product')}}"><i class="bi bi-arrow-right-short"></i>Update Product</a>
+          </li> --}}
           <li> <a href="ecommerce-transactions.html"><i class="bi bi-arrow-right-short"></i>Transactions</a>
           </li>
         </ul>
@@ -195,12 +184,8 @@
           </div>
           <div class="menu-title">Authentication</div>
         </a>
-        <ul>
-<<<<<<< Updated upstream
-          <li> <a href="{{route('signup')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
-=======
+        <ul>                
           <li> <a href="{{route('signin.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
->>>>>>> Stashed changes
           </li>
           <li> <a href="{{route('signup.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
           </li>

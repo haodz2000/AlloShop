@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
@@ -11,9 +12,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        //
-<<<<<<< Updated upstream
-=======
         DB::table('products')->insert([
             [
                 'product_name'=>'Quần thể thao frestyle',
@@ -112,6 +110,5 @@ class ProductSeeder extends Seeder
                 'discount'=> 0.2
             ],
         ]);
->>>>>>> Stashed changes
     }
 }
