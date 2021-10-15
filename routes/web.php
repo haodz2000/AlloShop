@@ -54,6 +54,7 @@ Route::group(["prefix" => "admin"], function(){
         return view('admin.pages.authentication.signin');
     })->name("signin"); 
     Route::get('/banner', [BannerController::class, 'show'])->name("banners"); 
+    Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy"); 
 
     Route::resource('/category','CategoryController');
 
