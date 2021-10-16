@@ -26,7 +26,7 @@ Route::post('/products/detail','ProductController@getInfoProduct');
 
 Route::group(["prefix" => "admin",'middleware' => "auth"], function(){
     Route::get('/', function () {
-        dd(Auth::user());
+        // dd(Auth::user());
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
@@ -51,9 +51,13 @@ Route::group(["prefix" => "admin",'middleware' => "auth"], function(){
     Route::get('/orders-detail', function () {
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
-    
-    
-    //Category
+    Route::get('/signup', function () {
+        return view('admin.pages.authentication.signup');
+    })->name("signup");
+    Route::get('/signin', function () {
+        return view('admin.pages.authentication.signin');
+    })->name("signin"); 
+    Route::get('/banner', [BannerController::class, 'show'])->name("banners"); 
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 });
