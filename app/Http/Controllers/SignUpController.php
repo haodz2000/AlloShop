@@ -20,7 +20,6 @@ class SignUpController extends Controller
     {       
         return view('authentication.pages.signup');
     }
-
     /**
      * Show the form for creating a new resource.
      *
