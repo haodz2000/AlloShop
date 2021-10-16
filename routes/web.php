@@ -24,7 +24,7 @@ Route::get('/shipping','CartController@index')->name('shipping');
 Route::get('/products/{slug}','ProductController@product_detail');
 Route::post('/products/detail','ProductController@getInfoProduct');
 
-Route::group(["prefix" => "admin",'middleware' => "auth"], function(){
+Route::group(["prefix" => "admin"], function(){
     Route::get('/', function () {
         // dd(Auth::user());
         return view('admin.pages.dashboard.dashboard');
