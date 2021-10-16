@@ -44,6 +44,19 @@
       </li>
       <li>
         <a href="javascript:;" class="has-arrow">
+          <div class="parent-icon"><i class="bi bi-award"></i>
+          </div>
+          <div class="menu-title">Banners</div>
+        </a>
+        <ul>
+          <li> <a href={{Route('banners')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
+          </li>
+          <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:;" class="has-arrow">
           <div class="parent-icon"><i class="bi bi-bag-check"></i>
           </div>
           <div class="menu-title">eCommerce</div>
@@ -61,8 +74,8 @@
           </li>
           <li> <a href="{{route('add-new-product')}}"><i class="bi bi-arrow-right-short"></i>Add New Product</a>
           </li>
-          <li> <a href="ecommerce-add-new-product-2.html"><i class="bi bi-arrow-right-short"></i>Add New Product 2</a>
-          </li>
+          {{-- <li> <a href="{{route('update-product')}}"><i class="bi bi-arrow-right-short"></i>Update Product</a>
+          </li> --}}
           <li> <a href="ecommerce-transactions.html"><i class="bi bi-arrow-right-short"></i>Transactions</a>
           </li>
         </ul>

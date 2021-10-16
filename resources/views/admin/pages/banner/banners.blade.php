@@ -1,16 +1,16 @@
 @extends('admin.index')
-@section('title', "Products Grid")
+@section('title', "Banner")
 @section('content')
-
+<main class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-      <div class="breadcrumb-title pe-3">eCommerce</div>
+      <div class="breadcrumb-title pe-3">Banners</div>
       <div class="ps-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0 p-0">
             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Products Grid</li>
+            <li class="breadcrumb-item active" aria-current="page">Banners List</li>
           </ol>
         </nav>
       </div>
@@ -38,7 +38,7 @@
         @endif
                         <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
-                                <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Product</a>
+                                <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Banner</a>
                             </div>
                             {{-- <div class="col-lg-9 col-xl-10">
                                 <form class="float-lg-end">
@@ -61,7 +61,7 @@
             <div class="col-lg-3 col-md-6 me-auto">
               <div class="ms-auto position-relative">
                 <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                <input class="form-control ps-5" type="text" placeholder="search produts">
+                <input class="form-control ps-5" type="text" placeholder="search banners">
               </div>
             </div>
             <div class="col-lg-2 col-6 col-md-3">
@@ -83,16 +83,17 @@
           </div>
          </div>
          <div class="card-body">
-           <div class="product-grid" id="product-list">
-             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 product-list">
-               @if ($product_grid)
-                   @foreach ($product_grid as $item)
-                   <div class="col">
+           <div class="product-grid" id="banner-list">
+               {{-- {{$banner_list}} --}}
+             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 banner-list">
+               @if ($banner_list)
+                   @foreach ($banner_list as $item)
+                   <div class="col" style="width: 500px">
                     <div class="card border shadow-none mb-0">
                       <div class="card-body text-center">
-                        <img src="{{asset('./assets/admin/images/products/'.$item['url_image'])}}" class="img-fluid mb-3" alt=""/>
-                        <h6 class="product-title">{{$item['product_name']}}</h6>
-                        <p class="product-price fs-5 mb-1"><span>${{$item["price"]}}.00</span></p>
+                        <img src="{{asset('./assets/admin/images/banners/'.$item['url_banner'])}}" style="width: 500px" class="img-fluid mb-3" alt=""/>
+                        <h6 class="product-title">{{$item['name']}}</h6>
+                        {{-- <p class="product-price fs-5 mb-1"><span>${{$item["price"]}}.00</span></p>
                         <div class="rating mb-0">
                           <i class="bi bi-star-fill text-warning"></i>
                           <i class="bi bi-star-fill text-warning"></i>
@@ -100,10 +101,10 @@
                           <i class="bi bi-star-fill text-warning"></i>
                           <i class="bi bi-star-fill text-warning"></i>
                         </div>
-                        <small>74 Reviews</small>
+                        <small>74 Reviews</small> --}}
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                          <a href="{{route('products-grid.update-view', $item['product_id'])}}" class="btn btn-sm btn-outline-primary" data-id="{{$item['product_id']}}"><i class="bi bi-pencil-fill"></i> Edit</a>
-                          <a href="#"><button class="btn btn-sm btn-outline-danger delete-grid" data-id="{{$item['product_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <a href="" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i> Edit</a>
+                          <a href=""><button class="btn btn-sm btn-outline-danger delete-banner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
                     </div>
@@ -125,6 +126,5 @@
 
 </div>
 </div>
-
-  
+</main>   
 @endsection
