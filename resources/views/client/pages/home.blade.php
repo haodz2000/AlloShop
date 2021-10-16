@@ -199,7 +199,7 @@
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
                                         @if (isset($newProducts))
                                             @for ($i = 0;$i<2;$i++)
-                                            @if (isset($newProduct[$i]))
+                                            @if (isset($newProducts[$i]))
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
@@ -264,7 +264,7 @@
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
                                         @if (isset($newProducts))
                                             @for ($i=2;$i<4;$i++)
-                                            @if (isset($newProduct[$i]))
+                                            @if (isset($newProducts[$i]))
                                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
                                                     <figure>
@@ -293,7 +293,7 @@
                                 <div class="row accurate">
                                     @if (isset($newProducts))
                                         @for ($i=4;$i<8;$i++)
-                                        @if (isset($newProduct[$i]))
+                                        @if (isset($newProducts[$i]))
                                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
                                                 <figure>

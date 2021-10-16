@@ -18,10 +18,13 @@ Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
     Route::post('/addCart/{id}','CartController@store');
     Route::post('/deleteItemCart','CartController@delete');
+    Route::post('/updateCart','CartController@update');
+    Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
 });
 Route::get('/shipping','CartController@index')->name('shipping');
 Route::get('/products/{slug}','ProductController@product_detail');
 Route::post('/products/detail','ProductController@getInfoProduct');
+
 
 
 Route::group(["prefix" => "admin"], function(){

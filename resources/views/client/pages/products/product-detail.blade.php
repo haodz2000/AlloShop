@@ -185,6 +185,7 @@
                                                         <li><option value="{{ $value->color_id }}">{{ $value->colors->color }}</option></li>
                                                     @endforeach
                                                 </select>
+
                                             @endif
                                             {{-- <li><span class="c-2"><i class="fa fa-check"></i></span></li>
 
@@ -210,7 +211,7 @@
                                             <tr>
                                                 <td>
                                                     @if ($productDetail)
-                                                        <select data-id="{{ $productDetail[0]->product_id }}" required name="size" id="size">
+                                                        <select style="height:100%" data-id="{{ $productDetail[0]->product_id }}" required name="size" id="size">
                                                             <option value="">Size</option>
                                                             @foreach ($productDetail as $key=>$value )
                                                                 <option value="{{ $value->size_id }}">{{ $value->sizes->size }}</option>
