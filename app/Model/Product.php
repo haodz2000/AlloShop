@@ -10,10 +10,7 @@ class Product extends Model
     protected $table = "products";
     protected $primaryKey = "product_id";
 
-    // protected $fillable = ['product_name','slug','category_id','description','url_image','quantity_orderd','price','discount']; //chỉ định các trường sử dụng
     protected $guarded = []; // sử dụng tất cả các trường
-
-
     protected $fillable = ['product_name','slug','category_id','description',
     'url_image','quantity_orderd','gender','price','discount','status'];
     public function rating_products(){

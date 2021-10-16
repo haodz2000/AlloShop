@@ -1,3 +1,4 @@
+
 @extends('admin.index')  
 @section('title','Dashboard')
 
@@ -729,8 +730,5 @@
         </div>
       </div>
     </div><!--end row-->
-
-
-
 
 @endsection

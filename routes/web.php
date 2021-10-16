@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\CategoryController;
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controller\SignUpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,26 +27,27 @@ Route::prefix('')->group(function () {
 
 Route::get('/products/{slug}','ProductController@product_detail');
 
-
-Route::group(["prefix" => "admin"], function(){
+Route::group(["prefix" => "admin",'middleware' => "auth"], function(){
     Route::get('/', function () {
+        // dd(Auth::user());
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
-    Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
-    Route::get('/products-grid/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
-    Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
-    Route::get('/add-new-product', [ProductController::class, 'listCategory'])->name("add-new-product");
-    Route::get('/update-product', function () {
-        return view('admin.pages.eCommerce.update-product');
-    })->name('update-product');
-    Route::get('/products-grid/{id}', [ProductController::class, 'updateView'])->name("products-grid.update-view");
-    Route::post('/update-product/{id}', [ProductController::class, 'updateProductGrid'])->name("products-grid.update");
-    Route::post('/add-new-product/add', [ProductController::class, 'addProductGrid'])->name("add-new-product.add");
+    //Product
+    Route::get('/products-list', function () {
+        return view('admin.pages.eCommerce.products-list');
+    })->name("products-list");
+    Route::get('/products-grid', function () {
+        return view('admin.pages.eCommerce.products-grid');
+    })->name("products-grid");
     Route::get('/products-categories', function () {
         return view('admin.pages.eCommerce.products-categories');
     })->name("products-categories");
+    Route::get('/add-new-product', function () {
+        return view('admin.pages.eCommerce.add-new-product');
+    })->name("add-new-product");
+
+    //Order
     Route::get('/orders', function () {
         return view('admin.pages.eCommerce.orders');
     })->name("orders");
@@ -58,14 +58,14 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
 
     Route::resource('/category','CategoryController');
-
-    Route::resource('/category','CategoryController');
-    Route::get('/category/delete/{id}', 'CategoryController@destroy');
     Route::get('/signup', function () {
         return view('admin.pages.authentication.signup');
     })->name("signup");
     Route::get('/signin', function () {
         return view('admin.pages.authentication.signin');
     })->name("signin");
+
+    Route::resource('/category','CategoryController');
+    Route::get('/category/delete/{id}', 'CategoryController@destroy');
 });
 
