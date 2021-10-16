@@ -83,9 +83,9 @@
           </div>
          </div>
          <div class="card-body">
-           <div class="product-grid" id="product-list">
+           <div class="product-grid" id="banner-list">
                {{-- {{$banner_list}} --}}
-             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 product-list">
+             <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 banner-list">
                @if ($banner_list)
                    @foreach ($banner_list as $item)
                    <div class="col" style="width: 500px">
@@ -104,7 +104,7 @@
                         <small>74 Reviews</small> --}}
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
                           <a href="" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i> Edit</a>
-                          <a href="#"><button class="btn btn-sm btn-outline-danger delete-grid" data-id=""><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <a href=""><button class="btn btn-sm btn-outline-danger delete-banner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
                     </div>
@@ -126,6 +126,5 @@
 
 </div>
 </div>
-
 </main>   
 @endsection

@@ -13,4 +13,8 @@ class BannerController extends Controller
             'banner_list' => $banner_list,
         ]);
     }
+    public function destroy($id){
+        $destroy = Banner::find($id)->delete();
+        return redirect()->route('banners');
+    }
 }

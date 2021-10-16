@@ -54,7 +54,7 @@
                         <option>Electronics</option>
                         <option>Furniture</option>
                         <option>Sports</option>
-                      </select> 
+                      </select>
                     </div>
                     <div class="col-12">
                       <label class="form-label">Description</label>
@@ -255,5 +255,5 @@
         </div>
       </div>
 
-  
+
 @endsection
