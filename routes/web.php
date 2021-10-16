@@ -22,11 +22,11 @@ Route::prefix('')->group(function () {
     Route::post('/deleteItemCart','CartController@delete');
     Route::post('/updateCart','CartController@update');
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
+    Route::post('/products/detail','ProductController@getInfoProduct');
+    Route::get('/shipping','CartController@index')->name('shipping');
 });
-Route::get('/shipping','CartController@index')->name('shipping');
-Route::get('/products/{slug}','ProductController@product_detail');
-Route::post('/products/detail','ProductController@getInfoProduct');
 
+Route::get('/products/{slug}','ProductController@product_detail');
 
 
 Route::group(["prefix" => "admin"], function(){
@@ -54,17 +54,18 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/orders-detail', function () {
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
-    Route::get('/signup', function () {
-        return view('admin.pages.authentication.signup');
-    })->name("signup");
-    Route::get('/signin', function () {
-        return view('admin.pages.authentication.signin');
-    })->name("signin"); 
-    Route::get('/banner', [BannerController::class, 'show'])->name("banners"); 
-    Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy"); 
+    Route::get('/banner', [BannerController::class, 'show'])->name("banners");
+    Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
 
     Route::resource('/category','CategoryController');
 
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
+    Route::get('/signup', function () {
+        return view('admin.pages.authentication.signup');
+    })->name("signup");
+    Route::get('/signin', function () {
+        return view('admin.pages.authentication.signin');
+    })->name("signin");
 });
+

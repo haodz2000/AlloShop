@@ -6,6 +6,7 @@ use App\Model\Category;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Model\ProductDetail;
 
 class ProductController extends Controller
 {
@@ -124,5 +125,23 @@ class ProductController extends Controller
             return redirect()->route('products-grid')->with('noti', 'Add successfull');
         }
         return redirect()->route('products-grid');
+    }
+    public function product_detail(Request $request,$slug){
+        $product  = Product::where('slug',$slug)->get()->first();
+        $productDetail = $product->product_details;
+        return view('client.pages.products.product-detail',[
+            'product'=>$product,
+            'productDetail'=>$productDetail
+        ]);
+    }
+    public function getInfoProduct(Request $request)
+    {
+        $data = $request->all();
+        $product = ProductDetail::where('product_id',$data['product_id'])
+        ->where('color_id',$data['color'])->where('size_id',$data['size'])
+        ->get()->first();
+        return response()->json([
+            'product'=>$product
+        ]);
     }
 }
