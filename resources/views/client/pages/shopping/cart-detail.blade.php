@@ -107,22 +107,33 @@
             <div class="tab-content" id="shiping">
                 @if (Session('Cart'))
                 <div class="tab-pane active" id="checkout">
-
+                    <span class="alert"></span>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
                         <div class="product-list table-cart">
                             @if ($cart = Session('Cart'))
                                 <table>
                                     @foreach ($cart->products as $product)
                                     <tr>
-
                                         <td><img src="{{ asset('assets/client/images/product/1-sm.png') }}" alt=""/></td>
 
                                         <td>
-
                                             <div class="des-pro">
-
-                                                <h4>{{ $product['productInfo']->product_name }}</h4><p>LifeStyle</p>
+                                                <h4>{{ $product['productInfo']->product_name }}</h4>
+                                                <p>
+                                                    <span>
+                                                        Size:
+                                                        <Select data-id="{{ $product['productInfo']->product_id }}" class="size_order">
+                                                            <option value="{{ $product['size'] }}">{{ $product['size'] }}</option>
+                                                        </Select>
+                                                    </span>
+                                                    <br>
+                                                    <span>
+                                                        Color:
+                                                        <Select data-id="{{ $product['productInfo']->product_id }}" class="color_order">
+                                                            <option value="{{ $product['color'] }}">{{ $product['color'] }}</option>
+                                                        </Select>
+                                                    </span>
+                                                </p>
 
                                             </div>
 
@@ -133,7 +144,7 @@
                                         <td>
 
                                             <div class="order-pro order1">
-                                                <input type="number" style="height: 100%; width: 100px"  class="quantity" value="{{ $product['quantity'] }}" />
+                                                <input type="number" style="height: 100%; width: 100px"  class="quantity_order" data-sku="{{ $product['sku'] }}" value="{{ $product['quantity'] }}" />
                                             </div>
                                         </td>
 

@@ -9,6 +9,11 @@ class Product extends Model
 {
     protected $table = "products";
     protected $primaryKey = "product_id";
+<<<<<<< .merge_file_a12880
+=======
+    // protected $fillable = ['product_name','slug','category_id','description','url_image','quantity_orderd','price','discount']; //chỉ định các trường sử dụng
+    protected $guarded = []; // sử dụng tất cả các trường
+>>>>>>> .merge_file_a10968
 
     protected $fillable = ['product_name','slug','category_id','description',
     'url_image','quantity_orderd','gender','price','discount','status'];

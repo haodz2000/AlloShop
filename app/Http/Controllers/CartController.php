@@ -55,6 +55,25 @@ class CartController extends Controller
         }
 
     }
+    public function update(Request $request){
+        $data = $request->all();
+        $quantiy = $data['quantity'];
+        $sku = $data['sku'];
+        $oldCart = Session('Cart')?Session('Cart'):null;
+        $newCart = new Cart($oldCart);
+        if($sku != null)
+        {
+            $newCart->updateCart($sku,$quantiy);
+            $request->session()->put('Cart',$newCart);
+            return response()->json([
+                'products'=>$newCart->products,
+                'totalQuantity'=>$newCart->totalQuantity,
+                'totalPrice'=>$newCart->totalPrice,
+                'success'=>'Update Success',
+                'class'=>'alert alert-success'
+           ]);
+        }
+    }
     public function delete(Request $request){
         $data = $request->all();
         $sku = $data['sku'];

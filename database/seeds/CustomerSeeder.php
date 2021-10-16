@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CustomerSeeder extends Seeder
 {
@@ -12,5 +13,6 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         //
+        
     }
 }

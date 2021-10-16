@@ -58,10 +58,10 @@ $(document).on('submit',"Form.Form-Add-To-Cart",function(e){
             processData: false,
             success: function (data) {
                 $(".cart").load(" .cart");
-                console.log(data);
+                alertify.success('Thêm mới thành công');
         },
             error: function (){
-            console.log('error');
+                alertify.error('Thêm mới thất bại');
         }
         })
     }
@@ -80,11 +80,58 @@ $(document).on('click','.close-item',function(){
             success: function(data) {
                 $(".cart").load(" .cart");
                 $("#shiping").load(" #shiping");
+                alertify.success('Xóa thành công');
             },
             error: function(){
-                console.log('errors')
+                alertify.error('Xóa thất bại');
             }
         })
     }
+})
+$(document).on('change','input.quantity_order',function(){
+    let quantity = parseInt($(this).val())>0?parseInt($(this).val()):1;
+    $(this).val(quantity);
+    let sku = $(this).data("sku");
+    if(isNaN(sku))
+    {
+        const url = '/updateCart';
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType:"JSON",
+            data:
+                {
+                    quantity:quantity,
+                    sku:sku
+                },
+            success: function(response){
+                $(".cart").load(" .cart");
+                $("#shiping").load(" #shiping");
+                alertify.success('Cập nhật thành công');
+            },
+            error: function(){
+                alertify.error('Cập nhật thất bại');
+            }
+        })
+    }
+    else{
+        alert("Khong tim thay san pham")
+    }
+})
+$(document).on('click','select.size_order',function(){
+    let id =$(this).data('id');
+    const url = '/getSizeColor';
+    $.ajax({
+        type: "POST",
+        url:url,
+        data:{id:id},
+        dataType:"JSON",
+        success: function(response){
+            console.log(response)
+        },
+        error: function(){
+            console.log("error");
+        }
+    })
 })
 

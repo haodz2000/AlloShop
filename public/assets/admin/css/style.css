@@ -804,6 +804,11 @@ a {
     border: 1px solid #e6e6e6;
 }
 
+.product-grid img{
+	width: 350px;
+	height: 250px;
+}
+
 .error-social a {
 	display: inline-block;
 	width: 40px;
