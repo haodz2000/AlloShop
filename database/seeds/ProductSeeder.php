@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
             [
                 'product_name'=>'Váy ngắn dạo phố nữ tính',
                 'slug'=>'Vay-ngan-dao-pho-nu-tinh',
-                'category_id'=>3,
+                'category_id'=>2,
                 'description'=>'Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Dolores non aspernatur est praesentium necessitatibus libero minus dolorum corporis
                  ex earum totam voluptate voluptas veniam, quae molestiae distinctio alias repellendus? Quo.',

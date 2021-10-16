@@ -9,7 +9,7 @@ class User extends Model
 {
     protected $table = "users";
     protected $primaryKey = "user_id";
-    // protected $fillable = [];
+    protected $fillable = ['name','email','password'];
     protected $guarded = [];
 
     public function posts(){

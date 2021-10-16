@@ -36,74 +36,51 @@
               <div class="d-sm-flex align-items-center">
                 <h5 class="mb-2 mb-sm-0">Add New Product</h5>
                 <div class="ms-auto">
-                  {{-- <button type="button" class="btn btn-secondary">Save to Draft</button> --}}
-                  {{-- <button type="button" class="btn btn-primary">Publish Now</button> --}}
+                  <button type="button" class="btn btn-secondary">Save to Draft</button>
+                  <button type="button" class="btn btn-primary">Publish Now</button>
                 </div>
               </div>
              </div>
             <div class="card-body">
                <div class="row g-3">
-                 <div class="col-12 col-lg-12">
+                 <div class="col-12 col-lg-8">
                     <div class="card shadow-none bg-light border">
                       <div class="card-body">
-                        <form class="row g-3" enctype="multipart/form-data" id="add-new-product" method="POST" action="{{route('add-new-product.add')}}">
-                          @csrf
-                          <div class="col-12 col-lg-6">
-                            <label class="form-label">Product name</label>
-                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="product_name">
+                        <form class="row g-3">
+                          <div class="col-12">
+                            <label class="form-label">Product title</label>
+                            <input type="text" class="form-control" placeholder="Product title">
                           </div>
-                          <div class="col-12 col-lg-6">
-                            <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="slug">
+                          <div class="col-12 col-lg-4">
+                            <label class="form-label">SKU</label>
+                            <input type="text" class="form-control" placeholder="SKU">
                           </div>
-                          <div class="col-12 col-lg-3">
-                            <label class="form-label">Category</label>
-                            <select class="form-select" aria-label="Default select example" name="category_id" id="category_id">
-                              <option selected>Please select category</option>
-                              @foreach ($category_name_list as $item)
-                                <option value="{{$item['category_id']}}">{{$item['category_name']}}</option>
-                                {{-- <option value="2">Two</option>
-                                <option value="3">Three</option> --}}
-                              @endforeach
-                            </select>
+                          <div class="col-12 col-lg-4">
+                            <label class="form-label">Color</label>
+                            <input type="text" class="form-control" placeholder="Color">
                           </div>
-                          <div class="col-12 col-lg-3">
-                            <label class="form-label">Gender</label>
-                            {{-- <input type="text" class="form-control" placeholder="Gender"> --}}
-                            <select class="form-select" aria-label="Default select example" name="gender" id="gender">
-                                <option selected>Please select gender</option>
-                                <option value="1">Nam</option>
-                                <option value="2">Nữ</option>
-                                <option value="3">Cả hai</option>
-                            </select>
+                          <div class="col-12 col-lg-4">
+                            <label class="form-label">Size</label>
+                            <input type="text" class="form-control" placeholder="Size">
                           </div>
-                          <div class="col-12 col-lg-3">
-                            <label class="form-label">Price</label>
-                            <input type="text" class="form-control" required placeholder="Price" name="price" id="price">
-                          </div>
-                          <div class="col-12 col-lg-3">
-                            <label class="form-label">Discount</label>
-                            <input type="text" class="form-control" required placeholder="Discount" name="discount" id="discount">
-                          </div>
-                          {{-- <div class="col-12">
+                          <div class="col-12">
                             <label class="form-label">Brand</label>
                             <input type="text" class="form-control" placeholder="Brand">
-                          </div> --}}
+                          </div>
                           <div class="col-12">
                             <label class="form-label">Images</label>
-                            <input class="form-control" required type="file" name="url_image" id="url_image">
+                            <input class="form-control" type="file">
                           </div>
                           <div class="col-12">
                             <label class="form-label">Full description</label>
-                            <textarea class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
+                            <textarea class="form-control" placeholder="Full description" rows="4" cols="4"></textarea>
                           </div>
-                          <button type="submit" class="btn btn-primary add-new-product" value="submit" name="add">Add New Product</button>
                         </form>
                       </div>
                     </div>
                  </div>
 
-                 {{-- <div class="col-12 col-lg-4">
+                 <div class="col-12 col-lg-4">
                     <div class="card shadow-none bg-light border">
                       <div class="card-body">
                           <div class="row g-3">
@@ -175,7 +152,7 @@
                           </div><!--end row-->
                       </div>
                     </div>  
-                </div> --}}
+                </div>
 
                </div><!--end row-->
              </div>
