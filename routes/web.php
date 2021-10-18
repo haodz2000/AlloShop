@@ -6,6 +6,8 @@ use App\Http\Controller\CategoryController;
 use App\Http\Controller\SignUpController;
 use App\Http\Controller\SignInController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 
 
@@ -71,6 +73,11 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/logout', 'SignInController@logout')->name('logout');
     
     //Category 
+
+    Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
+
+
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 

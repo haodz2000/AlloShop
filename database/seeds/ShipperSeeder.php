@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ShipperSeeder extends Seeder
 {
@@ -11,6 +12,22 @@ class ShipperSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('shippers')->insert([
+            [
+                'name' => 'Hung',
+                'phone' => '0983785181',
+                'address' => 'Thai Binh'
+            ],
+            [
+                'name' => 'Hao',
+                'phone' => '0974826481',
+                'address' => 'Ha Noi'
+            ],
+            [
+                'name' => 'Vu',
+                'phone' => '0997458348',
+                'address' => 'TP.HCM'
+            ]
+        ]);
     }
 }
