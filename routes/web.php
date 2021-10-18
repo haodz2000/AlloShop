@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controller\CategoryController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -55,6 +57,9 @@ Route::group(["prefix" => "admin"], function(){
     })->name("signin"); 
     Route::get('/banner', [BannerController::class, 'show'])->name("banners"); 
     Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy"); 
+
+    Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
 
     Route::resource('/category','CategoryController');
 
