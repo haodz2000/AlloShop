@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Model\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
-class SignUpController extends Controller
+class SignInController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function logout(Request $request){
 
+        return redirect('/signin')->with(Auth::logout());
+    }
 
+    public function __construct(){
+        $this->middleware('guest')->except('logout');
+    }
+  
     public function index()
-    {       
-        return view('authentication.pages.signup');
+    {
+        return view('authentication.pages.signin');
     }
 
     /**
@@ -39,30 +47,28 @@ class SignUpController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->isMethod('POST')) {
-            $validator = Validator::make($request->all(),[
-                'name' => 'required|min:6|max:100',
-                'email' => 'required|email',
-                'password' => 'required|min:6',
-                'confirm-password' => 'required|same:password' 
-            ]);
-            if($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput($request->except(['password','confirm-password']));
-            }
-
-            $user = User::where('email',$request->email)->first();
-            if(!$user) {
-                $newUser = new User();
-                $newUser->name = $request->name;
-                $newUser->email = $request->email;
-                $newUser->password = bcrypt($request->password);
-                $newUser->save();
-                return redirect()->route('signin.index')->with('success','Signed up successfully! Please sign in at here!');
-            }
-            else {
-                return redirect()->back()->with('error','Data account already exists!')->withInput($request->except(['password','confirm-password']));
-            }
+        
+        $validator = Validator::make($request->all(),[
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->except(['password','confirm-password']));
         }
+        
+        $remember = $request->remember; 
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember)) {
+
+            if (Auth::user()->status!= 1) {
+                return redirect()->back()->with('error','This account was block!');
+            }
+            if (Auth::user()->level>1) {
+                return view('admin.pages.dashboard.dashboard');
+                //return view('client.pages.home');
+            } 
+        };
+        return redirect()->back()->with('error','Sai');
     }
 
     /**
@@ -82,7 +88,7 @@ class SignUpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)                   
+    public function edit($id)
     {
         //
     }

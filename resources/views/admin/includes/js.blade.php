@@ -1,5 +1,13 @@
+
+ <!--plugins-->
+ <script src="{{ asset('./assets/admin/js/jquery.min.js') }}"></script>
+ <script src="{{ asset('./assets/admin/js/pace.min.js') }}"></script>
+
 <!-- Bootstrap bundle JS -->
-<script src="{{asset('./assets/admin/js/bootstrap.bundle.min.js')}}"></script>
+
+  <script src="{{asset('./assets/admin/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 <!--plugins-->
@@ -19,3 +27,4 @@
 <!--app-->
   <script src="{{asset('./assets/admin/js/app.js')}}"></script>
   <script src="{{asset('./assets/admin/js/index.js')}}"></script>
+

@@ -16,7 +16,7 @@
             },
             success: function(data) {
                 $("#data_category").load(" #data_category");
-                alert('Add category is success!');
+                // alert('Add category is success!');
                 $('#add_name_category').val('');
                 $('#add_description_category').val('');
             },
@@ -45,7 +45,7 @@
                       "_token": token,
                   },
                   success: function(response) {
-                    alert('Delete Category is Successfully!');
+                    //alert('Delete Category is Successfully!');
                     $("#data_category").load(" #data_category");
                   }
           });

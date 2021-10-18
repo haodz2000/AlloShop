@@ -1,3 +1,4 @@
+
 <!Doctype html>
 <html class="no-js" lang="en">
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -8,7 +9,8 @@
         <title>@yield('title')</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">​
+
         @include('admin.includes.css')
     </head>
     <body>
@@ -23,21 +25,20 @@
         <!--end sidebar -->
 
        <!--start content-->
-       @yield('content')
-       {{-- <main class="page-content">
+       <main class="page-content">
         @if ( Session::has('success') )
             <div class="alert alert-success alert-dismissible" role="alert">
                 <strong>{{ Session::get('success') }}</strong>
             </div>
         @endif
-    
+
         @if ( Session::has('error') )
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <strong>{{ Session::get('error') }}</strong>
             </div>
-        @endif
-            @yield('content')
-        </main> --}}
+        @endif 
+        @yield('content')
+        </main>
        <!--end page main-->
 
         @include('admin.includes.customizer')
@@ -52,3 +53,7 @@
 
 <!-- Mirrored from staging-themelocation.com/allo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Aug 2021 16:32:14 GMT -->
 </html>
+
+
+
+

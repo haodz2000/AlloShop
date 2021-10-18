@@ -12,7 +12,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        //
         DB::table('products')->insert([
             [
                 'product_name'=>'Quần thể thao frestyle',

@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title', "Products Grid")
 @section('content')
-<main class="page-content">
+
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -32,28 +32,16 @@
     <div class="card">
       <div class="card-body">
         @if (session()->has('noti'))
-        <div class="alert alert-success" role="alert">
-            <strong>{{session('noti')}}</strong>
-        </div>
+          <div class="alert alert-success" role="alert">
+              <strong>{{session('noti')}}</strong>
+          </div>
         @endif
-                        <div class="row align-items-center">
+          <div class="row align-items-center">
                             <div class="col-lg-3 col-xl-2">
                                 <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Product</a>
                             </div>
-                            {{-- <div class="col-lg-9 col-xl-10">
-                                <form class="float-lg-end">
-                                    <div class="row row-cols-lg-auto g-2">
-                                        <div class="col-12">
-                                            <a href="javascript:;" class="btn btn-light mb-3 mb-lg-0"><i class="bi bi-download"></i>Export</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <a href="javascript:;" class="btn btn-light mb-3 mb-lg-0"><i class="bi bi-upload"></i>Import</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
-                    </div>
+          </div>
+      </div>
     </div>
       <div class="card">
          <div class="card-header py-3"> 
@@ -114,17 +102,18 @@
       </div><!--end row-->
 </div>
 <nav class="float-end mt-4" aria-label="Page navigation">
-<ul class="pagination">
-<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item active"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
+    <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
 </nav>
 
 </div>
 </div>
-</main>
-  
+
+
+
 @endsection
