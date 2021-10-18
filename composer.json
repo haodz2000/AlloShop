@@ -9,10 +9,7 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2.5",
-<<<<<<< .merge_file_a13200
         "doctrine/dbal": "2.*",
-=======
->>>>>>> .merge_file_a02336
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",

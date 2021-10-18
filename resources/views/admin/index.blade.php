@@ -1,4 +1,4 @@
-@if (Auth::check())
+
 <!Doctype html>
 <html class="no-js" lang="en">
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,18 +26,18 @@
 
        <!--start content-->
        <main class="page-content">
-            @if ( Session::has('success') )
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <strong>{{ Session::get('success') }}</strong>
-                </div>
-            @endif
-        
-            @if ( Session::has('error') )
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <strong>{{ Session::get('error') }}</strong>
-                </div>
-            @endif
-            @yield('content')
+        @if ( Session::has('success') )
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+            </div>
+        @endif
+
+        @if ( Session::has('error') )
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>{{ Session::get('error') }}</strong>
+            </div>
+        @endif 
+        @yield('content')
         </main>
        <!--end page main-->
 
@@ -54,10 +54,6 @@
 <!-- Mirrored from staging-themelocation.com/allo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Aug 2021 16:32:14 GMT -->
 </html>
 
-
-@else
-    @extends('authentication.pages.signin');
-@endif
 
 
 
