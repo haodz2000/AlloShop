@@ -38,7 +38,7 @@ Route::post('/products/detail','ProductController@getInfoProduct');
 
 
 
-Route::group(["prefix" => "admin","middleware" => "auth"], function(){
+Route::group(["prefix" => "admin"], function(){
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
