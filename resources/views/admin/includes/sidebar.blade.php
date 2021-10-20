@@ -33,13 +33,13 @@
       <a href="javascript:;" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-award"></i>
         </div>
-        <div class="menu-title">Widgets</div>
+        <div class="menu-title">Orders</div>
       </a>
       <ul>
-        <li> <a href="widgets-static-widgets.html"><i class="bi bi-arrow-right-short"></i>Static Widgets</a>
+        <li> <a href="{{route('orders')}}"><i class="bi bi-arrow-right-short"></i>Orders</a>
         </li>
-        <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Data Widgets</a>
-        </li>
+        {{-- <li> <a href="{{route('order-details')}}"><i class="bi bi-arrow-right-short"></i>Order-details</a>
+        </li> --}}
       </ul>
     </li>
     <li>

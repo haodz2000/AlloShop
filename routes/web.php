@@ -74,8 +74,8 @@ Route::group(["prefix" => "admin"], function(){
     
     //Category 
 
-    Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
-    Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
+    Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
+    Route::get('/order/order-details/{order_id}/{customer_id}', [OrderDetailController::class, 'show'])->name('order-details');
 
 
     Route::resource('/category','CategoryController');

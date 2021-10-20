@@ -1,7 +1,6 @@
 @extends('admin.index')
 @section('title', 'Order details')
 @section('content')
-<main class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -62,9 +61,13 @@
                       </div>
                       <div class="info">
                          <h6 class="mb-2">Customer</h6>
-                         <p class="mb-1">Jhon Michle</p>
-                         <p class="mb-1">jhon@_78@example.com</p>
-                         <p class="mb-1">+91-9910XXXXXX</p>
+                         @if ($customers)
+                            @foreach ($customers as $item)
+                            <p class="mb-1">{{$item->name}}</p>
+                            <p class="mb-1">{{$item->email}}</p>
+                            <p class="mb-1">{{$item->phone}}</p>
+                            @endforeach
+                         @endif
                       </div>
                    </div>
                    </div>
@@ -106,111 +109,47 @@
           </div><!--end row-->
 
           <div class="row">
+              @if ($order_details)
               <div class="col-12 col-lg-8">
-                 <div class="card border shadow-none radius-10">
-                   <div class="card-body">
-                       <div class="table-responsive">
-                         <table class="table align-middle mb-0">
-                           <thead class="table-light">
-                             <tr>
-                               <th>Product</th>
-                               <th>Unit Price</th>
-                               <th>Quantity</th>
-                               <th>Total</th>
-                             </tr>
-                           </thead>
-                           <tbody>
-                             <tr>
-                               <td>
-                                 <div class="orderlist">
-                                  <a class="d-flex align-items-center gap-2" href="javascript:;">
-                                    <div class="product-box">
-                                        <img src="assets/images/products/01.png" alt="">
-                                    </div>
-                                    <div>
-                                        <P class="mb-0 product-title">Men White Polo T-shirt</P>
-                                    </div>
-                                   </a>
-                                 </div>
-                               </td>
-                               <td>$35.00</td>
-                               <td>2</td>
-                               <td>$70.00</td>
-                             </tr>
-                             <tr>
-                              <td>
-                                <div class="orderlist">
-                                 <a class="d-flex align-items-center gap-2" href="javascript:;">
-                                   <div class="product-box">
-                                       <img src="assets/images/products/02.png" alt="">
-                                   </div>
-                                   <div>
-                                       <P class="mb-0 product-title">Formal Black Coat Pant</P>
-                                   </div>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>$25.00</td>
-                              <td>1</td>
-                              <td>$25.00</td>
+                <div class="card border shadow-none radius-10">
+                  <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Product</th>
+                              <th>Unit Price</th>
+                              <th>Quantity</th>
+                              <th>Total</th>
                             </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($order_details as $item)
                             <tr>
                               <td>
                                 <div class="orderlist">
                                  <a class="d-flex align-items-center gap-2" href="javascript:;">
                                    <div class="product-box">
-                                       <img src="assets/images/products/03.png" alt="">
+                                       <img src="{{asset('./assets/admin/images/products/'.$item->product_image)}}" alt="">
                                    </div>
                                    <div>
-                                       <P class="mb-0 product-title">Blue Shade Jeans</P>
+                                       <P class="mb-0 product-title">{{$item->product_name}}</P>
                                    </div>
                                   </a>
                                 </div>
                               </td>
-                              <td>$65.00</td>
-                              <td>2</td>
-                              <td>$130.00</td>
+                              <td>${{$item->price}}.00</td>
+                              <td>{{$item->quantity}}</td>
+                              <td>${{$item->total_price}}.00</td>
                             </tr>
-                            <tr>
-                              <td>
-                                <div class="orderlist">
-                                 <a class="d-flex align-items-center gap-2" href="javascript:;">
-                                   <div class="product-box">
-                                       <img src="assets/images/products/04.png" alt="">
-                                   </div>
-                                   <div>
-                                       <P class="mb-0 product-title">Yellow Winter Jacket for Men</P>
-                                   </div>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>$56.00</td>
-                              <td>1</td>
-                              <td>$56.00</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div class="orderlist">
-                                 <a class="d-flex align-items-center gap-2" href="javascript:;">
-                                   <div class="product-box">
-                                       <img src="assets/images/products/05.png" alt="">
-                                   </div>
-                                   <div>
-                                       <P class="mb-0 product-title">Men Sports Shoes Nike</P>
-                                   </div>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>$85.00</td>
-                              <td>1</td>
-                              <td>$85.00</td>
-                            </tr>
-                           </tbody>
-                         </table>
-                       </div>
-                   </div>
-                 </div>
-              </div>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+             </div>
+              @endif
               <div class="col-12 col-lg-4">
                 <div class="card border shadow-none bg-light radius-10">
                   <div class="card-body">
@@ -289,5 +228,4 @@
         </div>
       </div>
 
-  </main>
 @endsection
