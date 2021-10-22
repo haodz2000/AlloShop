@@ -24,28 +24,24 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
+    Route::post('/products/detail','ProductController@getInfoProduct');
+    Route::get('/products/{slug}','ProductController@productDetail');
     Route::post('/addCart/{id}','CartController@store');
-
-});
-
-//Authentication
-Route::resource('/signin','SignInController');
-Route::resource('/signup','SignUpController');
-Route::get('/products/{slug}','ProductController@product_detail');
-Route::post('/products/detail','ProductController@getInfoProduct');
-Route::middleware(['auth'])->group(function () {
-    Route::get('/shipping','CartController@index')->name('shipping');
     Route::post('/deleteItemCart','CartController@delete');
     Route::post('/updateCart','CartController@update');
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
     Route::post('/products/detail','ProductController@getInfoProduct');
-    Route::get('/shipping','CartController@index')->name('shipping');
+    Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
     Route::post('/shipping','client\OrderController@order');
-    Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')
-    ;
+    Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
 });
 
-Route::get('/products/{slug}','ProductController@productDetail');
+
+
+
+//Authentication
+Route::resource('/signin','SignInController');
+Route::resource('/signup','SignUpController');
 
 Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/', function () {

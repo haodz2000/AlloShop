@@ -210,13 +210,13 @@
 
                                                 <fieldset>
 
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
 
                                                         <label>E-mail Address: {{ Auth::user()->email }}</label>
 
                                                     </div>
 
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
                                                         <label>Phone: {{ Auth::user()->phone }}</label>
                                                     </div>
                                                 </fieldset>
@@ -278,7 +278,7 @@
                                                 </fieldset>
 
                                                 <fieldset>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
                                                         <label>E-mail Address: {{ Auth::user()->email }}</label>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -288,7 +288,10 @@
                                                 <fieldset>
                                                     <div class="col-sm-12">
                                                         <label for="address">Address:</label>
-                                                        <input required type="text" name="address" id="address">
+                                                        @if (isset($error))
+                                                            <span class="alert alert-danger">{{ $error }}</span>
+                                                        @endif
+                                                        <input style="width: 400px" required type="text" name="address" id="address">
                                                     </div>
                                                 </fieldset>
                                                 <fieldset>
@@ -327,223 +330,11 @@
 
                             <div class="next-step text-center">
 
-                            <button>Next Step</button>
-
                         </div>
 
                         </div>
 
                     </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                        <div class="form-area row">
-
-                            <h3>Billing Information</h3>
-
-                            <form method="Post">
-                                @csrf
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>First Name *</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Last Name *</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Company Name</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>E-mail Address * *</label>
-
-                                        <input type="email">
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Phone *</label>
-
-                                        <input type="number">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Country</label>
-
-                                        <select>
-
-                                            <option>Select Your Country</option>
-
-                                            <option>Bangladesh</option>
-
-                                            <option>China</option>
-
-                                            <option>USA</option>
-
-                                        </select>
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Address</label>
-
-                                        <input type="text">
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Town / City</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>District *</label>
-
-                                        <select>
-
-                                            <option>Select Your District</option>
-
-                                            <option>Dhaka</option>
-
-                                            <option>Khulna</option>
-
-                                            <option>Bagerhat</option>
-
-                                        </select>
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Postcode / ZIP</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                            </form>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                        <div class="order-list">
-
-                            <h3>Your Order</h3>
-
-                            <table id="table-order">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-
-                                        <td>1. Nikki Mike Pro</td>
-                                        <td>$ 90.00</td>
-                                        <td>1</td>
-                                        <td>$ 99.00</td>
-
-                                    </tr>
-                                    <tr>
-
-                                        <td>2. Nikki Mike Pro </td>
-                                        <td>$ 90.00</td>
-                                        <td>1</td>
-                                        <td>$ 59.00</td>
-
-                                    </tr>
-
-                                    <tr class="row-bold">
-
-                                        <td>Subtotal</td>
-                                        <td colspan="2">
-                                        </td>
-
-                                        <td>$ 158.00</td>
-
-                                    </tr>
-
-                                    <tr class="row-bold">
-
-                                        <td>Total</td>
-                                        <td colspan="2"></td>
-                                        <td>$ 158.00</td>
-
-                                    </tr>
-                                </tbody>
-
-
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 next-step text-center">
-
-                        <button>Next Step</button>
-
-                    </div>
-
                 </div>
 
 

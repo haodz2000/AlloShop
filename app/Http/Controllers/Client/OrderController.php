@@ -15,15 +15,8 @@ use Validator;
 class OrderController extends Controller
 {
     //
-    public function order(Request $request){
-        $validation = Validator::make($request->all(),[
-            'infomation'=>'required',
-            'address' =>'required',
-            'shipper'=>'required'
-        ]);
-        if($validation->passes())
-        {
-            if(Auth::check())
+    public function order(Request $request){{
+        if(Auth::check())
             {
                 $data = $request->all();
                 $order = new Order();
@@ -34,7 +27,13 @@ class OrderController extends Controller
                     $order->address = Auth::user()->address;
                 }
                 else if($data['infomation'] == 'new'){
-                    $order->address = $data['address'];
+                    if($data['address'] != '')
+                    {
+                        $order->address = $data['address'];
+                    }
+                    else{
+                        $order->address = Auth::user()->address;
+                    }
                 }
                 if($data['note'] != ''){
                     $order->note = $data['note'];

@@ -12,7 +12,6 @@ class ShipperSeeder extends Seeder
      */
     public function run()
     {
-
         //
         DB::table('shippers')->insert([
             [
@@ -31,6 +30,5 @@ class ShipperSeeder extends Seeder
                 'address'=>'Hà Nội',
             ],
         ]);
-
     }
 }

@@ -16,7 +16,7 @@
                             @if (Auth::check())
                                 <li><a href="{{ route('logout') }}"><i class="fa fa-user"></i>{{ Auth::user()->name }}</a></li>
                             @else
-                                <li><a href="{{ route('login') }}"><i class="fa fa-user"></i>Login/Register</a></li>
+                                <li><a href="{{ route('signin.index') }}"><i class="fa fa-user"></i>Login/Register</a></li>
                             @endif
                             <li><a href="#"><i class="fa fa-heart-o"></i>Wishlist</a></li>
                             <li class="cart cart-area">
