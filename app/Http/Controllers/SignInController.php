@@ -15,15 +15,15 @@ class SignInController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function userCan($action, $option = NULL)
-    {
+    public function logout(Request $request){
 
-    $user = Auth::user();
-
-    return Gate::forUser($user)->allows($action, $option);
-
+        return redirect('/signin')->with(Auth::logout());
     }
 
+    public function __construct(){
+        $this->middleware('guest')->except('logout');
+    }
+  
     public function index()
     {
         return view('authentication.pages.signin');
@@ -47,6 +47,7 @@ class SignInController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(),[
             'email' => 'required|email',
             'password' => 'required'
@@ -56,16 +57,14 @@ class SignInController extends Controller
         }
         
         $remember = $request->remember; 
-        
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            logger(1);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember)) {
+
             if (Auth::user()->status!= 1) {
-                logger(2);
                 return redirect()->back()->with('error','This account was block!');
             }
             if (Auth::user()->level>1) {
-                logger(3);
-                return redirect('admin');
+                return view('admin.pages.dashboard.dashboard');
                 //return view('client.pages.home');
             } 
         };

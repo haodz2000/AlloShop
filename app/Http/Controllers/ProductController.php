@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\Product;
 use App\Model\ProductDetail;
-use App\Model\Color;
-use App\Model\Size;
 use App\Model\Category;
-
+use App\Model\Product;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
-
 
 class ProductController extends Controller
 {
-    //
+
+    public function productList(){
+        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
+        return view("admin.pages.eCommerce.products-list", [
+            'product_list' => $product_list]);
+    }
+
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
         $productDetail = $product->product_details;
@@ -44,14 +45,8 @@ class ProductController extends Controller
         $delete = Product::find($id)->delete();
         return redirect()->route('products-grid');
     }
-    public function destroyProductList(Request $request,$id)
+    public function destroyProductList($id)
     {
-        $data = $request->all();
-        $product = ProductDetail::where('product_id',$data['product_id'])
-        ->where('color_id',$data['color'])->where('size_id',$data['size'])
-        ->get()->first();
-        return response()->json([
-            'product'=>$product]);
         $delete = Product::find($id)->delete();
         return redirect()->route('products-list');
     }
@@ -146,6 +141,4 @@ class ProductController extends Controller
         }
         return redirect()->route('products-grid');
     }
-
-
 }

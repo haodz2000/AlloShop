@@ -1,7 +1,6 @@
 @extends('admin.index')
 @section('title', 'Categories')
 @section('content')
-
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -254,6 +253,5 @@
            </div><!--end row-->
         </div>
       </div>
-
-
 @endsection
+

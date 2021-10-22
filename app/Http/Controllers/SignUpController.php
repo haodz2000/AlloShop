@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Model\User;
+use App\User;
 
 class SignUpController extends Controller
 {
@@ -20,6 +20,7 @@ class SignUpController extends Controller
     {       
         return view('authentication.pages.signup');
     }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -30,6 +30,5 @@ class ShipperSeeder extends Seeder
                 'address'=>'Hà Nội',
             ],
         ]);
-
     }
 }
