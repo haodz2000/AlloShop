@@ -180,6 +180,160 @@
                 </div>
 
                 <div class="tab-pane" id="shipping">
+                    <div class="tab-pane" id="payment">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="faq">
+                                <div class="faq-content">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                          <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <span class="pd-l10">Sử dụng thông tin và địa chỉ cũ</span>
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                          <div class="panel-body">
+                                            <form method="Post">
+                                                @csrf
+                                                <input type="hidden" name="infomation" value="old">
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+
+                                                        <label>Name: {{ Auth::user()->name }}</label>
+                                                    </div>
+
+                                                </fieldset>
+
+                                                <fieldset>
+
+                                                    <div class="col-sm-6">
+
+                                                        <label>E-mail Address: {{ Auth::user()->email }}</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label>Phone: {{ Auth::user()->phone }}</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Address: {{ Auth::user()->address }}</label>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Đơn vị vận chuyển :</label>
+                                                        <select name="shipper" id="shipper">
+                                                            @foreach ($shippers as $shipper )
+                                                                <option value="{{ $shipper->shipper_id  }}">{{ $shipper->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Ghi chú</label>
+                                                        <br>
+                                                        <textarea name="note" id="note" cols="50" rows="3">
+                                                        </textarea>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <button type="submit" class="btn btn-success">Check-Out</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                          <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                             <span class="pd-l10">Sử dụng địa chỉ mới</span>
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                          <div class="panel-body">
+                                            <form method="Post">
+                                                @csrf
+                                                <input type="hidden" name="infomation" value="new">
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label>Name: {{ Auth::user()->name }}</label>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset>
+                                                    <div class="col-sm-6">
+                                                        <label>E-mail Address: {{ Auth::user()->email }}</label>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Phone: {{ Auth::user()->phone }}</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label for="address">Address:</label>
+                                                        <input required type="text" name="address" id="address">
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label>Đơn vị vận chuyển :</label>
+                                                        <select name="shipper" id="shipper">
+                                                            @foreach ($shippers as $shipper )
+                                                                <option value="{{ $shipper->shipper_id  }}">{{ $shipper->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Ghi chú</label>
+                                                        <br>
+                                                        <textarea name="note" id="note" cols="50" rows="3">
+                                                        </textarea>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <button type="submit" class="btn btn-success">Check-Out</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="next-step text-center">
+
+                            <button>Next Step</button>
+
+                        </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
@@ -187,8 +341,8 @@
 
                             <h3>Billing Information</h3>
 
-                            <form>
-
+                            <form method="Post">
+                                @csrf
                                 <fieldset>
 
                                     <div class="col-sm-6">
@@ -331,47 +485,52 @@
 
                             <h3>Your Order</h3>
 
-                            <table>
+                            <table id="table-order">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
 
-                                <tr>
+                                        <td>1. Nikki Mike Pro</td>
+                                        <td>$ 90.00</td>
+                                        <td>1</td>
+                                        <td>$ 99.00</td>
 
-                                    <td>Product</td>
+                                    </tr>
+                                    <tr>
 
-                                    <td>Total</td>
+                                        <td>2. Nikki Mike Pro </td>
+                                        <td>$ 90.00</td>
+                                        <td>1</td>
+                                        <td>$ 59.00</td>
 
-                                </tr>
+                                    </tr>
 
-                                <tr>
+                                    <tr class="row-bold">
 
-                                    <td>1. Nikki Mike Pro</td>
+                                        <td>Subtotal</td>
+                                        <td colspan="2">
+                                        </td>
 
-                                    <td>$ 99.00</td>
+                                        <td>$ 158.00</td>
 
-                                </tr>
+                                    </tr>
 
-                                <tr>
+                                    <tr class="row-bold">
 
-                                    <td>2. Nikki Mike Pro </td>
+                                        <td>Total</td>
+                                        <td colspan="2"></td>
+                                        <td>$ 158.00</td>
 
-                                    <td>$ 59.00</td>
+                                    </tr>
+                                </tbody>
 
-                                </tr>
-
-                                <tr class="row-bold">
-
-                                    <td>Subtotal</td>
-
-                                    <td>$ 158.00</td>
-
-                                </tr>
-
-                                <tr class="row-bold">
-
-                                    <td>Total</td>
-
-                                    <td>$ 158.00</td>
-
-                                </tr>
 
                             </table>
 
@@ -386,6 +545,7 @@
                     </div>
 
                 </div>
+
 
                 <div class="tab-pane" id="payment">
 

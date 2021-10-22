@@ -10,12 +10,16 @@ use Validator;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\VarDumper\Cloner\Data;
+use App\Model\Shipper;
 
 class CartController extends Controller
 {
     //
     public function index(){
-        return view('client.pages.shopping.cart-detail');
+        $shippers = Shipper::all();
+        return view('client.pages.shopping.cart-detail',[
+            'shippers'=>$shippers
+        ]);
     }
     public function store(Request $request, $id)
     {

@@ -22,14 +22,15 @@ Route::prefix('')->group(function () {
     Route::post('/updateCart','CartController@update');
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
     Route::post('/products/detail','ProductController@getInfoProduct');
-    Route::get('/shipping','CartController@index')->name('shipping');
+    Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
+    Route::post('/shipping','client\OrderController@order');
+    Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
 });
 
-Route::get('/products/{slug}','ProductController@product_detail');
+Route::get('/products/{slug}','ProductController@productDetail');
 
 Route::group(["prefix" => "admin",'middleware' => "auth"], function(){
     Route::get('/', function () {
-        // dd(Auth::user());
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 

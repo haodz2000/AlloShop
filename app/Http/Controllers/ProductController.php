@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     //
-    public function product_detail(Request $request,$slug){
+    public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
         $productDetail = $product->product_details;
         return view('client.pages.products.product-detail',[
