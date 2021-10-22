@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'vu',
                 'email' => 'vu@example.com',
-                'password' => '123456',
+                'password' => '123456789',
                 'code' => 'vu15082002'
             ],
             [

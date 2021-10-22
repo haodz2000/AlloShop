@@ -12,22 +12,25 @@ class ShipperSeeder extends Seeder
      */
     public function run()
     {
+
+        //
         DB::table('shippers')->insert([
             [
-                'name' => 'Hung',
-                'phone' => '0983785181',
-                'address' => 'Thai Binh'
+                'name'=>'ViettelPost',
+                'phone'=>'0868689999',
+                'address'=>'Hà Nội',
             ],
             [
-                'name' => 'Hao',
-                'phone' => '0974826481',
-                'address' => 'Ha Noi'
+                'name'=>'Giao hàng tiết kiệm',
+                'phone'=>'0868689990',
+                'address'=>'Hà Nội',
             ],
             [
-                'name' => 'Vu',
-                'phone' => '0997458348',
-                'address' => 'TP.HCM'
-            ]
+                'name'=>'Giao hàng nhanh',
+                'phone'=>'0868689992',
+                'address'=>'Hà Nội',
+            ],
         ]);
+
     }
 }

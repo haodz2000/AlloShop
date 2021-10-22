@@ -25,18 +25,27 @@ use App\Http\Controllers\ProductController;
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
     Route::post('/addCart/{id}','CartController@store');
+
 });
 
-//Authentication   
+//Authentication
 Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
-
-Route::get('/shipping','CartController@index')->name('shipping');
-
 Route::get('/products/{slug}','ProductController@product_detail');
 Route::post('/products/detail','ProductController@getInfoProduct');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/shipping','CartController@index')->name('shipping');
+    Route::post('/deleteItemCart','CartController@delete');
+    Route::post('/updateCart','CartController@update');
+    Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
+    Route::post('/products/detail','ProductController@getInfoProduct');
+    Route::get('/shipping','CartController@index')->name('shipping');
+    Route::post('/shipping','client\OrderController@order');
+    Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')
+    ;
+});
 
-
+Route::get('/products/{slug}','ProductController@productDetail');
 
 Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/', function () {
@@ -71,8 +80,8 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
 
     Route::get('/logout', 'SignInController@logout')->name('logout');
-    
-    //Category 
+
+    //Category
 
     Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');

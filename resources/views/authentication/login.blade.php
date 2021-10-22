@@ -11,7 +11,7 @@
   <title>Sign In</title>
 
   {{-- CSS --}}
-  @include('admin.includes.authentication.css')
+  @include('admin.includes.css')
 
 </head>
 
@@ -19,7 +19,7 @@
 
   <!--start wrapper-->
   <div class="wrapper">
-    
+
        <!--start content-->
        <main class="authentication-content">
         <div class="container-fluid">
@@ -88,7 +88,7 @@
           </div>
         </div>
        </main>
-        
+
        <!--end page main-->
 
   </div>
@@ -96,7 +96,7 @@
 
 
     {{-- JS --}}
-    @include('admin.includes.authentication.js')
+    @include('admin.includes.js')
 
 
 </body>
