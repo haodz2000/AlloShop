@@ -9,12 +9,12 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -36,8 +36,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    // public function posts(){
-    //     return  $this->hasMany('App\Model\Post', 'customer_id', 'customer_id');
-    // }
+    public function posts(){
+        return  $this->hasMany('App\Model\Post', 'user_id', 'user_id');
+    }
 }

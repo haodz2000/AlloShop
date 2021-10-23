@@ -25,20 +25,33 @@ use App\Http\Controllers\ProductController;
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
     Route::post('/addCart/{id}','CartController@store');
+    Route::post('/deleteItemCart','CartController@delete');
+    Route::post('/updateCart','CartController@update');
+    Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
+    Route::post('/products/detail','ProductController@getInfoProduct');
+    Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
+    Route::post('/shipping','client\OrderController@order');
+    Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
 });
 
-//Authentication   
+Route::get('/products/{slug}','ProductController@productDetail');
+//Authentication
 Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
 
 Route::get('/shipping','CartController@index')->name('shipping');
 
-Route::get('/products/{slug}','ProductController@product_detail');
+
 Route::post('/products/detail','ProductController@getInfoProduct');
 
 
 
+<<<<<<< HEAD
 Route::group(["prefix" => "admin"], function(){
+=======
+
+Route::group(["prefix" => "admin","middleware" => "auth"], function(){
+>>>>>>> c351dedc7ddb1d009e62db90fa2466ac74bb26c4
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
@@ -71,13 +84,13 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
 
     Route::get('/logout', 'SignInController@logout')->name('logout');
-    
-    //Category 
+
+    //Category
 
     Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
     Route::get('/order/order-details/{order_id}/{customer_id}', [OrderDetailController::class, 'show'])->name('order-details');
 
-
+    
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 

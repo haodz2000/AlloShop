@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Model\ProductDetail;
 use App\Model\Category;
 use App\Model\Product;
 use Illuminate\Http\Request;
@@ -9,13 +9,29 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+
     public function productList(){
         $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
         return view("admin.pages.eCommerce.products-list", [
-            'product_list' => $product_list,
+            'product_list' => $product_list]);
+    }
+
+    public function productDetail(Request $request,$slug){
+        $product  = Product::where('slug',$slug)->get()->first();
+        $productDetail = $product->product_details;
+        return view('client.pages.products.product-detail',[
+            'product'=>$product,
+            'productDetail'=>$productDetail
         ]);
-        return view("admin.pages.eCommerce.products-grid", [
-            'product_grid' => $product_list,
+    }
+    public function getInfoProduct(Request $request)
+    {
+        $data = $request->all();
+        $product = ProductDetail::where('product_id',$data['product_id'])
+        ->where('color_id',$data['color'])->where('size_id',$data['size'])
+        ->get()->first();
+        return response()->json([
+            'product'=>$product
         ]);
     }
     public function productGrid(){
@@ -57,8 +73,8 @@ class ProductController extends Controller
             $data = $request->input('url_image');
             $photo = $request->file('url_image')->getClientOriginalName();
 
-            $destination = base_path() . '/public/assets/admin/images/products';               
-            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh 
+            $destination = base_path() . '/public/assets/admin/images/products';
+            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
             // dd($data);
             // $create = Product::create($data);
             Product::create([
@@ -96,8 +112,8 @@ class ProductController extends Controller
             $description = $request->input('description');
             $data = $request->input('url_image');
             $photo = $request->file('url_image')->getClientOriginalName();
-            $destination = base_path() . '/public/assets/admin/images/products';               
-            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh 
+            $destination = base_path() . '/public/assets/admin/images/products';
+            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
             // dd($data);
             // $create = Product::create($data);
             // Product::create([

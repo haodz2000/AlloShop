@@ -13,7 +13,11 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="heiglight text-right">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i>Account</a></li>
+                            @if (Auth::check())
+                                <li><a href="{{ route('logout') }}"><i class="fa fa-user"></i>{{ Auth::user()->name }}</a></li>
+                            @else
+                                <li><a href="{{ route('signin.index') }}"><i class="fa fa-user"></i>Login/Register</a></li>
+                            @endif
                             <li><a href="#"><i class="fa fa-heart-o"></i>Wishlist</a></li>
                             <li class="cart cart-area">
                                 @if ($cart = Session('Cart'))

@@ -2,6 +2,11 @@
 @section('title','Category')
 
 @section('content')
+    {{--  Alert Block  --}}
+    <div class="alert alert-success alert-dismissible d-none" id="alert-success-category" role="alert">
+      <strong></strong>
+    </div>
+
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3" id="category_index">
       <div class="breadcrumb-title pe-3">eCommerce</div>
