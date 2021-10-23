@@ -72,7 +72,12 @@ Route::group(["prefix" => "admin"], function(){
 
     Route::get('/logout', 'SignInController@logout')->name('logout');
     
-    //Category 
+    Route::resource('/post','PostController');
+
+    Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
+
+    //Category
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 });

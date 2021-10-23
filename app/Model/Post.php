@@ -9,10 +9,10 @@ class Post extends Model
 {
     protected $table = "posts"; 
     protected $primaryKey = "post_id";
-    // protected $fillable = [];
+    protected $fillable = ['title','content','url_image','status','slug'];
     protected $guarded = [];
 
     public function Users(){
-        return $this->belongsTo('App\Model\User', 'post_id', 'post_id');
+        return $this->belongsTo('App\User', 'user_id', 'user_id');
     }
 }
