@@ -21,7 +21,7 @@ class OrderDetailSeeder extends Seeder
                 'size' => 'X',
                 'color' => 'vang',
                 'total_price' => '60',
-                // 'sku' => 'hic',
+                'sku' => 'hic',
             ],
             [
                 'order_id' => '2',
@@ -31,7 +31,7 @@ class OrderDetailSeeder extends Seeder
                 'size' => 'L',
                 'color' => 'xanh',
                 'total_price' => '60',
-                // 'sku' => 'hic',
+                'sku' => 'hic',
             ],
             [
                 'order_id' => '3',
@@ -41,7 +41,7 @@ class OrderDetailSeeder extends Seeder
                 'size' => 'XL',
                 'color' => 'den',
                 'total_price' => '80',
-                // 'sku' => 'hic',
+                'sku' => 'hic',
             ],
         ]);
     }

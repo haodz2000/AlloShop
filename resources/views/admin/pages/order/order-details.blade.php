@@ -32,8 +32,12 @@
         <div class="card-header py-3"> 
           <div class="row g-3 align-items-center">
             <div class="col-12 col-lg-4 col-md-6 me-auto">
-              <h5 class="mb-1">Tue, Apr 15, 2020, 8:44PM</h5>
-              <p class="mb-0">Order ID : #8965327</p>
+                @if ($orders)
+                    @foreach ($orders as $item)
+                    <h5 class="mb-1">{{$item->created_at}}</h5>
+                    <p class="mb-0">Order ID : {{$item->order_id}}</p>
+                    @endforeach
+                @endif
             </div>
             <div class="col-12 col-lg-3 col-6 col-md-3">
               <select class="form-select">
@@ -81,10 +85,14 @@
                         <i class="bi bi-truck text-success"></i>
                       </div>
                       <div class="info">
-                         <h6 class="mb-2">Order info</h6>
-                         <p class="mb-1"><strong>Shipping</strong> : Red Express</p>
-                         <p class="mb-1"><strong>Pay Method</strong> : Master Card</p>
-                         <p class="mb-1"><strong>Status</strong> : New</p>
+                         <h6 class="mb-2">Shipper</h6>
+                         @if ($shippers)
+                          @foreach ($shippers as $item)
+                          <p class="mb-1"><strong>Name</strong> : {{$item->name}}</p>
+                          <p class="mb-1"><strong>Phone</strong> : {{$item->phone}}</p>
+                          <p class="mb-1"><strong>Address</strong> : {{$item->address}}</p>
+                          @endforeach
+                         @endif
                       </div>
                    </div>
                    </div>
@@ -99,8 +107,12 @@
                       </div>
                       <div class="info">
                         <h6 class="mb-2">Deliver to</h6>
-                        <p class="mb-1"><strong>City</strong> : Sydney, Australia</p>
-                        <p class="mb-1"><strong>Address</strong> : 47-A, Street Name, <br>Sydney Australia</p>
+                            @if ($orders)
+                                @foreach ($orders as $item)
+                                <p class="mb-1"><strong>City</strong> : {{$item->address}}</p>
+                                <p class="mb-1"><strong>Address</strong> : {{$item->address}}</p>
+                                @endforeach
+                            @endif
                       </div>
                     </div>
                   </div>
@@ -130,6 +142,7 @@
                                 <div class="orderlist">
                                  <a class="d-flex align-items-center gap-2" href="javascript:;">
                                    <div class="product-box">
+                                      {{-- {{$item->product_image}} --}}
                                        <img src="{{asset('./assets/admin/images/products/'.$item->product_image)}}" alt="">
                                    </div>
                                    <div>
@@ -151,59 +164,66 @@
              </div>
               @endif
               <div class="col-12 col-lg-4">
-                <div class="card border shadow-none bg-light radius-10">
-                  <div class="card-body">
-                      <div class="d-flex align-items-center mb-4">
-                         <div>
-                            <h5 class="mb-0">Order Summary</h5>
-                         </div>
-                         <div class="ms-auto">
-                           <button type="button" class="btn alert-success radius-30 px-4">Confirmed</button>
+                @if ($order_details)
+                    @foreach ($order_details as $item)
+                    <div class="card border shadow-none bg-light radius-10">
+                      <div class="card-body">
+                          <div class="d-flex align-items-center mb-4">
+                             <div>
+                                <h5 class="mb-0">Order Summary</h5>
+                             </div>
+                             <div class="ms-auto">
+                               @if ($orders)
+                                   @foreach ($orders as $val)
+                                   <button type="button" class="btn alert-success radius-30 px-4">{{$val->status}}</button>
+                                   @endforeach
+                               @endif
+                            </div>
+                          </div>
+                            <div class="d-flex align-items-center mb-3">
+                              <div>
+                                <p class="mb-0">Total price</p>
+                              </div>
+                              <div class="ms-auto">
+                                <h5 class="mb-0">${{$item->total_price}}.00</h5>
+                            </div>
+                          {{-- </div>
+                          <div class="d-flex align-items-center mb-3">
+                            <div>
+                              <p class="mb-0">Shipping Price</p>
+                            </div>
+                            <div class="ms-auto">
+                              <h5 class="mb-0">$0.00</h5>
+                          </div>
+                        </div>
+                          <div class="d-flex align-items-center mb-3">
+                            <div>
+                              <p class="mb-0">Taxes</p>
+                            </div>
+                            <div class="ms-auto">
+                              <h5 class="mb-0">$24.00</h5>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                          <div>
+                            <p class="mb-0">Payment Fee</p>
+                          </div>
+                          <div class="ms-auto">
+                            <h5 class="mb-0">$14.00</h5>
                         </div>
                       </div>
                         <div class="d-flex align-items-center mb-3">
                           <div>
-                            <p class="mb-0">Subtotal</p>
+                            <p class="mb-0">Discount</p>
                           </div>
                           <div class="ms-auto">
-                            <h5 class="mb-0">$198.00</h5>
-                        </div>
+                            <h5 class="mb-0 text-danger">-$36.00</h5>
+                        </div> --}}
                       </div>
-                      <div class="d-flex align-items-center mb-3">
-                        <div>
-                          <p class="mb-0">Shipping Price</p>
-                        </div>
-                        <div class="ms-auto">
-                          <h5 class="mb-0">$0.00</h5>
                       </div>
                     </div>
-                      <div class="d-flex align-items-center mb-3">
-                        <div>
-                          <p class="mb-0">Taxes</p>
-                        </div>
-                        <div class="ms-auto">
-                          <h5 class="mb-0">$24.00</h5>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                      <div>
-                        <p class="mb-0">Payment Fee</p>
-                      </div>
-                      <div class="ms-auto">
-                        <h5 class="mb-0">$14.00</h5>
-                    </div>
-                  </div>
-                    <div class="d-flex align-items-center mb-3">
-                      <div>
-                        <p class="mb-0">Discount</p>
-                      </div>
-                      <div class="ms-auto">
-                        <h5 class="mb-0 text-danger">-$36.00</h5>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-
+                    @endforeach
+                @endif
                 <div class="card border shadow-none bg-warning radius-10">
                   <div class="card-body">
                       <h5>Payment info</h5>

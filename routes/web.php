@@ -46,12 +46,8 @@ Route::post('/products/detail','ProductController@getInfoProduct');
 
 
 
-<<<<<<< HEAD
-Route::group(["prefix" => "admin"], function(){
-=======
 
-Route::group(["prefix" => "admin","middleware" => "auth"], function(){
->>>>>>> c351dedc7ddb1d009e62db90fa2466ac74bb26c4
+Route::group(["prefix" => "admin"], function(){
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
@@ -88,7 +84,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     //Category
 
     Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
-    Route::get('/order/order-details/{order_id}/{customer_id}', [OrderDetailController::class, 'show'])->name('order-details');
+    Route::get('/order/order-details/{order_id}/{customer_id}/{shipper_id}', [OrderDetailController::class, 'show'])->name('order-details');
 
     
     Route::resource('/category','CategoryController');

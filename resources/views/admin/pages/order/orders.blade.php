@@ -75,13 +75,13 @@
                     @foreach ($order_list as $item)
                     <tr>
                       <td>{{$item->order_id}}</td>
-                      <td>{{$item->customer_name}}</</td>
+                      <td>{{$item->user_name}}</</td>
                       <td>{{$item->total_price}}</</td>
                       <td><span class="badge rounded-pill alert-success">{{$item->status}}</</span></td>
                       <td>{{$item->created_at}}</</td>
                       <td>
                        <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="{{route('order-details', [$item->order_id, $item->customer_id])}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
+                         <a href="{{route('order-details', [$item->order_id, $item->user_id, $item->shipper_id])}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                        </div>

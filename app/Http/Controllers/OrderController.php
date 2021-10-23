@@ -15,9 +15,9 @@ class OrderController extends Controller
     public function show(){
         $order_list = DB::table('orders')
                         ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
-                        ->join('customers', 'orders.customer_id', '=', 'customers.customer_id')
-                        // ->join('shippers', 'orders.shipper_id', '=', 'shippers.shipper_id')
-                        ->select('orders.*', 'order_details.total_price as total_price', 'customers.customer_id', 'customers.name as customer_name')
+                        ->join('users', 'orders.user_id', '=', 'users.user_id')
+                        ->join('shippers', 'orders.shipper_id', '=', 'shippers.shipper_id')
+                        ->select('orders.*', 'order_details.total_price as total_price', 'users.user_id', 'users.name as user_name', 'shippers.shipper_id as shipper_id')
                         ->get();
         // dd($order_list);
         return view('admin.pages.order.orders', [
