@@ -32,7 +32,7 @@ Route::prefix('')->group(function () {
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
     Route::post('/products/detail','ProductController@getInfoProduct');
     Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
-    Route::post('/shipping','client\OrderController@order');
+    Route::post('/shipping','client\OrderController@order')->middleware('auth');
     Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
 });
 

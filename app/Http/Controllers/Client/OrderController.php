@@ -126,9 +126,25 @@ class OrderController extends Controller
         });
     }
     public function listOrderedClient(){
-        $order = Order::where('user_id',Auth::id())->get();
+        $order = Order::where('user_id',Auth::id())->orderBy('updated_at')->get();
+        $orderTrans = null;
+        $orderCancel = null;
+        foreach($order as $value){
+            $i = 0;
+            if($value->status == 1)
+            {
+                $orderTrans[$i] = $value;
+            }
+            else if($value->status == 3){
+                $orderCancel[$i] = $value;
+            }
+        }
+        // $orderTrans = Order::where('user_id',Auth::id())->where('status',1)->orderBy('updated_at')->get();
+        // $orderCancel = Order::where('user_id',Auth::id())->where('status',3)->orderBy('updated_at')->get();
         return view('client.pages.shopping.order',[
-            'order'=>$order
+            'order'=>$order,
+            'orderTrans'=>$orderTrans,
+            'orderCancel'=>$orderCancel
         ]);
     }
 }
