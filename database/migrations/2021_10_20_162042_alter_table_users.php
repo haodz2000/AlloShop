@@ -15,8 +15,8 @@ class AlterTableUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('address');
-            $table->string('phone',15);
+            $table->string('address')->nullable();
+            $table->string('phone',15)->nullable();
             $table->string('avatar')->default('https://www.kindpng.com/picc/m/163-1636340_user-avatar-icon-avatar-transparent-user-icon-png.png');
         });
     }
