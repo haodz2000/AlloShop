@@ -14,7 +14,7 @@ class OrderSeeder extends Seeder
     {
         DB::table('orders')->insert([
             [
-                'customer_id' => '1',
+                'user_id' => '1',
                 'shipper_id' => '1',
                 'code_employee' => 'a01',
                 'key_token' => 'abcd',
@@ -23,7 +23,7 @@ class OrderSeeder extends Seeder
                 'address' => 'Thai Binh'
             ],
             [
-                'customer_id' => '1',
+                'user_id' => '2',
                 'shipper_id' => '2',
                 'code_employee' => 'a02',
                 'key_token' => 'efgh',
@@ -32,7 +32,7 @@ class OrderSeeder extends Seeder
                 'address' => 'Ha Noi'
             ],
             [
-                'customer_id' => '1',
+                'user_id' => '3',
                 'shipper_id' => '3',
                 'code_employee' => 'a03',
                 'key_token' => 'jklm',

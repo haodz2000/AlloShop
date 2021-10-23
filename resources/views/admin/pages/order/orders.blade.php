@@ -1,7 +1,6 @@
 @extends('admin.index')
 @section('title', 'Orders')
 @section('content')
-<main class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -58,201 +57,51 @@
                 </div>
               </div>
              </div>
+             @if ($order_list)
              <div class="card-body">
-               <div class="table-responsive">
-                 <table class="table align-middle">
-                   <thead class="table-light">
-                     <tr>
-                       <th>ID</th>
-                       <th>Customer name</th>
-                       <th>Price</th>
-                       <th>Status</th>
-                       <th>Date</th>
-                       <th>Action</th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                     <tr>
-                       <td>#872</td>
-                       <td>Thomas Hardy</td>
-                       <td>$24.00</td>
-                       <td><span class="badge rounded-pill alert-success">Received</span></td>
-                       <td>24-06-2020</td>
-                       <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                       </td>
-                     </tr>
-                     <tr>
-                      <td>#976</td>
-                      <td>Thomas Hardy</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
+              <div class="table-responsive">
+                <table class="table align-middle">
+                  <thead class="table-light">
                     <tr>
-                      <td>#683</td>
-                      <td>Victoria Hardy</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-danger">Cancelled</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
+                      <th>ID</th>
+                      <th>Customer name</th>
+                      <th>Total price</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Action</th>
                     </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($order_list as $item)
                     <tr>
-                      <td>#456</td>
-                      <td>Maria Anders</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
+                      <td>{{$item->order_id}}</td>
+                      <td>{{$item->user_name}}</</td>
+                      <td>{{$item->total_price}}</</td>
+                      <td><span class="badge rounded-pill alert-success">{{$item->status}}</</span></td>
+                      <td>{{$item->created_at}}</</td>
                       <td>
                        <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
+                         <a href="{{route('order-details', [$item->order_id, $item->user_id, $item->shipper_id])}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                        </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>#658</td>
-                      <td>Martin Loother</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#653</td>
-                      <td>Dianne Russell</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#875</td>
-                      <td>Jacob Jones</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#869</td>
-                      <td>Albert Flores</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-danger">Cancelled</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#245</td>
-                      <td>Guy Hawkins</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#758</td>
-                      <td>Eleanor Pena</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#356</td>
-                      <td>Savannah Nguyen</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#689</td>
-                      <td>Devon Lane</td>
-                      <td>$24.00</td>
-                      <td><span class="badge rounded-pill alert-success">Received</span></td>
-                      <td>24-06-2020</td>
-                      <td>
-                       <div class="d-flex align-items-center gap-3 fs-6">
-                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                         <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                         <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                       </div>
-                      </td>
-                    </tr>
-                   </tbody>
-                 </table>
-               </div>
-               <nav class="float-end" aria-label="Page navigation">
-                <ul class="pagination">
-                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-              </nav>
-             </div>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <nav class="float-end" aria-label="Page navigation">
+               <ul class="pagination">
+                 <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                 <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                 <li class="page-item"><a class="page-link" href="#">2</a></li>
+                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
+               </ul>
+             </nav>
+            </div>
+             @endif
            </div>
          </div>
          <div class="col-12 col-lg-3 d-flex">
@@ -299,6 +148,4 @@
           </div>
         </div>
       </div><!--end row-->
-
-  </main>
 @endsection

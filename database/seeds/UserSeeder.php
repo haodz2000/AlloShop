@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                 'code' => 'vu15082002',
                 'address'=>'Thanh Hoa',
                 'phone'=>'0123456812'
+
             ],
             [
                 'name' => 'tu',
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
                 'code' => 'tu03112002',
                 'address'=>'Thanh Hoa',
                 'phone'=>'0133456812',
+
             ],
             [
                 'name' => 'ro',
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'vu',
                 'email' => 'bb@example.com',
+
                 'password' => bcrypt('123456789'),
                 'code' => 'eheheheh',
                 'address'=>'Thanh Hoa',
@@ -54,6 +57,7 @@ class UserSeeder extends Seeder
                 'code' => 'abcddd',
                 'address'=>'Thanh Hoa',
                 'phone'=>'0123452812'
+
             ]
         ]);
 

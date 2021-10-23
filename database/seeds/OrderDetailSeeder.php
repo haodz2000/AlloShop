@@ -20,7 +20,8 @@ class OrderDetailSeeder extends Seeder
                 'quantity' => '3',
                 'size' => 'X',
                 'color' => 'vang',
-                'total_price' => '60'
+                'total_price' => '60',
+                'sku' => 'hic',
             ],
             [
                 'order_id' => '2',
@@ -29,7 +30,8 @@ class OrderDetailSeeder extends Seeder
                 'quantity' => '3',
                 'size' => 'L',
                 'color' => 'xanh',
-                'total_price' => '60'
+                'total_price' => '60',
+                'sku' => 'hic',
             ],
             [
                 'order_id' => '3',
@@ -38,7 +40,8 @@ class OrderDetailSeeder extends Seeder
                 'quantity' => '4',
                 'size' => 'XL',
                 'color' => 'den',
-                'total_price' => '80'
+                'total_price' => '80',
+                'sku' => 'hic',
             ],
         ]);
     }
