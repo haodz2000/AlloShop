@@ -82,7 +82,7 @@
 
         <div class="row">
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mr-b30">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mr-b30">    
 
                 <div class="button-area row">
 
@@ -272,7 +272,7 @@
                                                 @csrf
                                                 <input type="hidden" name="infomation" value="new">
                                                 <fieldset>
-                                                    <div class="col-sm-12">
+                                                    <div class="col-s   m-12">
                                                         <label>Name: {{ Auth::user()->name }}</label>
                                                     </div>
                                                 </fieldset>

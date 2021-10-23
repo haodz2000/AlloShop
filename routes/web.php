@@ -30,7 +30,7 @@ Route::prefix('')->group(function () {
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
     Route::post('/products/detail','ProductController@getInfoProduct');
     Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
-    Route::post('/shipping','client\OrderController@order');
+    Route::post('/shipping','client\OrderController@order')->middleware('auth');
     Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
 });
 
@@ -86,7 +86,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
 
-    
+
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 

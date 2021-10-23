@@ -1,0 +1,29 @@
+*{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+section .row .tab-content .tab-pane .List-order{
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+section .row .tab-content .tab-pane .List-order{
+    box-sizing: border-box;
+    border-collapse: collapse;
+    width: 100%;
+}
+section .row .tab-content .tab-pane .List-order thead,tbody{
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+section .row .tab-content .tab-pane .List-order tr,th,td{
+    box-sizing: border-box;
+    border-collapse: collapse;
+    padding: 5px;
+    border: 1px solid black;
+}
+section .row .tab-content .tab-pane .List-order{
+    box-sizing: border-box;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+

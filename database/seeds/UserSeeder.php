@@ -18,34 +18,43 @@ class UserSeeder extends Seeder
             [
                 'name' => 'vu',
                 'email' => 'vu@example.com',
-                'password' => '123456789',
-                'code' => 'vu15082002'
+                'password' => bcrypt('123456789'),
+                'code' => 'vu15082002',
+                'address'=>'Thanh Hoa',
+                'phone'=>'0123456812'
             ],
             [
                 'name' => 'tu',
                 'email' => 'tu@example.com',
-                'password' => '111111',
-                'code' => 'tu03112002'
+                'password' => bcrypt('123456789'),
+                'code' => 'tu03112002',
+                'address'=>'Thanh Hoa',
+                'phone'=>'0133456812',
             ],
             [
                 'name' => 'ro',
                 'email' => 'ro@example.com',
-                'password' => '222222',
-                'code' => 'ronaldo'
+                'password' => bcrypt('123456789'),
+                'code' => 'ronaldo',
+                'address'=>'Thanh Hoa',
+                'phone'=>'0323456812'
             ],
             [
                 'name' => 'vu',
                 'email' => 'bb@example.com',
-                'password' => '333333',
-                'code' => 'eheheheh'
+                'password' => bcrypt('123456789'),
+                'code' => 'eheheheh',
+                'address'=>'Thanh Hoa',
+                'phone'=>'0124456812'
             ],
             [
                 'name' => 'vu',
                 'email' => 'aa@example.com',
-                'password' => '444444',
-                'code' => 'abcddd'
+                'password' => bcrypt('123456789'),
+                'code' => 'abcddd',
+                'address'=>'Thanh Hoa',
+                'phone'=>'0123452812'
             ]
-
         ]);
 
     }
