@@ -57,6 +57,19 @@
     </li>
     <li>
       <a href="javascript:;" class="has-arrow">
+        <div class="parent-icon"><i class="bi bi-award"></i>
+        </div>
+        <div class="menu-title">Posts</div>
+      </a>
+      <ul>
+        <li> <a href={{route('post.index')}}><i class="bi bi-arrow-right-short"></i>Post List</a>
+        </li>
+        <li> <a href="{{route('post.create')}}"><i class="bi bi-arrow-right-short"></i>Add New Post</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:;" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-bag-check"></i>
         </div>
         <div class="menu-title">eCommerce</div>

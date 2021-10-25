@@ -13,6 +13,6 @@ class Post extends Model
     protected $guarded = [];
 
     public function Users(){
-        return $this->belongsTo('App\Model\User', 'post_id', 'post_id');
+        return $this->belongsTo('App\User', 'user_id', 'user_id');
     }
 }
