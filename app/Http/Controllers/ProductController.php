@@ -11,14 +11,16 @@ class ProductController extends Controller
 {
 
     public function productList(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
+        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')
+                                // ->join('')
+                                ->get();
         return view("admin.pages.eCommerce.products-list", [
-
-            'product_list' => $product_list,]);
-        return view("admin.pages.eCommerce.products-grid", [
-                'product_grid' => $product_list,
+                'product_list' => $product_list,
             ]);
-        }
+        // return view("admin.pages.eCommerce.products-grid", [
+        //         'product_grid' => $product_list,
+        //     ]);
+    }
 
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();

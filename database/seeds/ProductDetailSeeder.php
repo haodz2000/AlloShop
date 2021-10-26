@@ -63,13 +63,13 @@ class ProductDetailSeeder extends Seeder
                 'quantity'=>100,
                 'sku'=>'#733'
             ],
-            [
-                'product_id'=>8,
-                'color_id' =>1,
-                'size_id' =>4,
-                'quantity'=>100,
-                'sku'=>'#814',
-            ],
+            // [
+            //     'product_id'=>8,
+            //     'color_id' =>1,
+            //     'size_id' =>4,
+            //     'quantity'=>100,
+            //     'sku'=>'#814',
+            // ],
         ]);
     }
 }

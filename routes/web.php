@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CodeDiscountController;
+use App\Http\Controllers\ProductDetailContrloller;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ Route::group(["prefix" => "admin"], function(){
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-list', [ProductDetailContrloller::class, 'productList'])->name("products-list");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
     Route::get('/products-grid/destroy/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
     Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
