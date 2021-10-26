@@ -3,7 +3,7 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-      <div class="breadcrumb-title pe-3">eCommerce</div>
+      <div class="breadcrumb-title pe-3">Orders</div>
       <div class="ps-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0 p-0">
@@ -27,7 +27,6 @@
       </div>
     </div>
     <!--end breadcrumb-->
-
       <div class="card">
         <div class="card-header py-3"> 
           <div class="row g-3 align-items-center">
@@ -35,17 +34,18 @@
                 @if ($orders)
                     @foreach ($orders as $item)
                     <h5 class="mb-1">{{$item->created_at}}</h5>
-                    <p class="mb-0">Order ID : {{$item->order_id}}</p>
+                    <p class="mb-0">Order ID : {{$item->order_id}}</p>      
                     @endforeach
                 @endif
             </div>
             <div class="col-12 col-lg-3 col-6 col-md-3">
               <select class="form-select">
-                <option>Change Status</option>
-                <option>Awaiting Payment</option>
-                <option>Confirmed</option>
-                <option>Shipped</option>
-                <option>Delivered</option>
+                <option value="0">Change Status</option>
+                <option value="1">Chờ xác nhận</option>
+                <option value="2">Đang giao hàng</option>
+                <option value="3">Đã nhận hàng</option>
+                <option value="4">Hoàn thành đơn hàng</option>
+                <option value="5">Hủy đơn hàng</option>
               </select>
             </div>
             <div class="col-12 col-lg-3 col-6 col-md-3">

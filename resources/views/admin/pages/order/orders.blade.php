@@ -3,7 +3,7 @@
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-      <div class="breadcrumb-title pe-3">eCommerce</div>
+      <div class="breadcrumb-title pe-3">Orders</div>
       <div class="ps-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb mb-0 p-0">
@@ -36,7 +36,7 @@
                 <div class="col-lg-4 col-md-6 me-auto">
                   <div class="ms-auto position-relative">
                     <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                    <input class="form-control ps-5" type="text" placeholder="search produts">
+                    <input class="form-control ps-5" type="text" placeholder="search products">
                   </div>
                 </div>
                 <div class="col-lg-2 col-6 col-md-3">

@@ -33,4 +33,8 @@ class OrderDetailController extends Controller
             'orders' => $orders
         ]);
     }
+
+    public function changeStatus($order_id, Request $request){
+
+    }
 }
