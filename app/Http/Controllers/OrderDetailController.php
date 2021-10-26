@@ -25,7 +25,7 @@ class OrderDetailController extends Controller
         $orders = DB::table('orders')->select('orders.*')
                             ->where('orders.order_id', '=', $order_id)
                             ->get();
-        // dd($customers);  
+        // dd($customers);
         return view('admin.pages.order.order-details', [
             'order_details' => $order_details,
             'customers' => $customers,
@@ -35,6 +35,6 @@ class OrderDetailController extends Controller
     }
 
     public function changeStatus($order_id, Request $request){
-
+       
     }
 }

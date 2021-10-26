@@ -9,7 +9,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\CodeDiscountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,5 +85,7 @@ Route::group(["prefix" => "admin"], function(){
 
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
+
+    Route::get('/code-discount', [CodeDiscountController::class, 'show'])->name('code');
 
 });

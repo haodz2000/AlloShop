@@ -42,6 +42,20 @@
         </li> --}}
       </ul>
     </li>
+      <li>
+          <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="bi bi-award"></i>
+              </div>
+              <div class="menu-title">Code</div>
+          </a>
+          <ul>
+              <li> <a href="{{route('code')}}"><i class="bi bi-arrow-right-short"></i>Code-discount</a>
+              </li>
+              {{-- <li> <a href="{{route('order-details')}}"><i class="bi bi-arrow-right-short"></i>Order-details</a>
+              </li> --}}
+          </ul>
+      </li>
+      <li>
     <li>
       <a href="javascript:;" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-award"></i>
@@ -184,7 +198,7 @@
         </div>
         <div class="menu-title">Authentication</div>
       </a>
-      <ul>                
+      <ul>
         <li> <a href="{{route('signin.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign In</a>
         </li>
         <li> <a href="{{route('signup.index')}}" ><i class="bi bi-arrow-right-short"></i>Sign Up</a>
