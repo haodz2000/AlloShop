@@ -12,7 +12,7 @@
   <!--navigation-->
   <ul class="metismenu" id="menu"  data-simplebar="true">
     <li>
-      <a href="javascript:;" class="has-arrow">
+      <a href="/admin" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-house-door"></i>
         </div>
         <div class="menu-title">Dashboard</div>
@@ -30,7 +30,7 @@
     </li>
     <li class="menu-label">UI Elements</li>
     <li>
-      <a href="javascript:;" class="has-arrow">
+      <a href="{{route('orders')}}" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-award"></i>
         </div>
         <div class="menu-title">Orders</div>
@@ -57,7 +57,7 @@
       </li>
       <li>
     <li>
-      <a href="javascript:;" class="has-arrow">
+      <a href="{{Route('banners')}}" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-award"></i>
         </div>
         <div class="menu-title">Banners</div>
@@ -66,6 +66,19 @@
         <li> <a href={{Route('banners')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
         </li>
         <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{route('post.index')}}" class="has-arrow">
+        <div class="parent-icon"><i class="bi bi-award"></i>
+        </div>
+        <div class="menu-title">Posts</div>
+      </a>
+      <ul>
+        <li> <a href="{{route('post.index')}}"><i class="bi bi-arrow-right-short"></i>Post List</a>
+        </li>
+        <li> <a href="{{route('post.create')}}"><i class="bi bi-arrow-right-short"></i>Add New Post</a>
         </li>
       </ul>
     </li>

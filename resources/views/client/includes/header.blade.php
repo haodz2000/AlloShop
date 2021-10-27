@@ -13,7 +13,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="heiglight text-right">
                         <ul>
-                            @if (Auth::check())
+                            @if (Auth::check() && Auth::user()->level==1) 
                                 <li><a href="{{ route('logout') }}"><i class="fa fa-user"></i>{{ Auth::user()->name }}</a></li>
                             @else
                                 <li><a href="{{ route('signin.index') }}"><i class="fa fa-user"></i>Login/Register</a></li>

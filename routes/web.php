@@ -11,6 +11,8 @@ use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CodeDiscountController;
 use App\Http\Controllers\ProductDetailContrloller;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,7 @@ Route::prefix('')->group(function () {
 Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
 
-Route::group(["prefix" => "admin"], function(){
+Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
@@ -75,7 +77,9 @@ Route::group(["prefix" => "admin"], function(){
 
     Route::get('/banner', [BannerController::class, 'show'])->name("banners");
     Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
-
+ 
+    Route::resource('/post','PostController');
+    
     Route::get('/logout', 'SignInController@logout')->name('logout');
 
     //Category
