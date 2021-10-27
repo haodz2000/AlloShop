@@ -80,28 +80,4 @@ $(document).ready(function () {
     //         }
     //     });
     // });
-    $(document).ready(function () {
-        $(document).on('click', '.delete-banner', function(e){
-        //   alert(1);
-        // $(".delete").click(function () {
-            e.preventDefault();
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            // var url = "{{route('products-grid')}}";
-            $.ajax({
-                type: "GET",
-                url: "/admin/banner/" + id,
-                data: {
-                    "id": id,
-                    "_token": token,
-                },
-                success: function (response) {
-                    // console.log("Ok");
-                    // window.location.reload();
-                    $("#banner-list").load(" .banner-list")
-                }
-            });
-            // alert(id);
-          });
-        });
 });

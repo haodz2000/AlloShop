@@ -730,5 +730,16 @@
       </div>
     </div><!--end row-->
   
-@endsection
+    {{-- JS,Css riêng --}}
+    <script src="{{asset('./assets/admin/plugins/easyPieChart/jquery.easypiechart.js')}}"></script>
+    <script src="{{asset('./assets/admin/plugins/peity/jquery.peity.min.js')}}"></script>
+    <script src="{{asset('./assets/admin/plugins/vectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
+    <script src="{{asset('./assets/admin/plugins/vectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+
+    <link href="{{asset('./assets/admin/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+    
+
+    @endsection
+
+
 
