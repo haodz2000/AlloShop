@@ -1,6 +1,11 @@
 @extends('admin.index')
 @section('title', "Banner")
 @section('content')
+
+    {{--  Alert Block  --}}
+    <div class="alert alert-success alert-dismissible d-none" id="alert-success-banner" role="alert">
+      <strong></strong>
+    </div>
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">Banners</div>
@@ -28,35 +33,12 @@
     </div>
     <!--end breadcrumb-->
 
-    <div class="card">
-      <div class="card-body">
-        @if (session()->has('noti'))
-        <div class="alert alert-success" role="alert">
-            <strong>{{session('noti')}}</strong>
-        </div>
-        @endif
-                        <div class="row align-items-center">
-                            <div class="col-lg-3 col-xl-2">
-                                <a href="{{route('add-new-product')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Banner</a>
-                            </div>
-                            {{-- <div class="col-lg-9 col-xl-10">
-                                <form class="float-lg-end">
-                                    <div class="row row-cols-lg-auto g-2">
-                                        <div class="col-12">
-                                            <a href="javascript:;" class="btn btn-light mb-3 mb-lg-0"><i class="bi bi-download"></i>Export</a>
-                                        </div>
-                                        <div class="col-12">
-                                            <a href="javascript:;" class="btn btn-light mb-3 mb-lg-0"><i class="bi bi-upload"></i>Import</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
-                    </div>
-    </div>
       <div class="card">
          <div class="card-header py-3"> 
           <div class="row g-3 align-items-center">
+            <div class="col-lg-3 col-xl-2">
+              <a href="{{route('banner.create')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Banner</a>
+            </div>
             <div class="col-lg-3 col-md-6 me-auto">
               <div class="ms-auto position-relative">
                 <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
@@ -81,9 +63,8 @@
             </div>
           </div>
          </div>
-         <div class="card-body">
+         <div class="card-body">          
            <div class="product-grid" id="banner-list">
-               {{-- {{$banner_list}} --}}
              <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 banner-list">
                @if ($banner_list)
                    @foreach ($banner_list as $item)
@@ -92,18 +73,9 @@
                       <div class="card-body text-center">
                         <img src="{{asset('./assets/admin/images/banners/'.$item['url_banner'])}}" style="width: 500px" class="img-fluid mb-3" alt=""/>
                         <h6 class="product-title">{{$item['name']}}</h6>
-                        {{-- <p class="product-price fs-5 mb-1"><span>${{$item["price"]}}.00</span></p>
-                        <div class="rating mb-0">
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                        <small>74 Reviews</small> --}}
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
-                          <a href="" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i> Edit</a>
-                          <a href=""><button class="btn btn-sm btn-outline-danger delete-banner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <a href="{{route('banner.edit',$item['banner_id'])}}" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i>Edit</a>
+                          <a href=""><button class="btn btn-sm btn-outline-danger deleteBanner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
                         </div>
                       </div>
                     </div>
@@ -112,18 +84,42 @@
                @endif
           </div>
       </div><!--end row-->
-</div>
-<nav class="float-end mt-4" aria-label="Page navigation">
-<ul class="pagination">
-<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item active"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
-</nav>
+      <nav class="float-end mt-4" aria-label="Page navigation">
+        <ul class="pagination">
+            {{$banner_list->links()}}
+        </ul>
+      </nav>
+    </div>
+  </div>
 
-</div>
-</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(document).on('click','.deleteBanner',function(e) {
+          e.preventDefault();
+          let id = $(this).data('id');
+          let token   = $('meta[name="csrf-token"]').attr('content');
+              
+        if(confirm('Are you sure you want to delete this banner?')) {
+          $.ajax({
+                  type: "DELETE",
+                  url: "/admin/banner/" + id,
+                  data: {
+                      "id": id,
+                      "_token": token,
+                  },
+                  success: function(response) {
+                    $("#alert-success-banner").removeClass('d-none');
+                    $("#alert-success-banner strong").html('Delete banner is successfully!');
+                    setTimeout(function() { 
+                      $("#alert-success-banner").addClass('d-none');
+                    }, 3000);
+                    $("#banner-list").load(" #banner-list");
+                  }
+          });
+        }  
+      });
+    });
+  </script>
  
 @endsection

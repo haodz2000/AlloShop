@@ -75,8 +75,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
 
-    Route::get('/banner', [BannerController::class, 'show'])->name("banners");
-    Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
+    Route::resource('/banner','BannerController');
  
     Route::resource('/post','PostController');
     
