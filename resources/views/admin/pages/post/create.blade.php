@@ -2,7 +2,7 @@
 @section('title','Create Post')
 
 @section('content')
-<div class="row">
+  <div class="row">
     <div class="col-lg-12 mx-auto">
      <div class="card">
        <div class="card-header py-3 bg-transparent"> 
