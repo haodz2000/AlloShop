@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,13 @@ class OrderDetailController extends Controller
     }
 
     public function changeStatus($order_id, Request $request){
-       
+        // return $order_id." ".$request->input('status');
+        // return $order_id;
+        $order = Order::find($order_id);
+        $order->status = $request->input('status');
+        // return $order;
+        $order->save();
+        // return $order;
+        // return redirect()->route('orders');
     }
 }

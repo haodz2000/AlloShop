@@ -86,6 +86,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
 
     Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
     Route::get('/order/order-details/{order_id}/{customer_id}/{shipper_id}', [OrderDetailController::class, 'show'])->name('order-details');
+    Route::post('/order/order-details/update-status/{order_id}', [OrderDetailController::class, 'changeStatus'])->name('changeStatus');
 
 
     Route::resource('/category','CategoryController');
