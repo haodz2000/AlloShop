@@ -77,7 +77,25 @@
                       <td>{{$item->order_id}}</td>
                       <td>{{$item->user_name}}</</td>
                       <td>{{$item->total_price}}</</td>
-                      <td><span class="badge rounded-pill alert-success">{{$item->status}}</</span></td>
+                      @switch($item->status)
+                          @case(0)
+                              <td><span class="badge rounded-pill alert-warning">Chờ xác nhận</span></td>
+                              @break
+                          @case(1)
+                              <td><span class="badge rounded-pill alert-primary">Đang giao hàng</span></td>
+                              @break
+                          @case(2)
+                              <td><span class="badge rounded-pill alert-info">Đã nhận hàng</span></td>
+                              @break
+                          @case(3)
+                              <td><span class="badge rounded-pill alert-success">Hoàn thành</span></td>
+                              @break
+                          @case(4)
+                              <td><span class="badge rounded-pill alert-danger">Hủy đơn hàng</span></td>
+                              @break
+                          @default
+                              
+                      @endswitch
                       <td>{{$item->created_at}}</</td>
                       <td>
                        <div class="d-flex align-items-center gap-3 fs-6">

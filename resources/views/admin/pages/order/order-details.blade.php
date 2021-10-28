@@ -38,23 +38,31 @@
                     @endforeach
                 @endif
             </div>
-            <div class="col-12 col-lg-3 col-6 col-md-3">
-              <select class="form-select">
-                <option value="0">Change Status</option>
-                <option value="1">Chờ xác nhận</option>
-                <option value="2">Đang giao hàng</option>
-                <option value="3">Đã nhận hàng</option>
-                <option value="4">Hoàn thành đơn hàng</option>
-                <option value="5">Hủy đơn hàng</option>
-              </select>
-            </div>
-            <div class="col-12 col-lg-3 col-6 col-md-3">
-               <button type="button" class="btn btn-primary">Save</button>
-               <button type="button" class="btn btn-secondary"><i class="bi bi-printer-fill"></i> Print</button>
-            </div>
+            <div class="col-12 col-lg-4 col-md-3 me-auto">
+            @if ($orders)
+                @foreach ($orders as $item)
+            <form method="POST">
+              {{-- action="{{route('changeStatus', $item->order_id)}}" --}}
+              @csrf
+                <select class="form-select status" name="status">
+                  <option>Change Status</option>
+                  <option value="0">Chờ xác nhận</option>
+                  <option value="1">Đang giao hàng</option>
+                  <option value="2">Đã nhận hàng</option>
+                  <option value="3">Hoàn thành đơn hàng</option>
+                  <option value="4">Hủy đơn hàng</option>
+                </select>
+              <div class="col-12 col-lg-4 col-md-3 me-auto">
+                <button type="submit" class="btn btn-primary save" name="save" data-id="{{$item->order_id}}">Save</button>
+                  {{-- <button type="button" class="btn btn-secondary"><i class="bi bi-printer-fill"></i> Print</button> --}}
+               </div>
+            </form>
+                @endforeach
+            @endif
+          </div>
           </div>
          </div>
-        <div class="card-body">
+        <div class="card-body" id="card-body">
             <div class="row row-cols-1 row-cols-xl-2 row-cols-xxl-3">
                <div class="col">
                  <div class="card border shadow-none radius-10">
@@ -175,7 +183,25 @@
                              <div class="ms-auto">
                                @if ($orders)
                                    @foreach ($orders as $val)
-                                   <button type="button" class="btn alert-success radius-30 px-4">{{$val->status}}</button>
+                                   @switch($val->status)
+                                   @case(0)
+                                       <td><span class="badge rounded-pill alert-warning">Chờ xác nhận</span></td>
+                                       @break
+                                   @case(1)
+                                       <td><span class="badge rounded-pill alert-primary">Đang giao hàng</span></td>
+                                       @break
+                                   @case(2)
+                                       <td><span class="badge rounded-pill alert-info">Đã nhận hàng</span></td>
+                                       @break
+                                   @case(3)
+                                       <td><span class="badge rounded-pill alert-success">Hoàn thành</span></td>
+                                       @break
+                                   @case(4)
+                                       <td><span class="badge rounded-pill alert-danger">Hủy đơn hàng</span></td>
+                                       @break
+                                   @default
+                                       
+                               @endswitch
                                    @endforeach
                                @endif
                             </div>

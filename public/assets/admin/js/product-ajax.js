@@ -43,6 +43,27 @@ $(document).ready(function () {
         });
         // alert(id);
     });
+    $(document).on('click', '.save', function(e){
+        e.preventDefault();
+        var order_id = $(this).data('id');
+        var status = $('.status').val();
+        var token = $("meta[name='csrf-token']").attr("content");
+        // alert(status);
+        $.ajax({
+            type: "POST",
+            url: "/admin/order/order-details/update-status/" + order_id,
+            data: {
+                "order_id": order_id,
+                "status" : status,
+                "_token": token,
+            },
+            success: function (response) {
+                console.log(response);
+                $(".card-body").load(" #card-body");
+            }
+        });
+        // alert(id);
+    });
     // $(document).on('click', '.add-new-product', function(e){
     //     e.preventDefault();
     //     var token = $("meta[name='csrf-token']").attr("content");
