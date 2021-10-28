@@ -455,7 +455,7 @@ a {
 	display: flex;
 	align-items: center;
 	justify-content: left;
-	padding: 10px 15px;
+	padding: 5px 15px;
 	font-size: 15px;
 	color: #5f5f5f;
 	outline-width: 0;
@@ -508,7 +508,7 @@ a {
 }
 
 .menu-label {
-	padding: 20px 15px 5px 5px;
+	padding: 10px 15px 5px 5px;
 	color: #b0afaf;
 	text-transform: uppercase;
 	font-size: 12px;

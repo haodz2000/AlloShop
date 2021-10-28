@@ -76,7 +76,7 @@
     </div><!--end row-->
 
 
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-12 col-lg-8 col-xl-8">
         <div class="card radius-10">
           <div class="card-body">
@@ -728,7 +728,7 @@
           </div>
         </div>
       </div>
-    </div><!--end row-->
+    </div><!--end row--> --}}
   
     {{-- JS,Css riêng --}}
     <script src="{{asset('./assets/admin/plugins/easyPieChart/jquery.easypiechart.js')}}"></script>
