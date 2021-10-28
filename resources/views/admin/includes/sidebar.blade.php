@@ -57,15 +57,15 @@
       </li>
       <li>
     <li>
-      <a href="{{Route('banners')}}" class="has-arrow">
+      <a href="{{Route('banner.index')}}" class="has-arrow">
         <div class="parent-icon"><i class="bi bi-award"></i>
         </div>
         <div class="menu-title">Banners</div>
       </a>
       <ul>
-        <li> <a href={{Route('banners')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
+        <li> <a href={{Route('banner.index')}}><i class="bi bi-arrow-right-short"></i>Banners List</a>
         </li>
-        <li> <a href="widgets-data-widgets.html"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
+        <li> <a href="{{Route('banner.create')}}"><i class="bi bi-arrow-right-short"></i>Add New Banner</a>
         </li>
       </ul>
     </li>
