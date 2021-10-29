@@ -48,7 +48,11 @@
                 </div>
                 <div class="col-12">
                   <label class="form-label">Images</label>
-                  <input class="form-control" type="file" name="url_image" src="{{ URL::asset('./assets/admin/images/products/'.$product['url_image']) }}">
+                  <input class="form-control" type="file" name="url_image">
+                </div>
+                <div class="col-12">
+                  <label class="form-label" style="color: red">Now images</label>
+                  <img src="{{ URL::asset('./assets/admin/images/products/'.$product['url_image']) }}" alt="" class="form-control">
                 </div>
                 <div class="col-12">
                   <label class="form-label">Slug</label>
