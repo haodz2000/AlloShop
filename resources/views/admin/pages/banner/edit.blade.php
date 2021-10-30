@@ -34,8 +34,17 @@
                      @enderror
 
                      <div class="col-12 col-lg-12">
+                      <label class="form-label">Status</label>
+                      <select class="form-select" aria-label="Default select example" name="status" id="">
+                       <option value="1">Show</option>
+                       <option {{$banner->status==0 ? 'selected' :''}} value="0">Hidden</option>
+                      </select>
+                     </div>    
+
+                     <div class="col-12 col-lg-12">
                         <label class="form-label">Banner</label>
                         <input class="form-control" type="file" name="url_banner" id="">
+                        <br><strong class="text-danger">Ảnh hiện tại</strong><br>
                         <img src="{{asset('assets/admin/images/banners/'.$banner->url_banner)}}" alt="" width="50%">
                      </div>
                      @error('url_banner')

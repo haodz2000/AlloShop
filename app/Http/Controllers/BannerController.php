@@ -14,7 +14,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banner_list = Banner::select('banner_id', 'name', 'url_banner')->orderBy('banner_id','desc')->paginate(2);
+        $banner_list = Banner::select('banner_id', 'name', 'url_banner','status')->orderBy('banner_id','desc')->paginate(2);
         return view('admin.pages.banner.index', [
             'banner_list' => $banner_list,
         ]);
@@ -42,6 +42,7 @@ class BannerController extends Controller
             [
                 'name' => 'required|max:255',
                 'url_banner' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=500,min_heigh=500,max_width=6000,max_heigh=6000',
+                'status' => 'required'
             ]
         );
 
@@ -55,6 +56,7 @@ class BannerController extends Controller
 
         $banner = new Banner;
         $banner->name = $data['name'];
+        $banner->status = $data['status'];
         $banner->url_banner = $name_image;
         $addBanner = $banner->save();
         if ($addBanner) {
@@ -101,11 +103,13 @@ class BannerController extends Controller
             [
                 'name' => 'required|max:255',
                 'url_banner' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=500,min_heigh=500,max_width=6000,max_heigh=6000',
+                'status' => 'required'
             ]
         );
 
         $banner = Banner::find($id);
         $banner->name   = $data['name'];
+        $banner->status = $data['status'];
         
         // sửa ảnh
         $get_image = $request->url_banner;

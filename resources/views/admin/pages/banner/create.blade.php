@@ -31,6 +31,14 @@
                         </div>
                      @enderror
 
+                    <div class="col-12 col-lg-12">
+                      <label class="form-label">Status</label>
+                      <select class="form-select" aria-label="Default select example" name="status">
+                       <option selected value="1">Show</option>
+                       <option value="0">Hidden</option>
+                      </select>
+                    </div>    
+
                      <div class="col-12 col-lg-12">
                         <label class="form-label">Banner</label>
                         <input class="form-control" required type="file" name="url_banner" id="">

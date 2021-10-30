@@ -76,6 +76,7 @@
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
                           <a href="{{route('banner.edit',$item['banner_id'])}}" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i>Edit</a>
                           <a href=""><button class="btn btn-sm btn-outline-danger deleteBanner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <span class="badge rounded-pill alert-{{$item['status']==0 ? 'danger' : 'success'}}">{{$item['status']==0 ? 'Hidden' : 'Show'}}</span>
                         </div>
                       </div>
                     </div>
