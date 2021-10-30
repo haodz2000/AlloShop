@@ -2,7 +2,6 @@
 <link href="{{asset('./assets/admin/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 <link href="{{asset('./assets/admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 <link href="{{asset('./assets/admin/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
-<link href="{{asset('./assets/admin/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
 <link href="{{asset('./assets/admin/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 <!-- Bootstrap CSS -->
 <link href="{{asset('./assets/admin/css/bootstrap.min.css')}}" rel="stylesheet" />

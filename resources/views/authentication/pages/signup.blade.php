@@ -36,7 +36,7 @@
                     <p class="card-text mb-5">See your growth and get consulting support!</p>
                     <form class="form-body" action="{{route('signup.store')}}" method="post">
                       @csrf
-                      <div class="d-grid">
+                      {{-- <div class="d-grid">
                         <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
                             <img class="me-2" src="{{asset('assets/admin/images/icons/search.svg')}}" width="16" alt="">
                             <span>Sign up with Google</span>
@@ -45,7 +45,7 @@
                       </div>
                       <div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
                         <hr>
-                      </div>
+                      </div> --}}
                         <div class="row g-3">
                           <div class="col-12 ">
                             <label for="inputName" class="form-label">Name</label>
@@ -65,6 +65,26 @@
                             </div>
                             @if ($errors->has('email'))
                               <span class="text-danger">{{$errors->first('email')}}
+                            @endif
+                          </div>
+                          <div class="col-12">
+                            <label for="inputEmailAddress" class="form-label">Phone</label>
+                            <div class="ms-auto position-relative">
+                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-telephone-fill"></i></div>
+                              <input type="number" value="{{old('phone')}}" name="phone" class="form-control radius-30 ps-5" id="inputPhone" placeholder="Phone Number">
+                            </div>
+                            @if ($errors->has('phone'))
+                              <span class="text-danger">{{$errors->first('phone')}}
+                            @endif
+                          </div>
+                          <div class="col-12 ">
+                            <label for="inputName" class="form-label">Address</label>
+                            <div class="ms-auto position-relative">
+                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-house-fill"></i></div>
+                              <input type="text" name="address" value="{{old('address')}}" class="form-control radius-30 ps-5" id="inputAddress" placeholder="Enter Address">
+                            </div>
+                            @if ($errors->has('address'))
+                              <span class="text-danger">{{$errors->first('address')}}</span>
                             @endif
                           </div>
                           <div class="col-12">

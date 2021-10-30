@@ -63,12 +63,16 @@ class SignInController extends Controller
             if (Auth::user()->status!= 1) {
                 return redirect()->back()->with('error','This account was block!');
             }
-            if (Auth::user()->level>1) {
+            if (Auth::user()->level>2) {
                 return view('admin.pages.dashboard.dashboard');
                 //return view('client.pages.home');
             } 
+            if (Auth::user()->level==1) {
+                return view('client.pages.home');
+                //return view('client.pages.home');
+            } 
         };
-        return redirect()->back()->with('error','Sai');
+        return redirect()->back()->with('error','Email hoặc mật khẩu sai !');
     }
 
     /**

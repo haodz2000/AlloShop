@@ -29,7 +29,6 @@
                                         </ul>
                                     </div>
                                 </li>
-
                             @else
                                 <li><a href="{{ route('signin.index') }}"><i class="fa fa-user"></i>Login/Register</a></li>
                             @endif

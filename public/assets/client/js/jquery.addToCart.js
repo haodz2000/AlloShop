@@ -142,4 +142,3 @@ $(document).on('click','select.size_order',function(){
         }
     })
 })
-

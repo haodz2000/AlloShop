@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,12 +26,23 @@ class OrderDetailController extends Controller
         $orders = DB::table('orders')->select('orders.*')
                             ->where('orders.order_id', '=', $order_id)
                             ->get();
-        // dd($customers);  
+        // dd($customers);
         return view('admin.pages.order.order-details', [
             'order_details' => $order_details,
             'customers' => $customers,
             'shippers' => $shipper,
             'orders' => $orders
         ]);
+    }
+
+    public function changeStatus($order_id, Request $request){
+        // return $order_id." ".$request->input('status');
+        // return $order_id;
+        $order = Order::find($order_id);
+        $order->status = $request->input('status');
+        // return $order;
+        $order->save();
+        // return $order;
+        // return redirect()->route('orders');
     }
 }

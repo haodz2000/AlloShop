@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 use App\Model\ProductDetail;
 use App\Model\Category;
 use App\Model\Product;
+// use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
 
     public function productList(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
+        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->paginate(5);
+                        
         return view("admin.pages.eCommerce.products-list", [
-
-            'product_list' => $product_list,]);
-        return view("admin.pages.eCommerce.products-grid", [
-                'product_grid' => $product_list,
+                'product_list' => $product_list,
             ]);
-        }
+        // return view("admin.pages.eCommerce.products-grid", [
+        //         'product_grid' => $product_list,
+        //     ]);
+    }
 
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
@@ -67,7 +70,7 @@ class ProductController extends Controller
 
     }
     public function productGrid(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
+        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->paginate(5);
         return view("admin.pages.eCommerce.products-grid", [
             'product_grid' => $product_list,
         ]);
@@ -142,22 +145,6 @@ class ProductController extends Controller
             $price = $request->input('price');
             $discount = $request->input('discount');
             $description = $request->input('description');
-            $data = $request->input('url_image');
-            $photo = $request->file('url_image')->getClientOriginalName();
-            $destination = base_path() . '/public/assets/admin/images/products';
-            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
-            // dd($data);
-            // $create = Product::create($data);
-            // Product::create([
-            //     'product_name' => $product_name,
-            //     'slug' => $slug,
-            //     'category_id' => $category_id,
-            //     'gender' => $gender,
-            //     'price' => $price,
-            //     'discount' => $discount,
-            //     'url_image' => $photo,
-            //     'description' => $description
-            // ]);
             $product = Product::find($id);
             $product->product_name = $product_name;
             $product->slug = $slug;
@@ -165,7 +152,15 @@ class ProductController extends Controller
             $product->gender = $gender;
             $product->price = $price;
             $product->discount = $discount;
-            $product->url_image = $photo;
+            if ($request->has('url_image')) {
+                $image_path = public_path("/assets/admin/images/products/".$product->url_image);
+                File::delete($image_path);
+                $data = $request->input('url_image');
+                $photo = $request->file('url_image')->getClientOriginalName();
+                $destination = base_path() . '/public/assets/admin/images/products';
+                $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
+                $product->url_image = $photo;
+            };
             $product->description = $description;
             // dd($product);
             $product->save();

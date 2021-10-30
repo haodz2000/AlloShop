@@ -9,6 +9,9 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CodeDiscountController;
+use App\Http\Controllers\ProductDetailContrloller;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -46,12 +49,12 @@ Route::prefix('')->group(function () {
 Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
 
-Route::group(["prefix" => "admin"], function(){
+Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/', function () {
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-list', [ProductDetailContrloller::class, 'productList'])->name("products-list");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
     Route::get('/products-grid/destroy/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
     Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
@@ -75,18 +78,22 @@ Route::group(["prefix" => "admin"], function(){
         return view('admin.pages.eCommerce.orders-detail');
     })->name("orders-detail");
 
-    Route::get('/banner', [BannerController::class, 'show'])->name("banners");
-    Route::get('/banner/{id}', [BannerController::class, 'destroy'])->name("banners-destroy");
-
+    Route::resource('/banner','BannerController');
+ 
+    Route::resource('/post','PostController');
+    
     Route::get('/logout', 'SignInController@logout')->name('logout');
 
     //Category
 
     Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
     Route::get('/order/order-details/{order_id}/{customer_id}/{shipper_id}', [OrderDetailController::class, 'show'])->name('order-details');
+    Route::post('/order/order-details/update-status/{order_id}', [OrderDetailController::class, 'changeStatus'])->name('changeStatus');
 
 
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
+
+    Route::get('/code-discount', [CodeDiscountController::class, 'show'])->name('code');
 
 });
