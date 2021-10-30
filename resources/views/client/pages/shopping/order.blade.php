@@ -101,59 +101,66 @@
                     <div class="tab-pane active" id="checkout">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             @if (isset($order) && count($order)>=1)
-                            <table class="List-order">
-                                <thead>
-                                    <tr>
-                                        <th>OrderID</th>
-                                        <th>Địa chi giao hàng</th>
-                                        <th>Ngày đặt hàng</th>
-                                        <th>Trạng thái đơn hàng</th>
-                                        <th>Ngày cập nhật</th>
-                                        <th>Vận chuyển</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($order as $value )
-                                    <tr>
-                                        <td>{{ $value->order_id }}</td>
-                                        <td>{{ $value->address }}</td>
-                                        <td>{{ $value->created_at }}</td>
-                                        <td>
-                                            @php
-                                                $status = $value->status;
-                                                switch($status){
-                                                    case '0': {
-                                                        echo "Chờ xác nhận";
-                                                        break;
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">Danh sách các đơn hàng</div>
+
+                                <!-- Table -->
+                                <table class="List-order table">
+                                    <thead class="table">
+                                        <tr>
+                                            <th>OrderID</th>
+                                            <th>Địa chi giao hàng</th>
+                                            <th>Ngày đặt hàng</th>
+                                            <th>Trạng thái đơn hàng</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Vận chuyển</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table">
+                                        @foreach ($order as $value )
+                                        <tr>
+                                            <td>{{ $value->order_id }}</td>
+                                            <td>{{ $value->address }}</td>
+                                            <td>{{ $value->created_at }}</td>
+                                            <td>
+                                                @php
+                                                    $status = $value->status;
+                                                    switch($status){
+                                                        case '0': {
+                                                            echo "Chờ xác nhận";
+                                                            break;
+                                                        }
+                                                        case '1':{
+                                                            echo "Đang giao";
+                                                            break;
+                                                        }
+                                                        case '2':{
+                                                            echo "Đã nhận hàng";
+                                                            break;
+                                                        }
+                                                        case '3':{
+                                                            echo 'Đã hủy';
+                                                            break;
+                                                        }
                                                     }
-                                                    case '1':{
-                                                        echo "Đang giao";
-                                                        break;
-                                                    }
-                                                    case '2':{
-                                                        echo "Đã nhận hàng";
-                                                        break;
-                                                    }
-                                                    case '3':{
-                                                        echo 'Đã hủy';
-                                                        break;
-                                                    }
-                                                }
-                                            @endphp
-                                        </td>
-                                        <td>{{ $value->updated_at }}</td>
-                                        <td>{{ $value->shippers->name }}</td>
-                                        <td>
-                                            @if ($value->status == 0)
-                                                <button class="btn btn-danger">Hủy</button>
-                                            @endif
-                                            <button class="btn btn-success">View</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                @endphp
+                                            </td>
+                                            <td>{{ $value->updated_at }}</td>
+                                            <td>{{ $value->shippers->name }}</td>
+                                            <td>
+                                                @if ($value->status == 0)
+                                                    <button class="btn btn-danger">Hủy</button>
+                                                @endif
+                                                <button class="btn btn-success">View</button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                              </div>
+
                             @else
                             <div class="text-danger">
                                 <p>Không có đơn hàng nào</p>

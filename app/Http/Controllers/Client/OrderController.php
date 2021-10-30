@@ -12,6 +12,10 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Validator;
+use App\Jobs\SendEmailClientOrderProduct;
+use App\Jobs\SendEmailAdminOrderProduct;
+use Illuminate\Support\Arr;
+
 class OrderController extends Controller
 {
     //
@@ -27,9 +31,13 @@ class OrderController extends Controller
                     $order->address = Auth::user()->address;
                 }
                 else if($data['infomation'] == 'new'){
+                    $city = $this->getString($data['city']);
+                    $district = $this->getString($data['district']);
+                    $ward = $data['ward'];
                     if($data['address'] != '')
                     {
-                        $order->address = $data['address'];
+                        $address = $data['address'].' '.$ward.' '.$district.' '. $city;
+                        $order->address = $address;
                     }
                     else{
                         $order->address = Auth::user()->address;
@@ -67,7 +75,11 @@ class OrderController extends Controller
                 }
                 $customer = Auth::user();
                 $this->mailOrderClient($customer,$order);
-                $this->mailOrderAdmin($order);
+                $this->email = $customer->email;
+                $data = array('cart'=>Session('Cart'),'customer'=>$customer,'token'=>$order->key_token);
+                SendEmailClientOrderProduct::dispatch($this->email,$data);
+                $data = array('cart'=>Session('Cart'),'order'=>$order);
+                SendEmailAdminOrderProduct::dispatch($data)->delay(now()->addSecond(5));
                 $request->session()->forget('Cart');
                 return redirect()->route('shipping.order');
             }
@@ -105,25 +117,15 @@ class OrderController extends Controller
         }
         return $token;
     }
-
     public function mailOrderClient($customer,$order) {
-
         $this->email = $customer->email;
         $data = array('cart'=>Session('Cart'),'customer'=>$customer,'token'=>$order->key_token);
-        Mail::send('.client.pages.mails.mail-order-client', $data, function($message) {
-            $message->to($this->email, 'AlloShop')->subject
-            ('Thanh You');
-            $message->from('tahuuhao1810@gmail.com','Allshop');
-        });
+        SendEmailClientOrderProduct::dispatch($this->email,$data);
     }
 
     public function mailOrderAdmin($order){
         $data = array('cart'=>Session('Cart'),'order'=>$order);
-        Mail::send('.client.pages.mails.mail-order-admin', $data, function($message) {
-            $message->to('tahuuhao1810@gmail.com', 'AlloShop')->subject
-            ('Thanh You');
-            $message->from('tahuuhao1810@gmail.com','Allshop');
-        });
+        SendEmailAdminOrderProduct::dispatch($data)->delay(now()->addMinutes(1));
     }
     public function listOrderedClient(){
         $order = Order::where('user_id',Auth::id())->orderBy('updated_at')->get();
@@ -146,5 +148,9 @@ class OrderController extends Controller
             'orderTrans'=>$orderTrans,
             'orderCancel'=>$orderCancel
         ]);
+    }
+    public function getString($string){
+        $array = explode('/',$string);
+        return $array[1];
     }
 }

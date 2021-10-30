@@ -22,12 +22,16 @@
         }
         .table{
             margin: 0 auto;
+            padding: 2px;
+        }
+        .table table,thead,tbody,tr,,th,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            box-sizing: border-box;
         }
         .table th,td{
             text-align: center;
             padding: 10px;
-            border: 1 px solid black;
-            border-collapse: collapse;
         }
         span{
             margin: 0 auto;
@@ -63,23 +67,18 @@
                         <td>{{ $item['color'] }}</td>
                         <td>{{$item['productInfo']->price}}</td>
                         <td>{{$item['quantity']}}</td>
-                        <td>{{number_format($item['price'])}}đ</td>
+                        <td>{{number_format($item['price'],2)}}$</td>
                     </tr>
                 @endforeach
             @endif
             </tbody>
             <tr>
-                <td colspan="6">
-                    <hr>
-                </td>
+                <td colspan="6"><strong>Tổng SP</strong></td>
+                <td><strong>{{$cart->totalQuantity}}</strong></td>
             </tr>
             <tr>
-                <td colspan="4">Tổng SP:</td>
-                <td>{{$cart->totalQuantity}}</td>
-            </tr>
-            <tr>
-                <td colspan="4">Tổng tiền:</td>
-                <td>{{number_format($cart->totalPrice)}}đ</td>
+                <td colspan="7"><strong>Tổng tiền</strong></td>
+                <td><strong>{{number_format($cart->totalPrice,2)}}$</strong></td>
             </tr>
         </table>
     </div>

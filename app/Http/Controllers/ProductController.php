@@ -23,21 +23,47 @@ class ProductController extends Controller
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
         $productDetail = $product->product_details;
+        $size = null;
+        $color =null;
+        $totalQuantity = 0;
+        foreach($productDetail as $value){
+            $totalQuantity += $value->quantity;
+            $idSize = $value->size_id;
+            $idColor = $value->color_id;
+            $size[$idSize] = $value->sizes;
+            $color[$idColor] = $value->colors;
+        }
         return view('client.pages.products.product-detail',[
             'product'=>$product,
-            'productDetail'=>$productDetail
+            'productDetail'=>$productDetail,
+            'size'=> $size,
+            'color' => $color,
+            'totalQuantity'=>$totalQuantity
         ]);
     }
     public function getInfoProduct(Request $request)
     {
         $data = $request->all();
-        $product = ProductDetail::where('product_id',$data['product_id'])
-        ->where('color_id',$data['color'])->where('size_id',$data['size'])
-        ->get()->first();
-        return response()->json([
-            'product'=>$product
+        if(isset($data['product_id']))
+        {
+            $product = ProductDetail::where('product_id',$data['product_id'])
+            ->where('color_id',$data['color'])->where('size_id',$data['size'])
+            ->get()->first();
+            if($product)
+            {
+                return response()->json([
+                    'product'=>$product
+                ]);
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
 
-        ]);
+
 
     }
     public function productGrid(){

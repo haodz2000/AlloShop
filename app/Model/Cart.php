@@ -18,7 +18,7 @@ class Cart extends Model
             $this->totalQuantity = $cart->totalQuantity;
         }
     }
-    public function addCart($product,$sku,$color ='Trắng',$size = 'S',$quantity = 1)
+    public function addCart($product,$sku,$color,$size,$quantity = 1)
     {
         $newProduct = [
             'sku'=>$sku,

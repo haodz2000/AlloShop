@@ -25,11 +25,18 @@ $(document).on('change','select#size',function(){
             },
             dataType: "JSON",
             success: function(data){
-                $("#quantity-store").html(data.product.quantity);
-                $("input#sku").val(data.product.sku);
+                if(data!=0)
+                {
+                    $("#quantity-store").html(data.product.quantity);
+                    $("input#sku").val(data.product.sku);
+                }else{
+                    $("#quantity-store").html('Hết hàng');
+                    $("#addItemCart").addClass('disable');
+                }
+
             },
             error: function(){
-                console.log("Error")
+                console.log('error');
             }
         })
     }else{
@@ -57,7 +64,9 @@ $(document).on('submit',"Form.Form-Add-To-Cart",function(e){
             processData: false,
             success: function (data) {
                 $(".cart").load(" .cart");
+                $("#shiping").load(" #shiping");
                 alertify.success('Thêm mới thành công');
+                $(".order-form").addClass('hidden');
         },
             error: function (){
                 alertify.error('Thêm mới thất bại');

@@ -24,16 +24,19 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
-    Route::post('/products/detail','ProductController@getInfoProduct');
-    Route::get('/products/{slug}','ProductController@productDetail');
+    Route::get('/products/{slug}',['uses'=>'ProductController@productDetail'])->name('products.slug');
     Route::post('/addCart/{id}','CartController@store');
+    Route::post('/addItemCart','CartController@storeItem')->name('addItemCart');
     Route::post('/deleteItemCart','CartController@delete');
     Route::post('/updateCart','CartController@update');
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
-    Route::post('/products/detail','ProductController@getInfoProduct');
+    Route::post('/products/detail','ProductController@getInfoProduct')->name('product.detail');
     Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
     Route::post('/shipping','client\OrderController@order')->middleware('auth');
     Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
+    Route::get('/men/products', 'HomeController@men')->name('clothes.men');
+    Route::get('/women/products', 'HomeController@women')->name('clothes.women');
+    Route::post('/getDataProduct','CartController@getProduct')->name('getDataProduct');
 });
 
 
