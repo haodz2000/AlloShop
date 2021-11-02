@@ -103,9 +103,9 @@
       <li>
         <a href="{{route('products-list')}}"><i class="bi"></i>Products List</a>
       </li>
-      <li>
+      {{-- <li>
         <a href="{{route('products-grid')}}"><i class="bi"></i>Products Grid</a>
-      </li>
+      </li> --}}
       <li>
         <a href="{{route('add-new-product')}}"><i class="bi"></i>Add New Product</a>
       </li>

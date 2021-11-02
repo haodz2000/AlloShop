@@ -34,34 +34,52 @@
                 @if ($orders)
                     @foreach ($orders as $item)
                     <h5 class="mb-1">{{$item->created_at}}</h5>
-                    <p class="mb-0">Order ID : {{$item->order_id}}</p>      
+                    <p class="mb-0">Order ID : #{{$item->order_id}}</p>      
                     @endforeach
                 @endif
             </div>
-            <div class="col-12 col-lg-4 col-md-3 me-auto">
+            <div class="col-12 col-lg-4 col-md-6 me-auto">
             @if ($orders)
                 @foreach ($orders as $item)
-            <form method="POST">
-              {{-- action="{{route('changeStatus', $item->order_id)}}" --}}
+            <form method="POST" class="row g-3">
               @csrf
-                <select class="form-select status" name="status">
-                  <option>Change Status</option>
-                  <option value="0">Chờ xác nhận</option>
-                  <option value="1">Đang giao hàng</option>
-                  <option value="2">Đã nhận hàng</option>
-                  <option value="3">Hoàn thành đơn hàng</option>
-                  <option value="4">Hủy đơn hàng</option>
-                </select>
-              <div class="col-12 col-lg-4 col-md-3 me-auto">
-                <button type="submit" class="btn btn-primary save" name="save" data-id="{{$item->order_id}}">Save</button>
-                  {{-- <button type="button" class="btn btn-secondary"><i class="bi bi-printer-fill"></i> Print</button> --}}
-               </div>
+                <div class="col-9 col-lg-9">
+                  <select class="form-select status" name="status" class="col-12 col-lg-6">
+                    <option>Change Status</option>
+                    <option value="0">Chờ xác nhận</option>
+                    <option value="1">Đang giao hàng</option>
+                    <option value="2">Đã nhận hàng</option>
+                    <option value="3">Hoàn thành đơn hàng</option>
+                    <option value="4">Hủy đơn hàng</option>
+                  </select>
+                </div>
+                <div class="col-3 col-lg-3"><button type="submit" class="btn btn-primary save" name="save" data-id="{{$item->order_id}}">Save</button></div>
             </form>
                 @endforeach
             @endif
           </div>
           </div>
          </div>
+         {{-- <div class="card-header py-3"> 
+          <div class="row g-3 align-items-center">
+            <div class="col-12 col-lg-4 col-md-6 me-auto">
+              <h5 class="mb-1">Tue, Apr 15, 2020, 8:44PM</h5>
+              <p class="mb-0">Order ID : #8965327</p>
+            </div>
+            <div class="col-12 col-lg-3 col-6 col-md-3">
+              <select class="form-select">
+                <option>Change Status</option>
+                <option>Awaiting Payment</option>
+                <option>Confirmed</option>
+                <option>Shipped</option>
+                <option>Delivered</option>
+              </select>
+            </div>
+            <div class="col-12 col-lg-3 col-6 col-md-3">
+               <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+         </div> --}}
         <div class="card-body" id="card-body">
             <div class="row row-cols-1 row-cols-xl-2 row-cols-xxl-3">
                <div class="col">

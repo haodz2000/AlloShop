@@ -58,14 +58,31 @@
           @if ($product_list)
             <div class="table-responsive">
               <table class="table align-middle table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                      Product Name
+                    </th>
+                    <th>Slug</th>
+                    <th>
+                      Price
+                    </th>
+                    <th>
+                      Gender
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                  </tr>
+                </thead>
                 <tbody>
                       @foreach ($product_list as $item)
                         <tr>
-                          <td>
+                          {{-- <td>
                             <div class="form-check">
                               <input class="form-check-input" type="checkbox">
                             </div>
-                          </td>
+                          </td> --}}
                           <td class="productlist">
                             <a class="d-flex align-items-center gap-2" href="#">
                               <div class="product-box">
@@ -76,14 +93,29 @@
                               </div>
                             </a>
                           </td>
+                          <td><span>{{$item->slug}}</span></td>
                           <td><span>${{$item->price}}.00</span></td>
-                          <td><span>{{$item->color}}</span></td>
-                          <td><span>{{$item->size}}</span></td>
-                          <td><span>{{$item->quantity}}</span></td>
+                          <td>
+                            @switch($item->gender)
+                                @case(1)
+                                    <span>Nam</span>
+                                    @break
+                                @case(2)
+                                    <span>Nữ</span>
+                                    @break
+                                @case(3)
+                                    <span>Cả hai</span>
+                                    @break
+                                @default
+                                    
+                            @endswitch
+                          </td>
+                          {{-- <td><span>{{$item->size}}</span></td> --}}
+                          {{-- <td><span>{{$item->quantity}}</span></td> --}}
                           <td>
                             <div class="d-flex align-items-center gap-3 fs-6">
                               <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi   bi-eye-fill"></i></a>
-                              <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi  bi-pencil-fill"></i></a>
+                              <a  href="{{route('products-grid.update-view', $item['product_id'])}}" class="text-warning" data-id="{{$item['product_id']}}" aria-label="Edit"><i class="bi  bi-pencil-fill"></i></a>
                               <a href="#" class="delete-list" class="text-danger" data-id="{{$item->product_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi  bi-trash-fill"></i></a>
                             </div>
                           </td>
@@ -93,9 +125,9 @@
               </table>           
             </div>
             <nav class="float-end mt-4" aria-label="Page navigation">
-              {{-- <ul class="pagination">
-                {{$product_list->links()}}
-              </ul> --}}
+              <ul class="pagination">
+                  {{$product_list->links()}}
+              </ul>
             </nav>
           @endif
         </div>
