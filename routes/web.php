@@ -55,6 +55,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     })->name("dashboard");
 
     Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-list/category/{category}', [ProductController::class, 'productListSelectCategory'])->name("products-list-select-category");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
     Route::get('/products-grid/destroy/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
     Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");

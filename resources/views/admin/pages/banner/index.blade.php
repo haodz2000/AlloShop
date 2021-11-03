@@ -39,28 +39,6 @@
             <div class="col-lg-3 col-xl-2">
               <a href="{{route('banner.create')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Banner</a>
             </div>
-            <div class="col-lg-3 col-md-6 me-auto">
-              <div class="ms-auto position-relative">
-                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                <input class="form-control ps-5" type="text" placeholder="search banners">
-              </div>
-            </div>
-            <div class="col-lg-2 col-6 col-md-3">
-              <select class="form-select">
-                <option>All category</option>
-                <option>Fashion</option>
-                <option>Electronics</option>
-                <option>Furniture</option>
-                <option>Sports</option>
-              </select>
-            </div>
-            <div class="col-lg-2 col-6 col-md-3">
-              <select class="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
-              </select>
-            </div>
           </div>
          </div>
          <div class="card-body">          

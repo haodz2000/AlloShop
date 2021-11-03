@@ -14,16 +14,20 @@
           </ol>
         </nav>
       </div>
+      @if($linkFromCategory)
+        <div class="ms-auto">
+          <div class="btn-group">
+            <form action="{{route('products-list')}}">
+              <button type="submit" class="btn btn-primary">Go to All Product</button>
+            </form>
+          </div>
+        </div>
+      @endif
       <div class="ms-auto">
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Settings</button>
-          <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
-            <a class="dropdown-item" href="javascript:;">Another action</a>
-            <a class="dropdown-item" href="javascript:;">Something else here</a>
-            <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-          </div>
+          <form action="{{route('category.index')}}">
+            <button type="submit" class="btn btn-primary">Go to Category List</button>
+          </form>
         </div>
       </div>
     </div>
@@ -33,17 +37,27 @@
         <div class="card-header py-3">
           <div class="row align-items-center m-0">
             <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                <select class="form-select">
-                    <option>All category</option>
-                    <option>Fashion</option>
-                    <option>Electronics</option>
-                    <option>Furniture</option>
-                    <option>Sports</option>
-                </select>
+                @if($linkFromCategory)
+                  <h5>List product of <span class="text-danger">{{$linkFromCategory['category_name']}}</span></h5>
+                @else
+                  <select  class="form-select form-select-category">
+                      <option value="0">All product</option>
+                      @foreach ($category_name_list as $item)
+                        <option value="{{$item['category_name']}}">{{$item['category_name']}}</option>
+                      @endforeach
+                  </select>
+                @endif
+
             </div>
-            <div class="col-md-2 col-6">
+            <div class="col-lg-4 col-md-6 me-auto">
+              <div class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+                <input id="search" class="form-control ps-5" type="text" placeholder="Search product....">
+              </div>
+            </div>
+            {{-- <div class="col-md-2 col-6">
                 <input type="date" class="form-control">
-            </div>
+            </div> --}}
             <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option>Status</option>
@@ -54,15 +68,16 @@
             </div>
          </div>
         </div>
-        <div class="card-body">
-          @if ($product_list)
+        <div class="card-body" id="product-list">
+          @if (count($product_list)>0)
             <div class="table-responsive">
-              <table class="table align-middle table-striped">
+              <table class="table align-middle table-striped" id="myTable">
                 <thead>
                   <tr>
                     <th>
                       Product Name
                     </th>
+                    <th>Category</th>
                     <th>Slug</th>
                     <th>
                       Price
@@ -78,11 +93,6 @@
                 <tbody>
                       @foreach ($product_list as $item)
                         <tr>
-                          {{-- <td>
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox">
-                            </div>
-                          </td> --}}
                           <td class="productlist">
                             <a class="d-flex align-items-center gap-2" href="#">
                               <div class="product-box">
@@ -93,6 +103,7 @@
                               </div>
                             </a>
                           </td>
+                          <td class="category" data-category="{{$item->categories->category_name}}">{{$item->categories->category_name}}</td>
                           <td><span>{{$item->slug}}</span></td>
                           <td><span>${{$item->price}}.00</span></td>
                           <td>
@@ -129,9 +140,45 @@
                   {{$product_list->links()}}
               </ul>
             </nav>
+          @else
+              <span class="text-danger"><h3>No data!</h3></span>
           @endif
         </div>
 </div>
 
+  {{-- Filter to category --}}
+    <script>
+      $(document).ready(function() {
+            $('.form-select-category').change(function(){
+                filter_function();      
+            });
+            $('table tbody tr').show(); 
 
+            function filter_function(){
+                $('table tbody tr').hide();
+                
+                let categoryFlag = 0;
+                let categoryValue = $('.form-select-category').val();
+                
+                $('table tbody tr').each(function() {     
+
+                    if(categoryValue == 0){   
+                        categoryFlag = 1;
+                    }
+                    else if(categoryValue == $(this).find('td.category').data('category')){ 
+                        categoryFlag = 1;       
+                    }
+                    else{
+                        categoryFlag = 0;
+                    }
+                    if(categoryFlag){
+                        $(this).show();  
+                        if (categoryValue != 0) {
+                          $('.pagination').hide();  
+                        }
+                    }             
+                });                                
+            }
+      });
+    </script>
 @endsection

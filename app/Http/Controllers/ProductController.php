@@ -13,16 +13,22 @@ class ProductController extends Controller
 {
 
     public function productList(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price', 'gender', 'slug')->paginate(5);
-                        
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->paginate(5);   
+        $category_name_list = Category::select('category_name', 'category_id')->get();       
         return view("admin.pages.eCommerce.products-list", [
-                'product_list' => $product_list,
+                'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => null
             ]);
-        // return view("admin.pages.eCommerce.products-grid", [
-        //         'product_grid' => $product_list,
-        //     ]);
     }
 
+    public function productListSelectCategory($category) { 
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->where('category_id','=',$category)->paginate(5);
+        $linkFromCategory = Category::where('category_id','=',$category)->first();
+        $category_name_list = Category::select('category_name', 'category_id')->get();       
+        return view("admin.pages.eCommerce.products-list", [
+                'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => $linkFromCategory
+            ]);
+    }
+    
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
         $productDetail = $product->product_details;

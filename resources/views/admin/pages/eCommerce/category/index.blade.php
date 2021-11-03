@@ -21,14 +21,16 @@
       </div>
       <div class="ms-auto">
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Settings</button>
-          <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
+          <form action="{{route('products-list')}}">
+            <button type="submit" class="btn btn-primary">Go to Product List</button>
+          </form>
+          {{-- <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
           </button>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
             <a class="dropdown-item" href="javascript:;">Another action</a>
             <a class="dropdown-item" href="javascript:;">Something else here</a>
             <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -36,8 +38,29 @@
 
       <div class="card">
         <div class="card-header py-3">
-          <h6 class="mb-0">Add Product Category</h6>
-        </div>
+          <div class="row align-items-center m-0">
+            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                <h5>Add Category</h5>
+            </div>
+            <div class="col-lg-4 col-md-6 me-auto">
+              <div class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+                <input id="search" class="form-control ps-5" type="text" placeholder="Search category....">
+              </div>
+            </div>
+            {{-- <div class="col-md-2 col-6">
+                <input type="date" class="form-control">
+            </div> --}}
+            <div class="col-md-2 col-6">
+                <select class="form-select">
+                    <option>Status</option>
+                    <option>Active</option>
+                    <option>Disabled</option>
+                    <option>Show all</option>
+                </select>
+            </div>
+         </div>
+        </div> 
         <div class="card-body">
            <div class="row">
              <div class="col-12 col-lg-4 d-flex">
@@ -77,10 +100,10 @@
               <div class="card border shadow-none w-100">
                 <div class="card-body">
                   <div class="table-responsive-md" >
-                     <table class="table align-middle" id="data_category" >
+                     <table class="table align-middle" id="myTable">
                        <thead class="table-light">
                          <tr>
-                           <th><input class="form-check-input" type="checkbox"></th>
+                           {{-- <th><input class="form-check-input" type="checkbox"></th> --}}
                            <th>ID</th>
                            <th>Name</th>
                            <th>Description</th>
@@ -90,13 +113,13 @@
                        <tbody>
                          @foreach($listCategory as $category)
                          <tr id="category_{{$category->category_id}}">
-                           <td><input class="form-check-input" type="checkbox"></td>
+                           {{-- <td><input class="form-check-input" type="checkbox"></td> --}}
                            <td>{{$category->category_id}}</td>
                            <td>{{$category->category_name}}</td>
                            <td>{{$category->description}}</td>
                            <td>
                             <div class="d-flex align-items-center gap-3 fs-6">
-                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
+                              <a href="{{route('products-list-select-category',$category->category_id)}}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
                               <a href="javascript:;" data-id="{{$category->category_id}}" data-name="{{$category->category_name}}" data-description="{{$category->description}}" data-id="{{$category->category_id}}" class="editCategory text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
                               <a href="javascript:;" data-id="{{$category->category_id}}" class="deleteCategory text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                             </div>
@@ -107,7 +130,9 @@
                      </table>
                   </div>
                   <nav class="float-end mt-0" aria-label="Page navigation">
-                    {{$listCategory->links()}}
+                    <ul class="pagination">
+                      {{$listCategory->links()}}
+                    </ul>
                   </nav>
                 </div>
               </div>
@@ -121,5 +146,4 @@
   {{-- AJAX --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{asset("./assets/admin/js/category-curd-ajax.js")}}"></script>
-      
 @endsection
