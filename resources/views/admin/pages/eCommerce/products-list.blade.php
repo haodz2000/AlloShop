@@ -13,18 +13,17 @@
             <li class="breadcrumb-item active" aria-current="page">Products List</li>
           </ol>
         </nav>
-      </div>
-      @if($linkFromCategory)
-        <div class="ms-auto">
-          <div class="btn-group">
-            <form action="{{route('products-list')}}">
-              <button type="submit" class="btn btn-primary">Go to All Product</button>
-            </form>
-          </div>
-        </div>
-      @endif
+      </div>    
       <div class="ms-auto">
         <div class="btn-group">
+          @if($linkFromCategory)       
+            <form action="{{route('products-list')}}">
+              <button type="submit" class="btn btn-info">Go to All Product</button>
+            </form>
+          @endif
+          <form action="{{route('add-new-product')}}">
+            <button type="submit" class="btn btn-success">Add Product</button>
+          </form>  
           <form action="{{route('category.index')}}">
             <button type="submit" class="btn btn-primary">Go to Category List</button>
           </form>
@@ -58,15 +57,15 @@
             {{-- <div class="col-md-2 col-6">
                 <input type="date" class="form-control">
             </div> --}}
-            <div class="col-md-2 col-6">
+            {{-- <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option>Status</option>
                     <option>Active</option>
                     <option>Disabled</option>
                     <option>Show all</option>
                 </select>
-            </div>
-         </div>
+            </div> --}}
+          </div>
         </div>
         <div class="card-body" id="product-list">
           @if (count($product_list)>0)
@@ -125,12 +124,60 @@
                           {{-- <td><span>{{$item->quantity}}</span></td> --}}
                           <td>
                             <div class="d-flex align-items-center gap-3 fs-6">
-                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi   bi-eye-fill"></i></a>
+                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-toggle="modal" data-target="#detailProduct{{$item->product_id}}" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi   bi-eye-fill"></i></a>
                               <a  href="{{route('products-grid.update-view', $item['product_id'])}}" class="text-warning" data-id="{{$item['product_id']}}" aria-label="Edit"><i class="bi  bi-pencil-fill"></i></a>
-                              <a href="#" class="delete-list" class="text-danger" data-id="{{$item->product_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi  bi-trash-fill"></i></a>
+                              <a href="#" class="delete-list" class="text-danger" data-id="{{$item->product_id}}" data-bs-toggle="tooltip" data-bs-placement="bottom"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi  bi-trash-fill"></i></a>
                             </div>
                           </td>
                         </tr>
+                        <!-- The Modal -->
+                        <div class="modal" id="detailProduct{{$item->product_id}}">
+                          <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-name" id="nameDetailProduct">{{$item->product_name}}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <!-- Modal body -->
+                              <div class="modal-body">
+                                    <div class="col-12">
+                                        <label class="form-label">Full description</label>
+                                        <textarea readonly="true" rows="6" class="form-control">{{$item->description}}</textarea>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label" style="color: red">Now images</label>
+                                        <img src="{{URL::asset('./assets/admin/images/products/' . $item['url_image'])}}" class="form-control">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Slug</label>
+                                        <input readonly="true" type="text" class="form-control" value="{{ $item['slug'] }}">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Category</label>
+                                        <input readonly="true" type="text" class="form-control" value="{{$item->categories->category_name}}">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Gender</label>
+                                        <input readonly="true" type="text" class="form-control" value="@switch($item->gender) @case(1)Nam @break @case(2)Nữ@break @case(3)Cả hai @break @default   @endswitch">                                                                            
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label class="form-label">Price</label>
+                                        <input readonly="true" type="text" class="form-control" value="{{ $item->price }}">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label class="form-label">Discount</label>
+                                        <input readonly="true" type="text" class="form-control" value="{{ $item->discount }}">
+                                    </div>
+                                </form>
+                              </div>
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                              </div>
+                          </div>
+                          </div>
+                        </div>
                       @endforeach
                 </tbody>
               </table>           
@@ -181,4 +228,6 @@
             }
       });
     </script>
+
+
 @endsection
