@@ -7,11 +7,11 @@ setTimeout(() => {
         },
         dataType: 'JSON',
         success: function(data){
-            let optionCity ='<option value="">Tỉnh/Thành phố</option>';
+            let optionCity ='';
             $.each(data.results,function(index,val){
                 optionCity += '<option value="'+val.province_id+'/'+val.province_name+'">'+val.province_name+'</option>'
             })
-            $("Form select#city").html(optionCity);
+            $("Form select#city").append(optionCity);
         },
         error: function(){
             console.log('error');

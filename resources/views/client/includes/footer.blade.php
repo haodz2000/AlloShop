@@ -51,13 +51,20 @@
                         </form>
                         <p class="social-head">Follow Us On:</p>
                         <ul class="socila-link">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" href="https://www.facebook.com/AlloShop-100523459115884/"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
                             <li><a href="#"><i class="fa fa-skype"></i></a></li>
                             <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
                         </ul>
+                        <div class="page">
+                            <div class="fb-page"
+                            data-href="https://www.facebook.com/AlloShop-100523459115884/"
+                            data-width="380"
+                            data-hide-cover="false"
+                            data-show-facepile="false"></div>
+                        </div>
                     </div>
                 </div>
             </div>

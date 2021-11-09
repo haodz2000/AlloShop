@@ -23,42 +23,10 @@
         <link rel="stylesheet" href="{{ asset('./assets/client/css/style.css') }}">
         <!-- responsive css -->
         <link rel="stylesheet" href="{{ asset('./assets/client/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('./assets/client/css/style-form.css') }}">
         <!-- modernizr css -->
         <script src="{{ asset('./assets/client/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-        <style>
-            .order-form{
-                display: block;
-                max-width: 600px;
-                height: 600px;
-                background-color: rgba(195, 84, 172, 0.8);
-                position: sticky;
-                left: 35%;
-                top: 20%;
-                z-index: 99999;
-                transform: translateY(-5%);
-                animation-name: example;
-                animation-duration: 2s;
-                animation-iteration-count: 1;
-                transition: example 2s;
-                transition-timing-function: ease;
-            }
-            .order-form .imgslide{
-                max-width: 300px;
-                border-radius: 5px;
-                background-color: #ffffff;
-                position: relative;
-                left: 22%;
-            }
-            @keyframes example {
-                0%   {background-image:rgba(177, 221, 235,0.8); left:35%; top:0px;}
-                100% {background-image:rgba(108, 118, 202,0.3); left:35%; top:20%;}
-            }
-            .order-form form strong,input,select,option,button{
-                box-sizing: border-box;
-                padding-left: 15px;
-                margin-bottom: 5px
-            }
-        </style>
+
 @endsection
 
 
@@ -167,7 +135,6 @@
         <!--Banner area end here-->
         <!--New product area start here-->
         <div class="order-form form-control hidden">
-
         </div>
         <section class="new-product-area section-two">
             <div class="container">
@@ -191,16 +158,16 @@
                         @isset($newProducts)
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="all">
-                                <div class="row accurate">
+                                <div class="row accurate ">
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 accurate">
                                     @for ($i = 0 ; $i<2;$i++)
                                         @isset($newProducts[$i])
                                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
-                                                <figure>
+                                                <figure class="left">
                                                     <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                    <img class="normal" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                     </a>
 
                                                     <span class="product-position color1">New</span>
@@ -260,10 +227,10 @@
                                         @isset($newProducts[$i])
                                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 accurate">
                                             <div class="product-single">
-                                                <figure>
+                                                <figure class="right">
                                                     <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                    <img class="normal" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                     </a>
 
                                                     <span class="product-position color1">New</span>
@@ -291,8 +258,8 @@
                                         <div class="product-single">
                                             <figure>
                                                 <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                <img class="normal" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                <img class="hover" src="{{ asset('assets/client/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
                                                 </a>
 
                                                 <span class="product-position color1">New</span>
@@ -322,8 +289,8 @@
                                         <div class="product-single">
                                             <figure>
                                                 <a {{ route('products.slug',['slug'=> $product->slug]) }}>
-                                                <img class="normal" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-                                                <img class="hover" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
                                                 </a>
                                                 <span class="price">${{ $product->price }}</span>
                                                 <ul>
@@ -350,8 +317,8 @@
                                             <div class="product-single">
                                                 <figure>
                                                     <a href="/products/{{ $product->slug }}">
-                                                    <img class="normal" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
                                                     </a>
                                                     <span class="price">${{ $product->price }}</span>
                                                     <ul>
@@ -399,55 +366,80 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="best-seller">
                                 <div class="row accurate">
-                                    @if (isset($listProducts))
-                                        @foreach ($listProducts as $product )
+                                        @if(isset($hotProduct))
+                                            @foreach ($hotProduct as $product )
                                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                                 <div class="product-single">
-                                                        <figure>
-                                                            <a href="/products/{{ $product->slug }}">
-                                                                <img class="normal" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                                <img class="hover" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                            </a>
-                                                            <span class="product-position color2">Hot</span>
-                                                            <span class="price">${{ $product->price }}</span>
-                                                            <ul>
-                                                                <li><a data-id="{{ $product->product_id }}" class="shopping-cart" ><i  class="fa fa-shopping-cart"></i></a></li>
-                                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                                <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                            <div class="product-des">
-                                                                <a href="#"><h4>{{ $product->product_name }}</h4></a>
-                                                                <p>{{ $product->categories->category_name }}</p>
-                                                            </div>
-                                                        </figure>
+                                                    <figure>
+                                                        <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                            <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                            <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        </a>
+                                                        <span class="product-position color2">Hot</span>
+                                                        <span class="price">${{ $product->price }}</span>
+                                                        <ul>
+                                                            <li><a data-id="{{ $product->product_id }}" class="shopping-cart" ><i  class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><h4>{{ $product->product_name }}</h4></a>
+                                                            <p>{{ $product->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-
-
+                                            @endforeach
+                                        @endif
+                                </div>
+                                <div class="row accurate">
+                                    @if(isset($listProducts))
+                                            @foreach ($listProducts as $product )
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
+                                                <div class="product-single">
+                                                    <figure style="max-width: 100%">
+                                                        <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                            <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                            <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        </a>
+                                                        <span class="product-position color2">Hot</span>
+                                                        <span class="price">${{ $product->price }}</span>
+                                                        <ul>
+                                                            <li><a data-id="{{ $product->product_id }}" class="shopping-cart" ><i  class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><h4>{{ $product->product_name }}</h4></a>
+                                                            <p>{{ $product->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        @endif
                                 </div>
                             </div>
                             <div class="tab-pane" id="popular-products">
                                 <div class="row accurate">
                                     @isset($bestSellerProduct)
                                         @foreach ( $bestSellerProduct as $product )
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                             <div class="product-single">
                                                     <figure>
-                                                        <a href="/products/{{ $product->slug }}">
-                                                            <img class="normal" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                        <img class="hover" src="{{asset('./assets/client/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                        <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
                                                         </a>
                                                         <span class="product-position color2">Hot</span>
                                                         <span class="price">${{ $product->price }}</span>
                                                         <ul>
                                                             <li><a data-id="{{ $product->product_id }}" class="shopping-cart" ><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                            <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
+                                                            <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
                                                         <div class="product-des">
-                                                            <a href="/products/{{ $product->slug }}"><h4>{{ $product->product_name }}</h4></a>
+                                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><h4>{{ $product->product_name }}</h4></a>
                                                             <p>{{ $product->categories->category_name }}</p>
                                                         </div>
                                                     </figure>
@@ -462,8 +454,8 @@
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                         <div class="product-single">
                                             <figure>
-                                                <img class="normal" src="{{asset('./assets/client/images/product/12.jpg')}}" alt=""/>
-                                                <img class="hover" src="{{asset('./assets/client/images/product/12h.jpg')}}" alt=""/>
+                                                <img class="normal" src="{{asset('./assets/storage/images/product/12.jpg')}}" alt=""/>
+                                                <img class="hover" src="{{asset('./assets/storage/images/product/12h.jpg')}}" alt=""/>
                                                 <span class="product-position color1">New</span>
                                                 <span class="price">$59</span>
                                                 <ul>
@@ -481,8 +473,8 @@
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
                                         <div class="product-single">
                                             <figure>
-                                                <img class="normal" src="{{asset('./assets/client/images/product/11.jpg')}}" alt=""/>
-                                                <img class="hover" src="{{asset('./assets/client/images/product/11h.jpg')}}" alt=""/>
+                                                <img class="normal" src="{{asset('./assets/storage/images/product/11.jpg')}}" alt=""/>
+                                                <img class="hover" src="{{asset('./assets/storage/images/product/11h.jpg')}}" alt=""/>
                                                 <span class="price">$59</span>
                                                 <ul>
                                                     <li><a href="#"><i class="fa fa-shopping-cart "></i></a></li>
@@ -576,12 +568,12 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
         <script>
             const urlGetDataProduct = '{{ route('getDataProduct') }}';
             const urlProductDetail =  '{{ route('product.detail') }}';
-
+            const urlAddToCart = '{{ route('addToCart') }}';
         </script>
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
         <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
         </script>
 @endsection

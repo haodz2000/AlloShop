@@ -21,7 +21,7 @@ class CartController extends Controller
             'shippers'=>$shippers
         ]);
     }
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $validation = Validator::make($request->all(),[
             'quantity'=> 'required',

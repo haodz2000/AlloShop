@@ -5,7 +5,7 @@ $.ajaxSetup({
 });
 $(document).on('change',"input#quantity",function(){
     var quantity = parseInt($("#quantity").val());
-    quantity = (isNaN(quantity)&&quantity>0)?quantity:1;
+    quantity = (!isNaN(quantity)&&quantity>0)?quantity:1;
     $("#quantity").val(quantity);
 })
 $(document).on('change','select#size',function(){
@@ -47,15 +47,11 @@ $(document).on('change','select#size',function(){
 
 })
 $(document).on('submit',"Form.Form-Add-To-Cart",function(e){
-
+    quantity = parseInt($('.order-form>Form input#quantity').val());
     e.preventDefault();
-    var quantity = parseInt($("#quantity").val());
-    var id = parseInt($("#addItemCart").data('id'));
-    const url = '/addCart/'+id;
-    console.log(quantity);
     if( quantity>=0){
         $.ajax({
-            url: url,
+            url: urlAddToCart,
             method: "POST",
             data: new FormData(this),
             dataType: 'JSON',
@@ -65,8 +61,8 @@ $(document).on('submit',"Form.Form-Add-To-Cart",function(e){
             success: function (data) {
                 $(".cart").load(" .cart");
                 $("#shiping").load(" #shiping");
-                alertify.success('Thêm mới thành công');
                 $(".order-form").addClass('hidden');
+                alertify.success('Thêm mới thành công');
         },
             error: function (){
                 alertify.error('Thêm mới thất bại');
@@ -126,19 +122,4 @@ $(document).on('change','input.quantity_order',function(){
         alert("Khong tim thay san pham")
     }
 })
-$(document).on('click','select.size_order',function(){
-    let id =$(this).data('id');
-    const url = '/getSizeColor';
-    $.ajax({
-        type: "POST",
-        url:url,
-        data:{id:id},
-        dataType:"JSON",
-        success: function(response){
-            console.log(response)
-        },
-        error: function(){
-            console.log("error");
-        }
-    })
-})
+

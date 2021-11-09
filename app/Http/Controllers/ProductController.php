@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Model\ProductDetail;
 use App\Model\Category;
 use App\Model\Product;
+use App\Model\RatingProduct;
 // use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,28 +14,37 @@ class ProductController extends Controller
 {
 
     public function productList(){
-        $product_list =  Product::with('categories')->orderBy('product_id','desc')->paginate(5);   
-        $category_name_list = Category::select('category_name', 'category_id')->get();       
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->paginate(5);
+        $category_name_list = Category::select('category_name', 'category_id')->get();
         return view("admin.pages.eCommerce.products-list", [
                 'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => null
             ]);
     }
 
-    public function productListSelectCategory($category) { 
+    public function productListSelectCategory($category) {
         $product_list =  Product::with('categories')->orderBy('product_id','desc')->where('category_id','=',$category)->paginate(5);
         $linkFromCategory = Category::where('category_id','=',$category)->first();
-        $category_name_list = Category::select('category_name', 'category_id')->get();       
+        $category_name_list = Category::select('category_name', 'category_id')->get();
         return view("admin.pages.eCommerce.products-list", [
                 'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => $linkFromCategory
             ]);
     }
-    
+
     public function productDetail(Request $request,$slug){
         $product  = Product::where('slug',$slug)->get()->first();
+        $newProduct = Product::orderBy('created_at')->take(4)->get();
+        $hotProduct = Product::orderBy('quantity_orderd')->take(4)->get();
         $productDetail = $product->product_details;
         $size = null;
         $color =null;
         $totalQuantity = 0;
+        $idProduct = $product->product_id;
+        $vote=null;
+        $vote['vote'] = DB::table('rating_products')
+                ->where('product_id', $idProduct)
+                ->avg('vote');
+        $vote['quantity'] = RatingProduct::where('product_id',$idProduct)->count();
+        $ratingComment = RatingProduct::where('product_id',$idProduct)->orderBy('vote')->take(5)->get();
         foreach($productDetail as $value){
             $totalQuantity += $value->quantity;
             $idSize = $value->size_id;
@@ -47,7 +57,11 @@ class ProductController extends Controller
             'productDetail'=>$productDetail,
             'size'=> $size,
             'color' => $color,
-            'totalQuantity'=>$totalQuantity
+            'totalQuantity'=>$totalQuantity,
+            'newProduct'=>$newProduct,
+            'hotProduct'=>$hotProduct,
+            'vote'=> $vote,
+            'ratingComment' => $ratingComment
         ]);
     }
     public function getInfoProduct(Request $request)

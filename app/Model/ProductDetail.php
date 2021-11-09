@@ -9,7 +9,6 @@ class ProductDetail extends Model
 {
     protected $table = "product_details";
     protected $primaryKey = "product_id";
-
     protected $fillable = ['size_id','color_id','quantity'];
     protected $guarded = [];
     public function products(){

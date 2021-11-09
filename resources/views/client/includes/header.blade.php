@@ -14,7 +14,6 @@
 
                     <div class="heiglight text-right">
                         <ul>
-
                             @if (Auth::check())
                                 <li>
                                     <div class="dropdown">
@@ -23,7 +22,7 @@
                                         <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dLabel">
-                                            <li><a href="#">Cập nhật thông tin cá nhân</a></li>
+                                            <li><a href="{{ route('user.profile') }}">Cập nhật thông tin cá nhân</a></li>
                                             <li><a href="{{ route('shipping.order') }}">Đơn hàng của tôi</a></li>
                                             <li><a href="{{ route('logout') }}">Logout</a></li>
                                         </ul>
@@ -42,8 +41,12 @@
                                         <ul class="list">
                                             @foreach ($cart->products as $product )
                                             <li>
-                                                <a href="#" title="" class="cart-product-image floatleft"><img style="width: 108px; height:85px" src="{{asset('./assets/client/images/product/'.$product['productInfo']->url_image)}}" alt="Product"></a>
-                                                <div class="text">
+                                                <div style="max-width:100px; float: left;">
+                                                    <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}" title="" class="cart-product-image floatleft">
+                                                        <img src="{{asset('./assets/client/images/product/'.$product['productInfo']->url_image)}}" alt="Product">
+                                                    </a>
+                                                </div>
+                                                <div style="max-width:140px" class="text">
                                                     <a class="close close-item" data-sku="{{ $product['sku'] }}" title="close"><i class="fa fa-times-circle"></i></a>
                                                     <h4>{{ $product['productInfo']->product_name }}</h4>
                                                     <div>
@@ -107,74 +110,27 @@
                             <ul>
                                 <li><a href="{{ route('clothes.men') }}">Men</a></li>
                                 <li><a href="{{ route('clothes.women') }}">Women</a></li>
-                                <li><a href="#">Boys</a></li>
-                                <li><a href="#">Girls</a></li>
-                                <li><a href="#">Kids</a></li>
+                                <li><a href="{{ route('clothes.unisex') }}">Clothes Unisex</a></li>
                                 <li class="dropdown mega-dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <span class="caret"></span></a>
                                     <ul class="dropdown-menu mega-dropdown-menu">
                                         <li class="col-md-2 col-sm-4">
                                             <ul>
-                                                <li class="dropdown-header">Home Version</li>
-                                                <li><a href="index-2.html">Home 1</a></li>
-                                                <li><a href="index2.html">Home 2</a></li>
-                                                <li><a href="index3.html">Home 3</a></li>
-                                                <li><a href="index4.html">Home 4</a></li>
                                                 <li class="dropdown-header">Blog Page</li>
-                                                <li><a href="blog1.html">blog1</a></li>
-                                                <li><a href="blog2.html">blog2</a></li>
-                                                <li><a href="single-blog.html">single blog</a></li>
+                                                <li><a href="#">Blog</a></li>
                                             </ul>
                                         </li>
                                         <li class="col-md-3 col-sm-4">
                                             <ul>
                                                 <li class="dropdown-header">Shop Page</li>
-                                                <li><a href="shop1.html">Shop 1</a></li>
-                                                <li><a href="shop-left-sidbar.html">shop Left sidbar</a></li>
-                                                <li><a href="shop-right-sidbar.html">shop Right sidbar</a></li>
-                                                <li><a href="single-product1.html">single product1</a></li>
-                                                <li><a href="single-product2.html">single product2</a></li>
-                                                <li><a href="single-product3.html">single product3</a></li>
+                                                <li><a href="{{ route('clothes.all') }}">All Clothes</a></li>
                                             </ul>
                                         </li>
                                         <li class="col-md-3 col-sm-4">
                                             <ul>
                                                 <li class="dropdown-header">Other Pages</li>
-                                                <li><a href="shipping.html">shipping</a></li>
-                                                <li><a href="contact.html">contact</a></li>
-                                                <li><a href="404.html">404-error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-4 col-sm-4 slider-menu">
-                                            <ul>
-                                                <li class="dropdown-header">Women Collection</li>
-                                                <li><div id="womenCollection" class="carousel slide" data-ride="carousel">
-                                                  <div class="carousel-inner">
-                                                    <div class="item active">
-                                                        <a href="#"><img src="{{asset('./assets/client/images/product/20s.jpg')}}" class="img-responsive" alt="product 1"></a>
-                                                        <h4><small>Summer dress floral prints</small></h4>
-                                                        <button class="btn4" type="button">49,99 €</button> <button class="btn4" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                                    </div><!-- End Item -->
-                                                    <div class="item">
-                                                        <a href="#"><img src="{{asset('./assets/client/images/product/19s.jpg')}}" class="img-responsive" alt="product 2"></a>
-                                                        <h4><small>Gold sandals with shiny touch</small></h4>
-                                                        <button class="btn4" type="button">9,99 €</button> <button class="btn4" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                                    </div><!-- End Item -->
-                                                    <div class="item">
-                                                        <a href="#"><img src="{{asset('./assets/client/images/product/17s.jpg')}}" class="img-responsive" alt="product 3"></a>
-                                                        <h4><small>Denin jacket stamped</small></h4>
-                                                        <button class="btn4" type="button">49,99 €</button> <button class="btn4" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                                    </div><!-- End Item -->
-                                                  </div><!-- End Carousel Inner -->
-                                                  <!-- Controls -->
-                                                  <a class="left carousel-control" href="#womenCollection" role="button" data-slide="prev"><i class="fa fa-angle-left"></i>
-                                                  </a>
-                                                  <a class="right carousel-control" href="#womenCollection" role="button" data-slide="next"><i class="fa fa-angle-right"></i>
-                                                  </a>
-                                                </div><!-- /.carousel -->
-                                                </li>
-                                                <li class="divider"></li>
-                                                <li><a href="#" class="btn3 menuslider-btn">View all Collection<i class="fa fa-angle-right"></i></a></li>
+                                                <li><a href="{{ route('shipping') }}">shipping</a></li>
+                                                <li><a href="{{ route('shipping.order') }}">List Order</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -208,32 +164,17 @@
                     <ul>
                         <li><a href="#">Men</a></li>
                         <li><a href="#">Women</a></li>
-                        <li><a href="#">Boys</a></li>
-                        <li><a href="#">Girls</a></li>
-                        <li><a href="#">Kids</a></li>
-                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Colthes Unisex</a></li>
                         <li>
                             <a href="#">page</a>
                             <ul>
-                                <li><a href="index-2.html">Home 1</a></li>
-                                <li><a href="index2.html">Home 2</a></li>
-                                <li><a href="index3.html">Home 3</a></li>
-                                <li><a href="index4.html">Home 4</a></li>
-                                <li><a href="shop1.html">Shop 1</a></li>
-                                <li><a href="shop-left-sidbar.html">shop Left sidbar</a></li>
-                                <li><a href="shop-right-sidbar.html">shop Right sidbar</a></li>
-                                <li><a href="single-product1.html">single product1</a></li>
-                                <li><a href="single-product2.html">single product2</a></li>
-                                <li><a href="single-product3.html">single product3</a></li>
-                                <li><a href="blog1.html">blog1</a></li>
-                                <li><a href="blog2.html">blog2</a></li>
-                                <li><a href="single-blog.html">single blog</a></li>
-                                <li><a href="shipping.html">shipping</a></li>
-                                <li><a href="contact.html">contact</a></li>
+                                <li><a href="{{ route('home') }}">All Product</a></li>
+                                <li><a href="{{ 'home' }}">Blog</a></li>
+                                <li><a href="#">blog2</a></li>
                                 <li><a href="404.html">404-error</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                   </nav>
                 </div>
