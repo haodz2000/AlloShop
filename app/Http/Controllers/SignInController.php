@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\User;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-
+use Laravel\Socialite\Facades\Socialite;
 class SignInController extends Controller
 {
     /**
@@ -23,7 +23,7 @@ class SignInController extends Controller
     public function __construct(){
         $this->middleware('guest')->except('logout');
     }
-  
+
     public function index()
     {
         return view('authentication.pages.signin');
@@ -47,7 +47,7 @@ class SignInController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(),[
             'email' => 'required|email',
             'password' => 'required'
@@ -55,8 +55,8 @@ class SignInController extends Controller
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->except(['password','confirm-password']));
         }
-        
-        $remember = $request->remember; 
+
+        $remember = $request->remember;
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password],$remember)) {
 
@@ -66,11 +66,11 @@ class SignInController extends Controller
             if (Auth::user()->level>2) {
                 return view('admin.pages.dashboard.dashboard');
                 //return view('client.pages.home');
-            } 
+            }
             if (Auth::user()->level==1) {
-                return view('client.pages.home');
+                return redirect()->route('home');
                 //return view('client.pages.home');
-            } 
+            }
         };
         return redirect()->back()->with('error','Email hoặc mật khẩu sai !');
     }
@@ -118,5 +118,42 @@ class SignInController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //Facebook Login
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $this->_regiterOrLoginUser($user);
+        return redirect()->route('home');
+        // $user->token;
+    }
+    //Google Login
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        $this->_regiterOrLoginUser($user);
+        return redirect()->route('home');
+        // $user->token;
+    }
+    protected function _regiterOrLoginUser($data){
+        $user = User::where('email',$data->email)->first();
+        if(!$user){
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->avatar = $data->avatar;
+            $user->provider_id = $data->id;
+            $user->save();
+        }
+        Auth::login($user);
     }
 }

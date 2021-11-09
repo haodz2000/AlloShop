@@ -27,3 +27,135 @@ section .row .tab-content .tab-pane .List-order{
     border: 1px solid black;
 }
 
+div.board-view-detail-order{
+    /* display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 800px;
+    min-height: 600px;
+    position: sticky;
+    left: 35%;
+    top: 20%;
+    z-index: 99999;
+    transform: translateY(-15%);
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    transition: example 2s;
+    transition-timing-function: ease;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 5px; */
+    display: block;
+    min-width: 600px;
+    min-height: 620px;
+    background-color: rgb(241, 241, 231);
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    z-index: 99999;
+    transform: translate(-30%,50%);
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    transition: example 3s;
+    transition-timing-function: ease;
+}
+@keyframes example {
+    0%   {background-image:rgba(177, 221, 235,0.8); left:35%; top:0%;}
+    100% {background-image:rgba(108, 118, 202,0.3); left:35%; top:30%;}
+}
+div.board-view-detail-order .infomation{
+    max-width: 100%;
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+div.board-view-detail-order .infomation strong{
+   display: block;
+   margin-left: 5px;
+}
+div.board-view-detail-order .product-single a{
+    color: black;
+    text-decoration: none;
+}
+div.board-view-detail-order  strong{
+    display: inline;
+    margin-left: 5px;
+    color: rgb(66, 77, 231);
+ }
+div.board-view-detail-order  .row strong>span{
+    padding: 1px 5px;
+    box-sizing: border-box;
+ }
+ div.board-view-detail-order .product-single button.rating{
+     position: relative;
+     float: right;
+     right: 7%;
+     top: -15px;
+}
+
+.board-rating-product{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(255, 255, 255, 0.938);
+    width: 500px;
+    z-index: 9999;
+    left: 35%;
+    top: 20%;
+    position: absolute;
+    transform: translate(-30%,50%);
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    transition: example 3s;
+    transition-timing-function: ease;
+    transition: translatey(-50%);
+    margin: 0 auto;
+    height: 500px;
+}
+.board-rating-product .board .rating-star{
+   margin: 0 auto;
+}
+.board-rating-product .board .comment-rating #comment-auto{
+   margin: 0 auto;
+}
+ul li{
+    list-style-type: none;
+}
+.yellow{
+    color: rgb(238, 238, 29);
+}
+.board-rating-product .board{
+   max-width: 100%;
+   margin: 0 auto;
+}
+.board-rating-product .board .row span{
+   padding: 5px;
+   border-radius: 15px;
+   margin-bottom: 25px;
+   float: left;
+   box-sizing: border-box;
+   width: 200px;
+   background-color: rgb(154, 247, 216);
+   margin: 5px;
+}
+.board-rating-product .board .row span:hover:active{
+   cursor: pointer;
+   color: aliceblue;
+   border: 2px solid red;
+}
+.activeClick{
+   border: 1px solid red;
+}
+.board-rating-product .board .rating button.rate{
+   width: 100%;
+   margin-top: 2px;
+
+}
+.hidden-star{
+    opacity: 0.1;
+}
+

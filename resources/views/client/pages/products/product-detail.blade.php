@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('./assets/client/css/style.css') }}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('./assets/client/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/client/css/style-form.css') }}">
     <!-- modernizr css -->
     <script src="{{ asset('./assets/client/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 @endsection
@@ -85,9 +86,7 @@
 
                             <div class="product-photo">
 
-
-
-                                <div class="preview-pic tab-content">
+                                <div style="max-width:420px; margin:0 auto" class="preview-pic tab-content">
 
                                     <div id="carousel-example-generic" style="max-width:600px; max-hight:500px;margin: 0 auto" class="carousel slide" data-ride="carousel">
                                     <!-- Indicators -->
@@ -98,18 +97,18 @@
                                     </ol>
 
                                     <!-- Wrapper for slides -->
-                                    <div class="carousel-inner" role="listbox">
+                                    <div style="max-width:100%; margin:0 auto" class="carousel-inner" role="listbox">
                                         <div class="item active">
-                                        <img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="...">
-                                        <div class="carousel-caption">
-                                            ...
-                                        </div>
-                                        </div>
-                                        <div class="item">
-                                        <img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="...">
-                                        <div class="carousel-caption">
-                                            ...
-                                        </div>
+                                            <img src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="...">
+                                            <div class="carousel-caption">
+                                                ...
+                                            </div>
+                                            </div>
+                                            <div class="item">
+                                            <img src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="...">
+                                            <div class="carousel-caption">
+                                                ...
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- Controls -->
@@ -122,15 +121,6 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                     </div>
-
-                                    {{-- <div class="tab-pane active" style="max-width:637px;max-height:607px" id="pic-1"><img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
-
-                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-2"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
-
-                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-3"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
-
-                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-4"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div> --}}
-
                                 </div>
 
                                 <ul class="preview-thumbnail nav nav-tabs mr-l5">
@@ -138,25 +128,25 @@
 
                                     <li class="active">
 
-                                        <a data-target="#pic-1" data-toggle="tab"><img src="{{ asset('./assets/client/images/product/'.$product->url_image) }}"alt="" /></a>
+                                        <a data-target="#pic-1" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}"alt="" /></a>
 
                                     </li>
 
                                     <li>
 
-                                        <a data-target="#pic-2" data-toggle="tab"><img src="{{ asset('./assets/client/images/product/'.$product->url_image) }}" alt="" /></a>
+                                        <a data-target="#pic-2" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
 
                                     </li>
 
                                     <li>
 
-                                        <a data-target="#pic-3" data-toggle="tab"><img src="{{ asset('./assets/client/images/product/'.$product->url_image) }}" alt="" /></a>
+                                        <a data-target="#pic-3" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
 
                                     </li>
 
                                     <li>
 
-                                        <a data-target="#pic-4" data-toggle="tab"><img src="{{ asset('./assets/client/images/product/'.$product->url_image) }}" alt="" /></a>
+                                        <a data-target="#pic-4" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
 
                                     </li>
 
@@ -179,25 +169,33 @@
                                     <ul class="list-inline">
 
                                         <li><strong>${{ $product->price }}</strong></li>
-
-                                        <li class="floatright">
-
-                                            <ul class="list-inline">
-
-                                                <li><i class="fa fa-star"></i></li>
-
-                                                <li><i class="fa fa-star"></i></li>
-
-                                                <li><i class="fa fa-star"></i></li>
-
-                                                <li><i class="fa fa-star"></i></li>
-
-                                                <li><i class="fa fa-star-o"></i></li>
-
-                                                <li><span>(10)</span></li>
-
-                                            </ul>
-
+                                            @isset($vote)
+                                                @if ($vote['quantity'] > 0)
+                                                    <li class="floatright">
+                                                        <ul class="list-inline">
+                                                            @if ($vote['vote'] >= 3)
+                                                                @for ($i =1 ;$i < ceil($vote['vote']);$i++)
+                                                                    <li><i class="fa fa-star"></i></li>
+                                                                @endfor
+                                                                @if ($vote['vote'] == 5)
+                                                                    <li><i class="fa fa-star"></i></li>
+                                                                @else
+                                                                    <li><i class="fa fa-star-half-o"></i></li>
+                                                                @endif
+                                                                <li><span>({{ $vote['quantity'] }})</span></li>
+                                                            @endif
+                                                        </ul>
+                                                    </li>
+                                                @else
+                                                    <li class="floatright">
+                                                        <ul class="list-inline">
+                                                        @for ($i= 0; $i<5;$i++)
+                                                            <li><i class="fa fa-star"></i></li>
+                                                        @endfor
+                                                        </ul>
+                                                    </li>
+                                                @endif
+                                            @endisset
                                         </li>
 
                                     </ul>
@@ -206,36 +204,37 @@
                                 <div class="pro-deti">
                                     <p>{{ $product->description }}</p>
                                 </div>
-                                <Form action="{{ route('addItemCart') }}" class="order-form" action="" method="POST">
+                                <Form action="{{ route('addItemCart') }}" class="order-direction" method="POST">
                                     @csrf
-                                    <div class="form area">
-                                        <div class="clear-fix">
-                                        </div>
-                                        <strong>Select Size</strong>
-                                        <select class="form-control" name="size" id="size">
-                                            <option value="">Size</option>
-                                            @isset($size)
-                                                @foreach ($size as $value )
-                                                    <option value="{{ $value->size_id }}">{{ $value->size }}</option>
-                                                @endforeach
-                                            @endisset
-
-                                        </select>
-                                        <br>
-                                        <strong>Select Color</strong>
-                                        <select class="form-control" name="color" id="color">
-                                            <option value="">Color</option>
+                                    <div class="pro-color">
+                                        <h4>Select Color:</h4>
+                                        <ul class="list-inline">
                                             @isset($color)
                                                 @foreach ($color as $value )
-                                                    <option value="{{ $value->color_id }}">{{ $value->color }}</option>
+                                                    <li class="color" data-id="{{ $value->color_id }}" >{{ $value->color }}</li>
                                                 @endforeach
                                             @endisset
-                                        </select>
-                                        <br>
-                                        <strong id="stock">Kho:{{ $totalQuantity }}</strong>
-                                        <input type="hidden" id="idProduct" name="" value="{{ $product->product_id }}">
-                                        <input type="hidden" id="skuProduct" name="sku" value="">
+                                        </ul>
                                     </div>
+                                    <div class="pro-size">
+
+                                        <h4>Select Size:</h4>
+
+                                        <table>
+                                            <tbody><tr>
+                                                @isset($size)
+                                                    @foreach ($size as $value )
+                                                        <td class="size" data-id="{{ $value->size_id }}">{{ $value->size }}</td>
+                                                    @endforeach
+                                                @endisset
+                                            </tr>
+                                        </tbody></table>
+                                    </div>
+                                    <strong id="stock">Kho:{{ $totalQuantity }}</strong>
+                                    <input type="hidden" name="color" id="color" value="">
+                                    <input type="hidden" name="size" id="size" value="">
+                                    <input type="hidden" id="idProduct" name="" value="{{ $product->product_id }}">
+                                    <input type="hidden" id="skuProduct" name="sku" value="">
                                     <br>
                                     <div class="pro-button">
 
@@ -247,7 +246,7 @@
                                                 padding: 12px 20px;
                                                 font-size: 18px;
                                                 height: 50px;
-                                                width: auto;" type="submit" data-id="{{ $product->product_id }}" id="addItemCart"><i class="fa fa-shopping-cart"></i>Add To Cart</button></li>
+                                                width: auto;" type="submit" data-id="{{ $product->product_id }}" id="addItemCart"><i class="fa fa-shopping-cart"></i>Mua Ngay</button></li>
                                             <li>
                                                 <input id="quantity" type="number" name="quantity" value="1" />
                                                 <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
@@ -275,7 +274,8 @@
 
                                 <li class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
 
-                                <li><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Reviews (04)</a></li>
+                                <li><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Reviews</a></li>
+                                <li><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">Comments</a></li>
 
                             </ul>
 
@@ -303,7 +303,6 @@
                                             <li>Tighteous indignation and dislike </li>
 
                                             <li>Men who are so beguiled </li>
-
                                         </ul>
 
                                     </div>
@@ -311,123 +310,36 @@
                                 </div>
 
                                 <div class="tab-pane" id="review">
-
                                     <div class="review-con">
-
-                                        <div class="single-review mr-b30">
-
-                                            <div class="user-photo">
-
-                                                <img src="{{ asset('assets/client/images/review/1.jpg') }}" alt=""/>
-
-                                            </div>
-
-                                            <div class="review-content">
-
-                                                <div class="heading-review">
-
-                                                    <h4>Kazi Fahim</h4>
-
-                                                    <ul class="list-inline">
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star-half-o"></i></li>
-
-                                                    </ul>
-
-                                                    <span class="date">25/04/2017</span>
-
+                                        @isset($ratingComment)
+                                            @foreach ($ratingComment as $comment )
+                                            <div class="row">
+                                                <div class="single-review">
+                                                    <div class="user-photo">
+                                                        <img src="{{ asset('assets/client/images/review/1.jpg') }}" alt=""/>
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <div class="heading-review">
+                                                            <h4>{{ $comment->users->name }}</h4>
+                                                            <ul class="list-inline">
+                                                                @for ($i=1; $i<=$comment->vote; $i++)
+                                                                    <li><i class="fa fa-star"></i></li>
+                                                                @endfor
+                                                            </ul>
+                                                            <span class="date">{{ $comment->created_at }}</span>
+                                                        </div>
+                                                        <p>{{ $comment->comment }} </p>
+                                                    </div>
                                                 </div>
-
-                                                <p>Esimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the simply dummy text of the printing and typesetting industry. </p>
-
                                             </div>
-
-                                        </div>
-
-                                        <div class="single-review mr-b30">
-
-                                            <div class="user-photo">
-
-                                                <img src="{{ asset('./assets/client/images/review/2.jpg') }}" alt=""/>
-
-                                            </div>
-
-                                            <div class="review-content">
-
-                                                <div class="heading-review">
-
-                                                    <h4>Josef tina</h4>
-
-                                                    <ul class="list-inline">
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star-half-o"></i></li>
-
-                                                    </ul>
-
-                                                    <span class="date">20/04/2017</span>
-
-                                                </div>
-
-                                                <p>Esimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the simply dummy text of the printing and typesetting industry. </p>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="single-review">
-
-                                            <div class="user-photo">
-
-                                                <img src="{{ asset('./assets/client/images/review/3.jpg') }}" alt=""/>
-
-                                            </div>
-
-                                            <div class="review-content">
-
-                                                <div class="heading-review">
-
-                                                    <h4>Rupsha alain</h4>
-
-                                                    <ul class="list-inline">
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star"></i></li>
-
-                                                        <li><i class="fa fa-star-half-o"></i></li>
-
-                                                    </ul>
-
-                                                    <span class="date">18/04/2017</span>
-
-                                                </div>
-
-                                                <p>Esimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the simply dummy text of the printing and typesetting industry. </p>
-
-                                            </div>
-
-                                        </div>
-
+                                            <br>
+                                            @endforeach
+                                        @endisset
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="comment">
+                                    <div class="review-con">
+                                        <div class="fb-comments" data-href="http://127.0.0.1:8000/products/{{ $product->slug }}" data-width="" data-numposts="5"></div>
                                     </div>
 
                                 </div>
@@ -441,8 +353,8 @@
                     <!--Product Description area end here-->
 
                     <!--New product area start here-->
-
-                    <div class="new-product-three">
+                    <div class="order-form hidden"></div>
+                    <div class="new-product-three section">
 
                         <div class="row mr-b20">
 
@@ -479,307 +391,82 @@
                                 <div class="carousel-inner">
 
                                     <div class="item active">
+                                        @isset($newProduct)
+                                            @foreach ($newProduct as $product )
+                                                <div class="item col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                    <div class="single-product">
+                                                        <figure>
+                                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
 
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                            </a>
+                                                            <span class="price">Giá: <strong>${{ $product->price }}</strong></span>
+                                                            <span style="float: right">Đã bán:<strong>{{ $product->quanity_orderd?$product->quantity_order:0 }}</strong></span>
+                                                            <span class="product-position color1">New</span>
+                                                            <ul>
+                                                                <li><a  data-id="{{ $product->product_id }}" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a></li>
 
-                                            <div class="single-product">
+                                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
 
-                                                <figure>
+                                                                <li><a href=""><i class="fa fa-eye"></i></a></li>
+                                                            </ul>
+                                                        </figure>
 
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/22.jpg') }}" alt=""/>
+                                                        <div class="product-content">
 
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/22h.jpg') }}" alt=""/>
+                                                            <h4>{{ $product->product_name }}</h4>
 
-                                                    <ul>
+                                                            <h5>{{ $product->categories->category_name }}</h5>
+                                                            <p>{{ $product->description }}</p>
+                                                        </div>
 
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/24.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/24h.jpg') }}" alt=""/>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
+                                                    </div>
 
                                                 </div>
+                                            @endforeach
 
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/21.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/21h.jpg') }}" alt=""/>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/26.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/26h.jpg') }}" alt=""/>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
+                                        @endisset
                                     </div>
 
                                     <div class="item">
+                                        @isset($hotProduct)
+                                            @foreach ($hotProduct as $product)
+                                            <div class="item col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <div class="single-product">
 
-                                            <div class="single-product">
+                                                    <figure>
+                                                        <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
 
-                                                <figure>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                        </a>
+                                                        <span class="price">Giá: <strong>${{ $product->price }}</strong></span>
+                                                        <span style="float: right">Đã bán:<strong>{{ $product->quanity_orderd?$product->quantity_order:0 }}</strong></span>
+                                                        <span class="product-position color1">New</span>
+                                                        <ul>
+                                                            <li><a  data-id="{{ $product->product_id }}" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a></li>
 
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/20.jpg') }}" alt=""/>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
 
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/20h.jpg') }}" alt=""/>
+                                                            <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </figure>
 
-                                                    <span class="product-position color1">New</span>
+                                                    <div class="product-content">
 
-                                                    <ul>
+                                                        <h4>{{ $product->product_name }}</h4>
 
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/10.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/10h.jpg') }}" alt=""/>
-
-                                                    <span class="product-position color1">New</span>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
+                                                        <h5>{{ $product->categories->category_name }}</h5>
+                                                        <p>{{ $product->description }}</p>
+                                                    </div>
 
                                                 </div>
 
                                             </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/18.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/18h.jpg') }}" alt=""/>
-
-                                                    <span class="product-position color1">New</span>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-
-                                            <div class="single-product">
-
-                                                <figure>
-
-                                                    <img class="normal" src="{{ asset('./assets/client/images/product/19.jpg') }}" alt=""/>
-
-                                                    <img class="hover" src="{{ asset('./assets/client/images/product/19h.jpg') }}" alt=""/>
-
-                                                    <span class="product-position color1">New</span>
-
-                                                    <ul>
-
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-
-                                                        <li><a href="#"><i class="fa fa-eye"></i></a></li>
-
-                                                    </ul>
-
-                                                </figure>
-
-                                                <div class="product-content">
-
-                                                    <h4>NeoArt Jacket</h4>
-
-                                                    <p>Men Wear</p>
-
-                                                    <span class="price">$30</span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
+                                            @endforeach
+                                        @endisset
                                     </div>
 
                                 </div>
@@ -789,12 +476,10 @@
                         </div>
 
                     </div>
-
                     <!--New product area end here-->
-
                 </div>
 
-                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                {{-- <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 
                     <div class="sidbar-area">
 
@@ -1026,12 +711,9 @@
 
                     </div>
 
-                </div>
+                </div> --}}
 
             </div>
-
-
-
         </div>
 
     </section>
@@ -1065,36 +747,62 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addtocart.js') }}"></script>
         <script>
-            $(document).on('change','.order-form select',function(){
-                var id = $(".order-form #idProduct").val();
-                var color = $(".order-form #color").val();
-                var size = $(".order-form #size").val();
+            const urlGetDataProduct = '{{ route('getDataProduct') }}';
+            const urlProductDetail =  '{{ route('product.detail') }}';
+            const urlAddToCart = '{{ route('addToCart') }}';
+        </script>
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
+        <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
+        </script>
+        <script>
+             $(document).on('submit','section .row Form.order-direction',function(){
+                var sku = $('.order-direction #skuProduct').val();
+                if(sku == ''){
+                    alertify.error('Thêm mới thất bại');
+                    return false;
+                }
+             })
+            $(document).on('click','section .row Form .pro-color li.color',function(){
+                $('section .row Form .pro-color li.color').removeClass('activeClick');
+                $(this).addClass('activeClick');
+                var id = parseInt($(this).data('id'));
+                $('section .row Form input#color').val(id);
+                loadData();
+            })
+            $(document).on('click','section .row Form .pro-size td.size',function(){
+                $('section .row Form .pro-size td.size').removeClass('activeClick');
+                $(this).addClass('activeClick');
+                var id = parseInt($(this).data('id'));
+                $('section .row Form input#size').val(id);
+                loadData();
+             })
+             function loadData(){
+                var id = $("section .row Form #idProduct").val();
+                var color = $("section .row Form input#color").val();
+                var size = $("section .row Form input#size").val();
                 if(color!='' && size !='' && id!='')
                 {
-                    let url = '{{ route('product.detail') }}'
+                    let url = urlProductDetail
                     $.ajax({
                         type: "Post",
                         url: url,
                         data:{
                             color:color,
                             size:size,
-                            product_id:id,
+                            product_id:id
                         },
                         dataType:'JSON',
                         success: function(data){
                             if(data!=0)
                             {
-                                console.log(data);
-                                $(".order-form #stock").html('Kho: '+data.product.quantity);
-                                $(".order-form #skuProduct").val(data.product.sku);
+                                $("section .row Form #stock").html('Kho: '+data.product.quantity +' sản phẩm');
+                                $("section .row Form #skuProduct").val(data.product.sku);
                             }
                             else
                             {
-                                $(".order-form #stock").html('Kho: Hết hàng');
-                                $(".order-form #stock").css('color','red');
-                                $(".order-form #skuProduct").val('');
+                                $("section .row Form #stock").html('Kho: Hết hàng');
+                                $("section .row Form #skuProduct").val('');
                             }
                         },
                         error: function(){
@@ -1102,16 +810,6 @@
                         }
                     });
                 }
-            })
-            $(document).on('submit','Form.order-form',function(){
-                var sku = $('.order-form #skuProduct').val();
-                if(sku != ''){
-                    return true;
-                }
-                else{
-                    alertify.error('Cập nhật thất bại');
-                    return false;
-                }
-            })
+             }
         </script>
 @endsection
