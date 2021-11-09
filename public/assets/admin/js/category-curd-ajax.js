@@ -15,7 +15,7 @@
               _token: _token
             },
             success: function(data) {
-                $("#data_category").load(" #data_category");
+                $("#myTable").load(" #myTable");
                 $("#alert-success-category").removeClass('d-none');
                 $("#alert-success-category strong").html('Add category is successfully!');
                 setTimeout(function() { 
@@ -55,7 +55,7 @@
                     setTimeout(function() { 
                       $("#alert-success-category").addClass('d-none');
                     }, 3000);
-                    $("#data_category").load(" #data_category");
+                    $("#myTable").load(" #myTable");
                   }
           });
         }  
@@ -73,7 +73,7 @@
           let nameInit = $(this).data('name');
           let descriptionInit = $(this).data('description');
 
-          $('.card .card-header h6').html('Edit Product Category');
+          $('.card .card-header h5').html('Edit Product Category');
           $('.edit_name_category').val(nameInit);
           $('.edit_description_category').val(descriptionInit);
           $('.card .card-body form button').removeAttr('onclick');
@@ -98,7 +98,7 @@
                  },
                  success: function(data) {
                      status = 0;                  
-                     $("#data_category").load(" #data_category");  
+                     $("#myTable").load(" #myTable");  
                      $("#alert-success-category").removeClass('d-none');
                      $("#alert-success-category strong").html('Edit category is successfully!');
                      setTimeout(function() { 
@@ -106,7 +106,7 @@
                      }, 3000); 
                      $('.edit_name_category').val('');
                      $('.edit_description_category').val('');
-                     $('.card .card-header h6').html('Add Product Category');
+                     $('.card .card-header h5').html('Add Product Category');
                      $('.card .card-body form button').attr('onclick','addCategory()');
                  },
                  error: function(jqXHR, textStatus, errorThrown) {

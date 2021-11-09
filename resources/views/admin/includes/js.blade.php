@@ -1,9 +1,8 @@
 <!-- Bootstrap bundle JS -->
-<script src="{{asset('./assets/admin/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('./assets/admin/js/bootstrap.bundle.min.js')}}"></script>
 
 
 <!--plugins-->
-  <script src="{{asset('./assets/admin/js/jquery-3.6.0.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/simplebar/js/simplebar.min.js')}}"></script>
   <script src="{{asset('./assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
   <script src="{{asset('./assets/admin/js/pace.min.js')}}"></script>

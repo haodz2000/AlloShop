@@ -63,8 +63,10 @@
                 <table class="table align-middle">
                   <thead class="table-light">
                     <tr>
-                      <th>ID</th>
+                      <th>STT</th>
                       <th>Customer name</th>
+                      <th>Phone</th>
+                      <th>Quantity</th>
                       <th>Total price</th>
                       <th>Status</th>
                       <th>Date</th>
@@ -72,10 +74,15 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($order_list as $item)
                     <tr>
-                      <td>{{$item->order_id}}</td>
+                      <td>{{$i}}</td>
                       <td>{{$item->user_name}}</</td>
+                      <td>{{$item->phone}}</td>
+                      <td>{{$item->quantity}}</td>
                       <td>{{$item->total_price}}</</td>
                       @switch($item->status)
                           @case(0)
@@ -105,6 +112,9 @@
                        </div>
                       </td>
                     </tr>
+                    @php
+                        $i++
+                    @endphp
                     @endforeach
                   </tbody>
                 </table>

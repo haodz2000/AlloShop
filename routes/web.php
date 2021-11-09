@@ -69,7 +69,8 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
         return view('admin.pages.dashboard.dashboard');
     })->name("dashboard");
 
-    Route::get('/products-list', [ProductDetailContrloller::class, 'productList'])->name("products-list");
+    Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-list/category/{category}', [ProductController::class, 'productListSelectCategory'])->name("products-list-select-category");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
     Route::get('/products-grid/destroy/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
     Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
@@ -79,8 +80,8 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     })->name('update-product');
 
     Route::get('/products-grid/{id}', [ProductController::class, 'updateView'])->name("products-grid.update-view");
-    Route::post('/update-product/{id}', [ProductController::class, 'updateProductGrid'])->name("products-grid.update");
-    Route::post('/add-new-product/add', [ProductController::class, 'addProductGrid'])->name("add-new-product.add");
+    Route::post('/update-product/{id}', [ProductController::class, 'updateProduct'])->name("products-grid.update");
+    Route::post('/add-new-product/add', [ProductController::class, 'addProduct'])->name("add-new-product.add");
 
     Route::get('/products-categories', function () {
         return view('admin.pages.eCommerce.products-categories');

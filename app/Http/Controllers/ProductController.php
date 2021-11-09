@@ -14,14 +14,20 @@ class ProductController extends Controller
 {
 
     public function productList(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->paginate(5);
-
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->paginate(5);
+        $category_name_list = Category::select('category_name', 'category_id')->get();
         return view("admin.pages.eCommerce.products-list", [
-                'product_list' => $product_list,
+                'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => null
             ]);
-        // return view("admin.pages.eCommerce.products-grid", [
-        //         'product_grid' => $product_list,
-        //     ]);
+    }
+
+    public function productListSelectCategory($category) {
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->where('category_id','=',$category)->paginate(5);
+        $linkFromCategory = Category::where('category_id','=',$category)->first();
+        $category_name_list = Category::select('category_name', 'category_id')->get();
+        return view("admin.pages.eCommerce.products-list", [
+                'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => $linkFromCategory
+            ]);
     }
 
     public function productDetail(Request $request,$slug){
@@ -83,12 +89,12 @@ class ProductController extends Controller
 
 
     }
-    public function productGrid(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->paginate(5);
-        return view("admin.pages.eCommerce.products-grid", [
-            'product_grid' => $product_list,
-        ]);
-    }
+    // public function productGrid(){
+    //     $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->paginate(5);
+    //     return view("admin.pages.eCommerce.products-grid", [
+    //         'product_grid' => $product_list,
+    //     ]);
+    // }
     public function destroyProductGrid($id)
     {
         $delete = Product::find($id)->delete();
@@ -107,7 +113,7 @@ class ProductController extends Controller
             'category_name_list' => $category_name_list,
         ]);
     }
-    public function addProductGrid(Request $request){
+    public function addProduct(Request $request){
         // dd($request->all());
 
         if ($request->has('add')) {
@@ -136,9 +142,9 @@ class ProductController extends Controller
                 'url_image' => $photo,
                 'description' => $description
             ]);
-            return redirect()->route('products-grid')->with('noti', 'Add successfull');
+            return redirect()->route('products-list')->with('noti', 'Add successfull');
         }
-        return redirect()->route('products-grid');
+        return redirect()->route('products-list');
     }
     public function updateView($id){
         $product = Product::find($id);
@@ -148,7 +154,7 @@ class ProductController extends Controller
             'category' => $category_name_list,
         ]);
     }
-    public function updateProductGrid(Request $request, $id){
+    public function updateProduct(Request $request, $id){
         if ($request->has('update')) {
             // $data = $request->except('_token', 'update');
             // dd($product->product_name);
@@ -178,8 +184,8 @@ class ProductController extends Controller
             $product->description = $description;
             // dd($product);
             $product->save();
-            return redirect()->route('products-grid')->with('noti', 'Add successfull');
+            return redirect()->route('products-list')->with('noti', 'Add successfull');
         }
-        return redirect()->route('products-grid');
+        return redirect()->route('products-list');
     }
 }

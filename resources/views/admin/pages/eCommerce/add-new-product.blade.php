@@ -36,11 +36,12 @@
               <div class="d-sm-flex align-items-center">
                 <h5 class="mb-2 mb-sm-0">Add New Product</h5>
                 <div class="ms-auto">
-                  <button type="button" class="btn btn-secondary">Save to Draft</button>
-                  <button type="button" class="btn btn-primary">Publish Now</button>
+                  <form action="{{route('products-list')}}">
+                    <button type="submit" class="btn btn-primary">List Product</button>
+                  </form>                 
                 </div>
               </div>
-             </div>
+            </div>
             <div class="card-body">
                <div class="row g-3">
                  <div class="col-12 col-lg-12">
@@ -50,11 +51,11 @@
                           @csrf
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Product name</label>
-                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="product_name">
+                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="slug"  onkeyup="ChangeToSlug()" >
                           </div>
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="slug">
+                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="convert_slug">
                           </div>
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Category</label>
@@ -95,7 +96,7 @@
                           </div>
                           <div class="col-12">
                             <label class="form-label">Full description</label>
-                            <textarea class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
+                            <textarea id="summernote" class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
                           </div>
                           <button type="submit" class="btn btn-primary add-new-product" value="submit" name="add">Add New Product</button>
                         </form>
@@ -109,6 +110,6 @@
       </div><!--end row-->
 
 </main>
-
+<script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
 
 @endsection

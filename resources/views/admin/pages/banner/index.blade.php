@@ -39,28 +39,6 @@
             <div class="col-lg-3 col-xl-2">
               <a href="{{route('banner.create')}}" class="btn btn-primary mb-3 mb-lg-0"><i class="bi bi-plus-square-fill"></i>Add Banner</a>
             </div>
-            <div class="col-lg-3 col-md-6 me-auto">
-              <div class="ms-auto position-relative">
-                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                <input class="form-control ps-5" type="text" placeholder="search banners">
-              </div>
-            </div>
-            <div class="col-lg-2 col-6 col-md-3">
-              <select class="form-select">
-                <option>All category</option>
-                <option>Fashion</option>
-                <option>Electronics</option>
-                <option>Furniture</option>
-                <option>Sports</option>
-              </select>
-            </div>
-            <div class="col-lg-2 col-6 col-md-3">
-              <select class="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
-              </select>
-            </div>
           </div>
          </div>
          <div class="card-body">          
@@ -76,6 +54,7 @@
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
                           <a href="{{route('banner.edit',$item['banner_id'])}}" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i>Edit</a>
                           <a href=""><button class="btn btn-sm btn-outline-danger deleteBanner" data-id="{{$item['banner_id']}}"><i class="bi bi-trash-fill"></i>Delete</button></a>
+                          <span class="badge rounded-pill alert-{{$item['status']==0 ? 'danger' : 'success'}}">{{$item['status']==0 ? 'Hidden' : 'Show'}}</span>
                         </div>
                       </div>
                     </div>

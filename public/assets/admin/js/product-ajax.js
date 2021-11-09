@@ -28,19 +28,22 @@ $(document).ready(function () {
         var token = $("meta[name='csrf-token']").attr("content");
         // alert(1);
         // var url = "{{route('products-grid')}}";
-        $.ajax({
-            type: "GET",
-            url: "/admin/products-list/" + id,
-            data: {
-                "id": id,
-                "_token": token,
-            },
-            success: function (response) {
-                // console.log("Ok");
-                // window.location.reload();
-                $(".card-body").load(" .table-responsive")
-            }
-        });
+        if (confirm("Are you sure you want to delete this product?")) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/products-list/" + id,
+                data: {
+                    "id": id,
+                    "_token": token,
+                },
+                success: function (response) {
+                    // console.log("Ok");
+                    // window.location.reload();
+                    $(".card-body").load(" .table-responsive")
+                }
+            });
+        }
+            
         // alert(id);
     });
     $(document).on('click', '.save', function(e){
@@ -101,4 +104,39 @@ $(document).ready(function () {
     //         }
     //     });
     // });
+
+    // Change select category
+        // $(document).on('change','.form-select-category', function(e) {
+        //     e.preventDefault();
+        //     let category_id = $(this).val();
+        //     let token = $("meta[name='csrf-token']").attr("content");
+
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/admin/products-list/select-category",
+        //         data: {
+        //             'category_id': category_id,
+        //             "_token": token,
+        //         },
+        //         success: function (response) {
+        //             $("#product-list").load(" #product-list");
+        //         }
+        //     });
+        // });
+        
+    //Search
+        $("#search").keyup(function(){ 
+            $('.pagination').hide();
+            _this = this; 
+            $.each($("#myTable tbody tr"), function() { 
+                if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) 
+                    $(this).hide();  
+                else $(this).show(); 
+            }); 
+            if ($(_this).val() == "") {
+                $('.pagination').show();  
+            };
+        }); 
+
+
 });
