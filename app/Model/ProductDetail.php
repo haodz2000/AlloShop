@@ -11,6 +11,7 @@ class ProductDetail extends Model
     // protected $primaryKey = "product_id";
 
     protected $fillable = ['product_id', 'size_id','color_id','quantity','sku'];
+
     protected $guarded = [];
     public function products(){
         return $this->belongsTo('App\Model\Product', 'product_id', 'product_id');

@@ -1,7 +1,6 @@
 
 <!Doctype html>
 <html class="no-js" lang="en">
-
 <!-- Mirrored from staging-themelocation.com/allo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Aug 2021 16:31:50 GMT -->
 <head>
         <meta charset="utf-8">
@@ -10,10 +9,16 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <div id="fb-root"></div>
+        <meta property="fb:admins" content="&#123;100523459115884&#125;"/>
         @yield('css_by_page')
 
-    </head>
+</head>
     <body>
+        {{-- <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="wW8YKWEk"></script> --}}
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0" nonce="osbog2UD"></script>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->

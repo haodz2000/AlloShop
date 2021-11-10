@@ -13,17 +13,20 @@
             <li class="breadcrumb-item active" aria-current="page">Products List</li>
           </ol>
         </nav>
-      </div>
+      </div>    
       <div class="ms-auto">
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Settings</button>
-          <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
-            <a class="dropdown-item" href="javascript:;">Another action</a>
-            <a class="dropdown-item" href="javascript:;">Something else here</a>
-            <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-          </div>
+          @if($linkFromCategory)       
+            <form action="{{route('products-list')}}">
+              <button type="submit" class="btn btn-info">Go to All Product</button>
+            </form>
+          @endif
+          <form action="{{route('add-new-product')}}">
+            <button type="submit" class="btn btn-success">Add Product</button>
+          </form>  
+          <form action="{{route('category.index')}}">
+            <button type="submit" class="btn btn-primary">Go to Category List</button>
+          </form>
         </div>
       </div>
     </div>
@@ -33,26 +36,36 @@
         <div class="card-header py-3">
           <div class="row align-items-center m-0">
             <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                <select class="form-select">
-                    <option>All category</option>
-                    <option>Fashion</option>
-                    <option>Electronics</option>
-                    <option>Furniture</option>
-                    <option>Sports</option>
-                </select>
+                @if($linkFromCategory)
+                  <h5>List product of <span class="text-danger">{{$linkFromCategory['category_name']}}</span></h5>
+                @else
+                  <select  class="form-select form-select-category">
+                      <option value="0">All product</option>
+                      @foreach ($category_name_list as $item)
+                        <option value="{{$item['category_name']}}">{{$item['category_name']}}</option>
+                      @endforeach
+                  </select>
+                @endif
+
             </div>
-            <div class="col-md-2 col-6">
+            <div class="col-lg-4 col-md-6 me-auto">
+              <div class="ms-auto position-relative">
+                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+                <input id="search" class="form-control ps-5" type="text" placeholder="Search product....">
+              </div>
+            </div>
+            {{-- <div class="col-md-2 col-6">
                 <input type="date" class="form-control">
-            </div>
-            <div class="col-md-2 col-6">
+            </div> --}}
+            {{-- <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option>Status</option>
                     <option>Active</option>
                     <option>Disabled</option>
                     <option>Show all</option>
                 </select>
-            </div>
-         </div>
+            </div> --}}
+          </div>
         </div>
         <div class="card-body" id="product-list">
           @if (count($product_list)>0)
@@ -64,7 +77,6 @@
                       Product Name
                     </th>
                     <th>Category</th>
-
                     <th>Slug</th>
                     <th>
                       Price
@@ -129,6 +141,7 @@
                               </div>
                               <!-- Modal body -->
                               <div class="modal-body row">
+
                                     <div class="col-12">
                                         <label class="form-label">Full description</label>
                                         <textarea readonly="true" rows="6" class="form-control">{{$item->description}}</textarea>
@@ -184,8 +197,9 @@
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                               </div>
-
+                          </div>
                         </div>
+                  
                       @endforeach
                 
                 </tbody>
@@ -198,8 +212,45 @@
               </ul>
             </nav>
           @endif  
+
         </div>
       </div>
+
+  {{-- Filter to category --}}
+    <script>
+      $(document).ready(function() {
+            $('.form-select-category').change(function(){
+                filter_function();      
+            });
+            $('table tbody tr').show(); 
+
+            function filter_function(){
+                $('table tbody tr').hide();
+                
+                let categoryFlag = 0;
+                let categoryValue = $('.form-select-category').val();
+                
+                $('table tbody tr').each(function() {     
+
+                    if(categoryValue == 0){   
+                        categoryFlag = 1;
+                    }
+                    else if(categoryValue == $(this).find('td.category').data('category')){ 
+                        categoryFlag = 1;       
+                    }
+                    else{
+                        categoryFlag = 0;
+                    }
+                    if(categoryFlag){
+                        $(this).show();  
+                        if (categoryValue != 0) {
+                          $('.pagination').hide();  
+                        }
+                    }             
+                });                                
+            }
+      });
+    </script>
 
 
 @endsection

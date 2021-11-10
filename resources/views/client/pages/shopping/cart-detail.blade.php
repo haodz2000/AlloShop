@@ -23,50 +23,9 @@
         <link rel="stylesheet" href="{{ asset('./assets/client/css/style.css') }}">
         <!-- responsive css -->
         <link rel="stylesheet" href="{{ asset('./assets/client/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('./assets/client/css/style-form.css') }}">
         <!-- modernizr css -->
         <script src="{{ asset('./assets/client/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-        <style>
-            div.img{
-                width: 100px;
-                border: 1px solid white;
-            }
-            div.img img{
-                width: 100%;
-                border: 1px solid white;
-            }
-            .order-form{
-                display: block;
-                max-width: 600px;
-                height: 600px;
-                background-color: rgba(195, 84, 172, 0.8);
-                position: sticky;
-                left: 35%;
-                top: 20%;
-                z-index: 99999;
-                transform: translateY(-5%);
-                animation-name: example;
-                animation-duration: 2s;
-                animation-iteration-count: 1;
-                transition: example 2s;
-                transition-timing-function: ease;
-            }
-            .order-form .imgslide{
-                max-width: 300px;
-                border-radius: 5px;
-                background-color: #ffffff;
-                position: relative;
-                left: 22%;
-            }
-            @keyframes example {
-                0%   {background-image:rgba(177, 221, 235,0.8); left:35%; top:0px;}
-                100% {background-image:rgba(108, 118, 202,0.3); left:35%; top:20%;}
-            }
-            .order-form form strong,input,select,option,button{
-                box-sizing: border-box;
-                padding-left: 15px;
-                margin-bottom: 5px
-            }
-        </style>
 @endsection
 @section('content')
 @include('client.includes.support')
@@ -157,42 +116,44 @@
                             @if ($cart = Session('Cart'))
                                 <table>
                                     @foreach ($cart->products as $product)
-                                    <tr>
-                                        <td>
-                                            <div class="img">
-                                                <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
-                                                    <img src="{{ asset('assets/client/images/product/'.$product['productInfo']->url_image) }}"
-                                                    alt="{{ $product['productInfo']->product_name }}"/>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="des-pro">
-                                                <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
-                                                    <h4>{{ $product['productInfo']->product_name }}</h4>
-                                                </a>
-                                                <p>
-                                                        <span>Size:</span>
-                                                        <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="size form-control">
-                                                            <option value="{{ $product['size'] }}">{{ $product['size'] }}</option>
-                                                        </select>
-                                                        <span>Color:</span>
-                                                        <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="color form-control">
-                                                            <option value="{{ $product['color'] }}">{{ $product['color'] }}</option>
-                                                        </select>
-                                                </p>
-                                            </div>
-                                        </td>
-                                        <td><strong>${{ number_format( $product['productInfo']->price,2) }}</strong></td>
-                                        <td>
-                                            <div class="order-pro order1">
-                                                <input  type="number" style="height: 100%; width: 100px"  class="quantity_order form-control" data-sku="{{ $product['sku'] }}" value="{{ $product['quantity'] }}" />
-                                            </div>
-                                        </td>
-                                        <td><span class="prize">${{ number_format($product['price'],2) }}</span></td>
+                                    <div class="row">
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
+                                                        <img  src="{{ asset('assets/storage/images/product/'.$product['productInfo']->url_image) }}"
+                                                        alt="{{ $product['productInfo']->product_name }}"/>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="des-pro">
+                                                    <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
+                                                        <h4>{{ $product['productInfo']->product_name }}</h4>
+                                                    </a>
+                                                    <p>
+                                                            <span>Size:</span>
+                                                            <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="size form-control">
+                                                                <option value="{{ $product['size'] }}">{{ $product['size'] }}</option>
+                                                            </select>
+                                                            <span>Color:</span>
+                                                            <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="color form-control">
+                                                                <option value="{{ $product['color'] }}">{{ $product['color'] }}</option>
+                                                            </select>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td><strong>${{ number_format( $product['productInfo']->price,2) }}</strong></td>
+                                            <td>
+                                                <div class="order-pro order1">
+                                                    <input  type="number" style="height: 100%; width: 80px"  class="quantity_order form-control" data-sku="{{ $product['sku'] }}" value="{{ $product['quantity'] }}" />
+                                                </div>
+                                            </td>
+                                            <td><span class="prize">${{ number_format($product['price'],2) }}</span></td>
 
-                                        <td><i class="fa fa-times close-item" data-sku="{{ $product['sku'] }}"></i></td>
-                                    </tr>
+                                            <td><i class="fa fa-times close-item" data-sku="{{ $product['sku'] }}"></i></td>
+                                        </tr>
+                                    </div>
                                     @endforeach
                                 </table>
                                 <div class="total text-right">
@@ -229,7 +190,7 @@
                                         </div>
                                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                           <div class="panel-body">
-                                            <form method="Post">
+                                            <Form action="{{ route('checkout') }}" method="Post">
                                                 @csrf
                                                 <input type="hidden" name="infomation" value="old">
                                                 <fieldset>
@@ -286,7 +247,7 @@
                                                         <button style="margin-left:40%" type="submit" class="btn btn-success">Check-Out</button>
                                                     </div>
                                                 </fieldset>
-                                            </form>
+                                            </Form>
                                           </div>
                                         </div>
                                       </div>
@@ -300,7 +261,7 @@
                                         </div>
                                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                           <div class="panel-body">
-                                            <Form method="Post">
+                                            <Form action="{{ route('checkout') }}" method="Post">
                                                 @csrf
                                                 <input type="hidden" name="infomation" value="new">
                                                 <fieldset>
@@ -428,12 +389,13 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addToCart.js') }}"></script>
         <script>
             const urlGetDataProduct = '{{ route('getDataProduct') }}';
             const urlProductDetail =  '{{ route('product.detail') }}';
+            const urlAddToCart = '{{ route('addToCart') }}';
         </script>
-        <script src="{{ asset('assets/client/js/jquery.api.province.js') }}"></script>
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
         <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
         </script>
+        <script src="{{ asset('assets/client/js/jquery.api.province.js') }}"></script>
 @endsection

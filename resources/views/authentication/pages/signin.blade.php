@@ -12,6 +12,8 @@
 
   {{-- CSS --}}
   @include('authentication.includes.css')
+  <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=314699203450532&autoLogAppEvents=1" nonce="ZlNe7R1S"></script>
 
 </head>
 
@@ -19,7 +21,7 @@
 
   <!--start wrapper-->
   <div class="wrapper">
-    
+
        <!--start content-->
        <main class="authentication-content">
         <div class="container-fluid">
@@ -36,12 +38,25 @@
                     <form class="form-body" action="{{route('signin.store')}}" method="post">
                       @csrf
                       <div class="d-grid">
-                        <a class="btn btn-white radius-30" href="javascript:;"><span class="d-flex justify-content-center align-items-center">
+                        <a class="btn btn-danger radius-30" href="{{ route('google.login') }}">
+                            <span class="d-flex justify-content-center align-items-center">
                             <img class="me-2" src="{{asset('assets/admin/images/icons/search.svg')}}" width="16" alt="">
                             <span>Sign in with Google</span>
                           </span>
                         </a>
+                        <br>
+                        <a style="box-sizing:border-box" class="btn btn-primary radius-30" href="{{ route('facebook.login') }}">
+                            <span class="d-flex justify-content-center align-items-center">
+                            <img class="me-2" width="40px" src="https://www.logo.wine/a/logo/Facebook/Facebook-f_Logo-Blue-Logo.wine.svg"alt="">
+                            <span>Sign in with Facebook</span>
+                          </span>
+                        </a>
                       </div>
+                      {{-- <div style="margin: 0 auto" class="d-grid">
+                        <a href="{{ route('facebook.login') }}">
+                            <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                        </a>
+                      </div> --}}
                       <div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
                         <hr>
                       </div>
@@ -103,7 +118,7 @@
           </div>
         </div>
        </main>
-        
+
        <!--end page main-->
 
   </div>

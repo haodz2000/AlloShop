@@ -46,7 +46,8 @@
                      <div class="col-12 col-lg-6">
                         <label class="form-label">Images</label>
                         <input class="form-control" type="file" name="url_image" id="">
-                        <img src="{{asset('assets/admin/images/posts/'.$post->url_image)}}" alt="" width="30%">
+                        <br><strong class="text-danger">Ảnh hiện tại</strong><br>
+                        <img src="{{asset('assets/admin/images/posts/'.$post->url_image)}}" alt="" width="85%">
                      </div>
                      @error('url_image')
                         <div class='alert alert-danger' role='alert'>

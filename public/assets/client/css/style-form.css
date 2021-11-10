@@ -1,0 +1,96 @@
+.shopping-cart,.fa-shopping-cart:hover,:active{
+    cursor: pointer;
+}
+.order-form{
+    display: block;
+    max-width: 600px;
+    height: 620px;
+    background-color: white;
+    position: sticky;
+    left: 35%;
+    top: 20%;
+    z-index: 99999;
+    transform: translateY(-15%);
+    animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    transition: example 2s;
+    transition-timing-function: ease;
+}
+.order-form .imgslide{
+    max-width: 200px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #ffffff;
+
+}
+@keyframes example {
+    0%   {background-image:rgba(177, 221, 235,0.8); left:35%; top:0px;}
+    100% {background-image:rgba(108, 118, 202,0.3); left:35%; top:20%;}
+}
+.order-form form strong,input,select,option,button{
+    box-sizing: border-box;
+    padding-left: 15px;
+    margin-bottom: 5px
+}
+section.new-product-area .row figure.left,figure.right{
+    max-width: 68%
+}
+section.new-product-area .row figure.left{
+    float: right;
+}
+section.new-product .row figure img{
+    width: 100%;
+    margin-right: 3px;
+}
+section .row #best-seller .product-single figure{
+    display: flex;
+    max-width: 100%;
+
+}
+div.order-form>Form ul,li{
+
+    padding: 5px;
+}
+div.order-form>Form ul li:hover{
+    display: inline-block;
+    background-color: rgb(233, 36, 10);
+    cursor: pointer;
+}
+div.order-form>Form ul li{
+    margin: 5px;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid rgba(133, 115, 115,0.5);
+    border-radius: 5px;
+}
+.activeClick{
+    background-color: red;
+}
+section .row #best-seller .accurate .product-single figure{
+    margin: 0 auto;
+    display: block;
+    display: flex;
+    box-sizing: border-box;
+}
+section .row Form .pro-color ul li{
+    border: 1px solid #ddd;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+section .row Form .pro-color ul li:hover{
+    background-color: rgb(238, 81, 81);
+    cursor: pointer;
+}
+section .row Form .pro-size tbody td:hover{
+    background-color: rgb(238, 81, 81);
+    cursor: pointer;
+}
+.activeClick{
+    background-color: red;
+}
+

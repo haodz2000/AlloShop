@@ -18,7 +18,7 @@ class AddPrimaryKeyToOrderDetailsTable extends Migration
             $table->string('sku',15);
             $table->string('size',5)->change();
             $table->string('color',50)->change();
-            $table->primary(array('order_id', 'product_id'));
+            $table->primary(array('order_id', 'product_id','sku'));
         });
     }
 

@@ -24,7 +24,7 @@
             margin: 0 auto;
             padding: 2px;
         }
-        .table table,thead,tbody,tr,,th,td{
+        .table table,thead,tbody,tr,th,td{
             border: 1px solid black;
             border-collapse: collapse;
             box-sizing: border-box;
@@ -77,7 +77,7 @@
                 <td><strong>{{$cart->totalQuantity}}</strong></td>
             </tr>
             <tr>
-                <td colspan="7"><strong>Tổng tiền</strong></td>
+                <td colspan="6"><strong>Tổng tiền</strong></td>
                 <td><strong>{{number_format($cart->totalPrice,2)}}$</strong></td>
             </tr>
         </table>

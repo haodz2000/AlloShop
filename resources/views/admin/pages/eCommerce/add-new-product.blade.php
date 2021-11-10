@@ -36,8 +36,9 @@
               <div class="d-sm-flex align-items-center">
                 <h5 class="mb-2 mb-sm-0">Add New Product</h5>
                 <div class="ms-auto">
-                  <button type="button" class="btn btn-secondary">Save to Draft</button>
-                  <button type="button" class="btn btn-primary">Publish Now</button>
+                  <form action="{{route('products-list')}}">
+                    <button type="submit" class="btn btn-primary">List Product</button>
+                  </form>                 
                 </div>
               </div>
             </div>

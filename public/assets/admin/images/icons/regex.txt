@@ -1,0 +1,8 @@
+Để tạo một biểu thức chính quy, thì chúng ta bắt đầu: / và kết thúc cũng là dấu /
+-   Tạo biểu thức chính quy có chứa dấu cách: 
+	var regexMatkhau = /\ /; 
+Một số biểu thức chính quy thường hay sử dụng.	
+var name =  /^[^\d+]*[\d+]{0}[^\d+]*$/	
+var regexEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm
+	var phone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+

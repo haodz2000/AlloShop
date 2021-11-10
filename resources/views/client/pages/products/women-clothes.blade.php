@@ -23,9 +23,10 @@
         <link rel="stylesheet" href="{{ asset('./assets/client/css/style.css') }}">
         <!-- responsive css -->
         <link rel="stylesheet" href="{{ asset('./assets/client/css/responsive.css') }}">
+        <link rel="stylesheet" href="{{ asset('./assets/client/css/style-form.css') }}">
         <!-- modernizr css -->
         <script src="{{ asset('./assets/client/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-        <style>
+        {{-- {{-- <style>
             .order-form{
                 display: block;
                 max-width: 600px;
@@ -58,7 +59,7 @@
                 padding-left: 15px;
                 margin-bottom: 5px
             }
-        </style>
+        </style> --}}
 @endsection
 @section('content')
     @include('client.includes.support')
@@ -213,47 +214,64 @@
                 </div>
 
             </div>
+            @isset($listProduct)
+                @php
+                    $numberProduct = count($listProduct);
+                    $numberRow = ceil($numberProduct/3);
+                @endphp
+                @for ($i = 0 ;$i < $numberRow; $i++)
+                    <div class="row" id="products">
+                        @php
+                        $pos = 0;
+                        @endphp
+                        @while ($pos < 3)
+                            @isset($listProduct[$i*3 +$pos])
+                                @php
+                                    $product = $listProduct[$i*3 +$pos ]
+                                @endphp
+                                <div class="item col-lg-4 col-md-4 col-sm-12 col-xs-12">
 
-            <div class="row" id="products">
+                                    <div class="single-product">
 
-                @isset($listProduct)
-                    @foreach ($listProduct as $product )
-                    <div class="item col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                        <figure>
+                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
 
-                        <div class="single-product">
+                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                            </a>
+                                            <span class="product-position color1">New</span>
 
-                            <figure>
-                                <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                    <img class="normal" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                            <ul>
 
-                                    <img class="hover" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-                                </a>
-                                <span class="price">Giá: <strong>${{ $product->price }}</strong></span>
-                                <span style="float: right">Đã bán:<strong>{{ $product->quanity_orderd?$product->quantity_order:0 }}</strong></span>
-                                <span class="product-position color1">New</span>
-                                <ul>
-                                    <li><a  data-id="{{ $product->product_id }}" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li><a  data-id="{{ $product->product_id }}" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a></li>
 
-                                    <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
 
-                                    <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
-                                </ul>
-                            </figure>
+                                                <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
 
-                            <div class="product-content">
+                                            </ul>
 
-                                <h4>{{ $product->product_name }}</h4>
+                                        </figure>
 
-                                <h5>{{ $product->categories->category_name }}</h5>
-                                <p>{{ $product->description }}</p>
+                                        <div class="product-content">
+
+                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><h4>{{ $product->product_name }}</h4></a>
+
+                                            <h5>{{ $product->categories->category_name }}</h5>
+                                            <h5 style="color: red" class="price">Price:  ${{ $product->price }} <i style="float: right; color:black">Đã bán:{{ $product->quantity_orderd }}</i></h5>
+                                            <p>{{ $product->description }}</p>
+                                        </div>
+
+                                </div>
                             </div>
-
-                        </div>
-
+                            @endisset
+                            @php
+                                $pos++;
+                            @endphp
+                        @endwhile
                     </div>
-                    @endforeach
-                @endisset
-            </div>
+                @endfor
+            @endisset
         </div>
 
     </section>
@@ -287,11 +305,12 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
         <script>
             const urlGetDataProduct = '{{ route('getDataProduct') }}';
             const urlProductDetail =  '{{ route('product.detail') }}';
+            const urlAddToCart = '{{ route('addToCart') }}';
         </script>
-         <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
-         </script>
+        <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
+        <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
+        </script>
 @endsection

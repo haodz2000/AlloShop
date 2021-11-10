@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\Jobs\SendEmailClientOrderProduct;
 use App\Jobs\SendEmailAdminOrderProduct;
+use App\Model\Cart;
 use Illuminate\Support\Arr;
 
 class OrderController extends Controller
@@ -67,19 +68,15 @@ class OrderController extends Controller
                     $orderDetail->sku = $product['sku'];
                     $orderDetail->save();
                     $productDetail = ProductDetail::where('sku',$product['sku'])->first();
-                    $productDetail->quantity -= $product['quantity'];
-                    $productDetail->save();
-                    $products = $productDetail->products;
+                    $quantity = $productDetail->quantity - $product['quantity'];
+                    ProductDetail::where('sku',$product['sku'])->update(['quantity'=>$quantity]);
+                    $products = Product::where('product_id',$product['productInfo']->product_id)->get()->first();
                     $products->quantity_orderd += $product['quantity'];
                     $products->save();
                 }
                 $customer = Auth::user();
                 $this->mailOrderClient($customer,$order);
-                $this->email = $customer->email;
-                $data = array('cart'=>Session('Cart'),'customer'=>$customer,'token'=>$order->key_token);
-                SendEmailClientOrderProduct::dispatch($this->email,$data);
-                $data = array('cart'=>Session('Cart'),'order'=>$order);
-                SendEmailAdminOrderProduct::dispatch($data)->delay(now()->addSecond(5));
+                $this->mailOrderAdmin($order);
                 $request->session()->forget('Cart');
                 return redirect()->route('shipping.order');
             }
@@ -128,7 +125,7 @@ class OrderController extends Controller
         SendEmailAdminOrderProduct::dispatch($data)->delay(now()->addMinutes(1));
     }
     public function listOrderedClient(){
-        $order = Order::where('user_id',Auth::id())->orderBy('updated_at')->get();
+        $order = Order::where('user_id',Auth::id())->orderBy('updated_at','DESC')->get();
         $orderTrans = null;
         $orderCancel = null;
         foreach($order as $value){
@@ -137,7 +134,7 @@ class OrderController extends Controller
             {
                 $orderTrans[$i] = $value;
             }
-            else if($value->status == 3){
+            else if($value->status == 4){
                 $orderCancel[$i] = $value;
             }
         }
@@ -152,5 +149,55 @@ class OrderController extends Controller
     public function getString($string){
         $array = explode('/',$string);
         return $array[1];
+    }
+    public function getOrderDetail(Request $request){
+        $idOrder = (int)$request['id'];
+        if($idOrder != null)
+        {
+            $userId = Auth::id();
+            $order = Order::where('order_id',$idOrder)->where('user_id',$userId)->first();
+            $order['totalQuantity'] = 0;
+            $order['totalPrice'] = 0;
+            $order['shipper'] = $order->shippers->name;
+            $customer = Auth::user();
+            $orderDetail = OrderDetail::where('order_id',$idOrder)->get();
+            $product = null;
+            foreach($orderDetail as $key=>$value)
+            {
+                $order['totalQuantity'] += $value->quantity;
+                $order['totalPrice'] += $value->total_price;
+                $product[$key] = $value->products;
+                $product[$key]['quantiyOrder'] = $value->quantity;
+                $product[$key]['size'] = $value->size;
+                $product[$key]['color'] = $value->color;
+                $product[$key]['totalPrice'] = $value->total_price;
+            }
+            if($order)
+            {
+                return response()->json([
+                    'order'=> $order,
+                    'customer'=>$customer,
+                    'product' => $product
+                ]);
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 0;
+        }
+
+    }
+    public function cancelOrder(Request $request){
+        $idOrder = (int)$request['id'];
+        if($idOrder != null){
+            $idCustomer = Auth::id();
+            $order = Order::where('order_id',$idOrder)->where('user_id',$idCustomer)->get()->first();
+            $order->status = 4;
+            $order->save();
+            $order['shipper'] = $order->shippers->name;
+            return response()->json(['order'=>$order]);
+        }
     }
 }

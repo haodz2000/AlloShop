@@ -28,21 +28,36 @@ use App\Http\Controllers\PostController;
 Route::get('/','HomeController@index')->name('home');
 Route::prefix('')->group(function () {
     Route::get('/products/{slug}',['uses'=>'ProductController@productDetail'])->name('products.slug');
-    Route::post('/addCart/{id}','CartController@store');
+    Route::post('/addCart','CartController@store')->name('addToCart');
     Route::post('/addItemCart','CartController@storeItem')->name('addItemCart');
     Route::post('/deleteItemCart','CartController@delete');
     Route::post('/updateCart','CartController@update');
     Route::post('/getSizeColor','ProductController@getSizeAndColor')->name('SizeColor');
     Route::post('/products/detail','ProductController@getInfoProduct')->name('product.detail');
     Route::get('/shipping','CartController@index')->name('shipping')->middleware('auth');
-    Route::post('/shipping','client\OrderController@order')->middleware('auth');
+    Route::post('/shipping','client\OrderController@order')->name('checkout')->middleware(['auth','validate.user']);
     Route::get('shipping/order','client\OrderController@listOrderedClient')->name('shipping.order')->middleware('auth');
+    Route::post('shipping/order/detail','Client\OrderController@getOrderDetail')->name('shipping.order.detail')->middleware('auth');
+    Route::post('shipping/order/cancel', 'Client\OrderController@cancelOrder')->name('shipping.order.cancel')->middleware('auth');
     Route::get('/men/products', 'HomeController@men')->name('clothes.men');
     Route::get('/women/products', 'HomeController@women')->name('clothes.women');
     Route::post('/getDataProduct','CartController@getProduct')->name('getDataProduct');
+    Route::get('/unisex/products', 'HomeController@unisex')->name('clothes.unisex');
+    Route::get('all/products','HomeController@allProduct')->name('clothes.all');
+    Route::post('/shipping/order/rating','client\RatingController@rating')->name('shipping.order.rating');
+    Route::get('/contact.html',function(){
+        return view('client.pages.contact.contact');
+    })->name('contact');
+    Route::get('user/profile','client\UserController@index')->name('user.profile')->middleware('auth');
+    Route::post('/user/profile/update','client\UserController@update')->name('user.profile.update')->middleware('auth');
 });
+// Facebook Login
+Route::get('/signin/facebook', 'SignInController@redirectToFacebook')->name('facebook.login');
+Route::get('/signin/facebook/callback', 'SignInController@handleFacebookCallback');
 
-
+// Google Login
+Route::get('/signin/google', 'SignInController@redirectToGoogle')->name('google.login');
+Route::get('/signin/google/callback', 'SignInController@handleGoogleCallback');
 
 
 //Authentication
@@ -55,6 +70,7 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     })->name("dashboard");
 
     Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
+    Route::get('/products-list/category/{category}', [ProductController::class, 'productListSelectCategory'])->name("products-list-select-category");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");
     Route::get('/products-grid/destroy/{id}', [ProductController::class, 'destroyProductGrid'])->name("products-grid.destroy");
     Route::get('/products-list/{id}', [ProductController::class, 'destroyProductList'])->name("products-list.destroy");
@@ -80,9 +96,8 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
 
     Route::resource('/banner','BannerController');
 
- 
     Route::resource('/post','PostController');
-    
+
     Route::get('/logout', 'SignInController@logout')->name('logout');
 
     //Category
