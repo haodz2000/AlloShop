@@ -98,4 +98,5 @@ class CodeDiscountController extends Controller
     {
         //
     }
+
 }

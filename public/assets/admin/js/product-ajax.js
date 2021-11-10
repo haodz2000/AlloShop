@@ -4,10 +4,11 @@ $(document).ready(function () {
         e.preventDefault();
         var id = $(this).data("id");
         var token = $("meta[name='csrf-token']").attr("content");
-        // var url = "{{route('products-grid')}}";
+        // var url = "{{route('products-grid', 'id')}}";
+        // alert(id);
         $.ajax({
             type: "GET",
-            url: "/admin/products-grid/" + id,
+            url: "/admin/products-grid/destroy/" + id,
             data: {
                 "id": id,
                 "_token": token,
@@ -38,6 +39,27 @@ $(document).ready(function () {
                 // console.log("Ok");
                 // window.location.reload();
                 $(".card-body").load(" .table-responsive")
+            }
+        });
+        // alert(id);
+    });
+    $(document).on('click', '.save', function(e){
+        e.preventDefault();
+        var order_id = $(this).data('id');
+        var status = $('.status').val();
+        var token = $("meta[name='csrf-token']").attr("content");
+        // alert(status);
+        $.ajax({
+            type: "POST",
+            url: "/admin/order/order-details/update-status/" + order_id,
+            data: {
+                "order_id": order_id,
+                "status" : status,
+                "_token": token,
+            },
+            success: function (response) {
+                console.log(response);
+                $(".card-body").load(" #card-body");
             }
         });
         // alert(id);
@@ -79,28 +101,4 @@ $(document).ready(function () {
     //         }
     //     });
     // });
-    $(document).ready(function () {
-        $(document).on('click', '.delete-banner', function(e){
-        //   alert(1);
-        // $(".delete").click(function () {
-            e.preventDefault();
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            // var url = "{{route('products-grid')}}";
-            $.ajax({
-                type: "GET",
-                url: "/admin/banner/" + id,
-                data: {
-                    "id": id,
-                    "_token": token,
-                },
-                success: function (response) {
-                    // console.log("Ok");
-                    // window.location.reload();
-                    $("#banner-list").load(" .banner-list")
-                }
-            });
-            // alert(id);
-          });
-        });
 });

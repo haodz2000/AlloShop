@@ -36,7 +36,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $data = $request->validate(
             [
                 'category_name'   => 'required|unique:categories|max:100',
@@ -88,7 +88,7 @@ class CategoryController extends Controller
         $category->category_name = $request['category_name'];
         $category->description = $request['description'];
         $category->save();
-        
+
         return Response()->json($category);
 
     }

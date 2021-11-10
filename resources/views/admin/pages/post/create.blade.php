@@ -2,7 +2,8 @@
 @section('title','Create Post')
 
 @section('content')
-  <div class="row">
+
+<div class="row">
     <div class="col-lg-12 mx-auto">
      <div class="card">
        <div class="card-header py-3 bg-transparent"> 
@@ -63,7 +64,7 @@
 
                      <div class="col-12">
                        <label class="form-label">Content</label>
-                       <textarea class="form-control" required placeholder="Content" rows="4" cols="4" name="content" id=""></textarea>
+                       <textarea id="summernote" class="form-control" required placeholder="Content" rows="8" cols="4" name="content" id=""></textarea>
                      </div>
                      @error('content')
                         <div class='alert alert-danger' role='alert'>
@@ -80,7 +81,8 @@
         </div>
        </div>
     </div>
-</div><!--end row-->
+ </div><!--end row-->
+
 
  <script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
 @endsection

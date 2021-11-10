@@ -1,6 +1,7 @@
 @extends('admin.index')
 @section('title', "Add new product")
 @section('content')
+
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -49,11 +50,11 @@
                           @csrf
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Product name</label>
-                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="product_name">
+                            <input type="text" class="form-control" required placeholder="Product name" name="product_name" id="slug"  onkeyup="ChangeToSlug()" >
                           </div>
                           <div class="col-12 col-lg-6">
                             <label class="form-label">Slug</label>
-                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="slug">
+                            <input type="text" class="form-control" required placeholder="Slug" name="slug" id="convert_slug">
                           </div>
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Category</label>
@@ -102,7 +103,7 @@
                           </div>
                           <div class="col-12">
                             <label class="form-label">Full description</label>
-                            <textarea class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
+                            <textarea id="summernote" class="form-control" required placeholder="Full description" rows="4" cols="4" name="description" id="description"></textarea>
                           </div>
                           <button type="submit" class="btn btn-primary add-new-product" value="submit" name="add">Add New Product</button>
                         </form>
@@ -114,4 +115,8 @@
             </div>
          </div>
       </div><!--end row-->
+
+</main>
+<script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
+
 @endsection

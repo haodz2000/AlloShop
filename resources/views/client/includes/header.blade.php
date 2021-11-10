@@ -11,10 +11,28 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
                     <div class="heiglight text-right">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i>Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart-o"></i>Wishlist</a></li>
+
+                            @if (Auth::check())
+                                <li>
+                                    <div class="dropdown">
+                                        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-user"></i>{{ Auth::user()->name }}
+                                        <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                            <li><a href="#">Cập nhật thông tin cá nhân</a></li>
+                                            <li><a href="{{ route('shipping.order') }}">Đơn hàng của tôi</a></li>
+                                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            @else
+                                <li><a href="{{ route('signin.index') }}"><i class="fa fa-user"></i>Login/Register</a></li>
+                            @endif
+                            <li class="whilest"><i class="fa fa-heart-o"></i> Whilest</li>
                             <li class="cart cart-area">
                                 @if ($cart = Session('Cart'))
                                 <div class="hove">
@@ -80,19 +98,18 @@
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                     <div class="logo">
-                        <a href="index-2.html"><img src="{{ asset('./assets/client/images/logo/logo.png') }}" alt="AlloShop"/></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('./assets/client/images/logo/logo.png') }}" alt="AlloShop"/></a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12">
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li><a href="#">Men</a></li>
-                                <li><a href="#">Women</a></li>
+                                <li><a href="{{ route('clothes.men') }}">Men</a></li>
+                                <li><a href="{{ route('clothes.women') }}">Women</a></li>
                                 <li><a href="#">Boys</a></li>
                                 <li><a href="#">Girls</a></li>
                                 <li><a href="#">Kids</a></li>
-                                <li><a href="#">Accessories</a></li>
                                 <li class="dropdown mega-dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <span class="caret"></span></a>
                                     <ul class="dropdown-menu mega-dropdown-menu">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OrderSeeder extends Seeder
 {
@@ -11,6 +12,34 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('orders')->insert([
+            [
+                'user_id' => '1',
+                'shipper_id' => '1',
+                'code_employee' => 'a01',
+                'key_token' => 'abcd',
+                'note' => 'hehe',
+                'status' => '1',
+                'address' => 'Thai Binh'
+            ],
+            [
+                'user_id' => '2',
+                'shipper_id' => '2',
+                'code_employee' => 'a02',
+                'key_token' => 'efgh',
+                'note' => 'hoho',
+                'status' => '2',
+                'address' => 'Ha Noi'
+            ],
+            [
+                'user_id' => '3',
+                'shipper_id' => '3',
+                'code_employee' => 'a03',
+                'key_token' => 'jklm',
+                'note' => 'hihi',
+                'status' => '3',
+                'address' => 'TP.HCM'
+            ],
+        ]);
     }
 }

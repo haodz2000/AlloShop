@@ -1,6 +1,7 @@
 @extends('admin.index')
 @section('title', "Products List")
 @section('content')
+
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
       <div class="breadcrumb-title pe-3">eCommerce</div>
@@ -63,6 +64,7 @@
                       Product Name
                     </th>
                     <th>Category</th>
+
                     <th>Slug</th>
                     <th>
                       Price
@@ -184,23 +186,20 @@
                               </div>
 
                         </div>
-                    @endforeach
-                @endif
-              </tbody>
-            </table>
-          </div>
+                      @endforeach
+                
+                </tbody>
+              </table>
+            </div>
 
-    <nav class="float-end mt-4" aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
-    </nav>
+            <nav class="float-end mt-4" aria-label="Page navigation">
+              <ul class="pagination">
+                  {{$product_list->links()}}
+              </ul>
+            </nav>
+          @endif  
+        </div>
+      </div>
 
-</div>
-</div>
 
 @endsection

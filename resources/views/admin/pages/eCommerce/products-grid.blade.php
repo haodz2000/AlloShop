@@ -70,11 +70,12 @@
           </div>
          </div>
          <div class="card-body">
-           <div class="product-grid" id="product-list">
+          @if ($product_grid)
+            <div class="product-grid" id="product-list">
              <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-3 product-list">
-               @if ($product_grid)
-                   @foreach ($product_grid as $item)
-                   <div class="col">
+               
+                  @foreach ($product_grid as $item)
+                  <div class="col">
                     <div class="card border shadow-none mb-0">
                       <div class="card-body text-center">
                         <img src="{{asset('./assets/admin/images/products/'.$item['url_image'])}}" class="img-fluid mb-3" alt=""/>
@@ -94,21 +95,19 @@
                         </div>
                       </div>
                     </div>
-                 </div>
-                   @endforeach
-               @endif
-          </div>
-      </div><!--end row-->
+                  </div>
+                  @endforeach
+               
+            </div>
+            <nav class="float-end mt-4" aria-label="Page navigation">
+              <ul class="pagination">
+                  {{$product_grid->links()}}
+              </ul>
+            </nav>
+            @endif
+          </div><!--end row-->
 </div>
-<nav class="float-end mt-4" aria-label="Page navigation">
-<ul class="pagination">
-<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item active"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
-</nav>
+
 
 </div>
 </div>

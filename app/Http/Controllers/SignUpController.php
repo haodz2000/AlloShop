@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Model\User;
+use App\User;
 
 class SignUpController extends Controller
 {
@@ -43,6 +43,8 @@ class SignUpController extends Controller
             $validator = Validator::make($request->all(),[
                 'name' => 'required|min:6|max:100',
                 'email' => 'required|email',
+                'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'address' => 'required',
                 'password' => 'required|min:6',
                 'confirm-password' => 'required|same:password' 
             ]);
@@ -54,7 +56,9 @@ class SignUpController extends Controller
             if(!$user) {
                 $newUser = new User();
                 $newUser->name = $request->name;
+                $newUser->phone = $request->phone;
                 $newUser->email = $request->email;
+                $newUser->address = $request->address;
                 $newUser->password = bcrypt($request->password);
                 $newUser->save();
                 return redirect()->route('signin.index')->with('success','Signed up successfully! Please sign in at here!');
@@ -82,7 +86,7 @@ class SignUpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)                   
     {
         //
     }

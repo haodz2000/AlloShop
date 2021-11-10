@@ -125,7 +125,7 @@ class PostController extends Controller
         $post->status  = $data['status'];
 
         // sửa ảnh
-        $get_image = $request->hinhanh;
+        $get_image = $request->url_image;
         if ($get_image) {
             $pathRemove = 'assets/admin/images/posts/'.$post->url_image;
             if (file_exists($pathRemove)) {
@@ -167,3 +167,4 @@ class PostController extends Controller
         return Response()->json($post);
     }
 }
+

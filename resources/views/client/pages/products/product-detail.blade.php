@@ -89,17 +89,52 @@
 
                                 <div class="preview-pic tab-content">
 
-                                    <div class="tab-pane active" id="pic-1"><img style="width: 637px; height:607px" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+                                    <div id="carousel-example-generic" style="max-width:600px; max-hight:500px;margin: 0 auto" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    </ol>
 
-                                    <div class="tab-pane" id="pic-2"><img style="width: 637px; height:607px" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                        <img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="...">
+                                        <div class="carousel-caption">
+                                            ...
+                                        </div>
+                                        </div>
+                                        <div class="item">
+                                        <img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt="...">
+                                        <div class="carousel-caption">
+                                            ...
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    </div>
 
-                                    <div class="tab-pane" id="pic-3"><img style="width: 637px; height:607px" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+                                    {{-- <div class="tab-pane active" style="max-width:637px;max-height:607px" id="pic-1"><img src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
 
-                                    <div class="tab-pane" id="pic-4"><img style="width: 637px; height:607px" src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-2"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+
+                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-3"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div>
+
+                                    <div class="tab-pane" style="max-width:637px;max-height:607px" id="pic-4"><img  src="{{ asset('assets/client/images/product/'.$product->url_image) }}" alt=""/></div> --}}
 
                                 </div>
 
                                 <ul class="preview-thumbnail nav nav-tabs mr-l5">
+
 
                                     <li class="active">
 
@@ -168,64 +203,40 @@
                                     </ul>
 
                                 </div>
-
                                 <div class="pro-deti">
                                     <p>{{ $product->description }}</p>
                                 </div>
-                                <Form class="Form-Add-To-Cart" action="" method="POST">
+                                <Form action="{{ route('addItemCart') }}" class="order-form" action="" method="POST">
                                     @csrf
-                                    <div class="pro-color">
+                                    <div class="form area">
+                                        <div class="clear-fix">
+                                        </div>
+                                        <strong>Select Size</strong>
+                                        <select class="form-control" name="size" id="size">
+                                            <option value="">Size</option>
+                                            @isset($size)
+                                                @foreach ($size as $value )
+                                                    <option value="{{ $value->size_id }}">{{ $value->size }}</option>
+                                                @endforeach
+                                            @endisset
 
-                                        <h4>Select Color:</h4>
-
-                                        <ul class="list-inline">
-                                            @if ($productDetail)
-                                                <select name="color" id="color">
-                                                    @foreach ($productDetail as $key=>$value )
-                                                        <li><option value="{{ $value->color_id }}">{{ $value->colors->color }}</option></li>
-                                                    @endforeach
-                                                </select>
-                                            @endif
-                                            {{-- <li><span class="c-2"><i class="fa fa-check"></i></span></li>
-
-                                            <li><span class="c-3"><i class="fa fa-check"></i></span></li>
-
-                                            <li><span class="c-4"><i class="fa fa-check"></i></span></li>
-
-                                            <li><span class="c-5"><i class="fa fa-check"></i></span></li>
-
-                                            <li><span class="c-6"><i class="fa fa-check"></i></span></li>
-
-                                            <li><span class="c-7"><i class="fa fa-check"></i></span></li> --}}
-                                        </ul>
-
+                                        </select>
+                                        <br>
+                                        <strong>Select Color</strong>
+                                        <select class="form-control" name="color" id="color">
+                                            <option value="">Color</option>
+                                            @isset($color)
+                                                @foreach ($color as $value )
+                                                    <option value="{{ $value->color_id }}">{{ $value->color }}</option>
+                                                @endforeach
+                                            @endisset
+                                        </select>
+                                        <br>
+                                        <strong id="stock">Kho:{{ $totalQuantity }}</strong>
+                                        <input type="hidden" id="idProduct" name="" value="{{ $product->product_id }}">
+                                        <input type="hidden" id="skuProduct" name="sku" value="">
                                     </div>
-
-                                    <div class="pro-size">
-
-                                        <h4>Select Size:</h4>
-
-                                        <table>
-
-                                            <tr>
-                                                <td>
-                                                    @if ($productDetail)
-                                                        <select data-id="{{ $productDetail[0]->product_id }}" required name="size" id="size">
-                                                            <option value="">Size</option>
-                                                            @foreach ($productDetail as $key=>$value )
-                                                                <option value="{{ $value->size_id }}">{{ $value->sizes->size }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    @endif
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td id="quantity-store"></td>
-                                                <input type="hidden" required name="sku" id="sku" value="">
-                                            </tr>
-                                        </table>
-                                    </div>
+                                    <br>
                                     <div class="pro-button">
 
                                         <ul class="list-inline">
@@ -236,7 +247,7 @@
                                                 padding: 12px 20px;
                                                 font-size: 18px;
                                                 height: 50px;
-                                                width: auto;" type="sumit" data-id="{{ $product->product_id }}" id="addItemCart"><i class="fa fa-shopping-cart"></i>Add To Cart</button></li>
+                                                width: auto;" type="submit" data-id="{{ $product->product_id }}" id="addItemCart"><i class="fa fa-shopping-cart"></i>Add To Cart</button></li>
                                             <li>
                                                 <input id="quantity" type="number" name="quantity" value="1" />
                                                 <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
@@ -1054,5 +1065,53 @@
         <script src="{{ asset('./assets/client/js/plugins.js')}}"></script>
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
-        <script src="{{ asset('./assets/client/js/jquery.addToCart.js') }}"></script>
+        <script src="{{ asset('./assets/client/js/jquery.addtocart.js') }}"></script>
+        <script>
+            $(document).on('change','.order-form select',function(){
+                var id = $(".order-form #idProduct").val();
+                var color = $(".order-form #color").val();
+                var size = $(".order-form #size").val();
+                if(color!='' && size !='' && id!='')
+                {
+                    let url = '{{ route('product.detail') }}'
+                    $.ajax({
+                        type: "Post",
+                        url: url,
+                        data:{
+                            color:color,
+                            size:size,
+                            product_id:id,
+                        },
+                        dataType:'JSON',
+                        success: function(data){
+                            if(data!=0)
+                            {
+                                console.log(data);
+                                $(".order-form #stock").html('Kho: '+data.product.quantity);
+                                $(".order-form #skuProduct").val(data.product.sku);
+                            }
+                            else
+                            {
+                                $(".order-form #stock").html('Kho: Hết hàng');
+                                $(".order-form #stock").css('color','red');
+                                $(".order-form #skuProduct").val('');
+                            }
+                        },
+                        error: function(){
+                            console.log('error')
+                        }
+                    });
+                }
+            })
+            $(document).on('submit','Form.order-form',function(){
+                var sku = $('.order-form #skuProduct').val();
+                if(sku != ''){
+                    return true;
+                }
+                else{
+                    alertify.error('Cập nhật thất bại');
+                    return false;
+                }
+            })
+        </script>
 @endsection

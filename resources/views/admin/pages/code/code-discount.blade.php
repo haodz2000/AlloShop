@@ -49,7 +49,6 @@
             </div>
         </div>
         <div class="card-body">
-            @if ($code)
             <div class="table-responsive">
                 <table class="table align-middle table-striped">
                     <thead>
@@ -60,7 +59,9 @@
                             <th>Created_at</th>
                             <th>Action</th>
                     </thead>
-                    <tbody>                   
+
+                    <tbody>
+                    @if ($code)
                         @foreach ($code as $item)
                             <tr>
                                 <td>
@@ -86,8 +87,7 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
-                    
+                        @endforeach                  
                     </tbody>
                 </table>
                 <nav class="float-end mt-4" aria-label="Page navigation">

@@ -1,6 +1,6 @@
 @extends('client.index')
 @section('css_by_page')
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
         <!-- Place favicon.ico in the root directory -->
         <!-- all css here -->
         <!-- bootstrap v3.3.6 css -->
@@ -25,6 +25,48 @@
         <link rel="stylesheet" href="{{ asset('./assets/client/css/responsive.css') }}">
         <!-- modernizr css -->
         <script src="{{ asset('./assets/client/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+        <style>
+            div.img{
+                width: 100px;
+                border: 1px solid white;
+            }
+            div.img img{
+                width: 100%;
+                border: 1px solid white;
+            }
+            .order-form{
+                display: block;
+                max-width: 600px;
+                height: 600px;
+                background-color: rgba(195, 84, 172, 0.8);
+                position: sticky;
+                left: 35%;
+                top: 20%;
+                z-index: 99999;
+                transform: translateY(-5%);
+                animation-name: example;
+                animation-duration: 2s;
+                animation-iteration-count: 1;
+                transition: example 2s;
+                transition-timing-function: ease;
+            }
+            .order-form .imgslide{
+                max-width: 300px;
+                border-radius: 5px;
+                background-color: #ffffff;
+                position: relative;
+                left: 22%;
+            }
+            @keyframes example {
+                0%   {background-image:rgba(177, 221, 235,0.8); left:35%; top:0px;}
+                100% {background-image:rgba(108, 118, 202,0.3); left:35%; top:20%;}
+            }
+            .order-form form strong,input,select,option,button{
+                box-sizing: border-box;
+                padding-left: 15px;
+                margin-bottom: 5px
+            }
+        </style>
 @endsection
 @section('content')
 @include('client.includes.support')
@@ -75,7 +117,9 @@
 <!--Breadcumb area end here-->
 
 <!--Shipping area start here-->
+<div class="order-form form-control hidden">
 
+</div>
 <section class="shipping-area section">
 
     <div class="container">
@@ -88,11 +132,11 @@
 
                     <ul class="tab-nav" role="tablist">
 
-                        <li class="active col-sm-4"><a href="#checkout" aria-controls="checkout" role="tab" data-toggle="tab">01. Checkout</a></li>
+                        <li class="active col-sm-6"><a href="#checkout" aria-controls="checkout" role="tab" data-toggle="tab">01. Checkout</a></li>
 
-                        <li class="col-sm-4"><a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">02. Shipping Method</a></li>
+                        <li class="col-sm-6"><a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">02. Payment</a></li>
 
-                        <li class="col-sm-4"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">03.Payment</a></li>
+                        {{-- <li class="col-sm-4"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">03.Payment</a></li> --}}
 
                     </ul>
 
@@ -107,342 +151,242 @@
             <div class="tab-content" id="shiping">
                 @if (Session('Cart'))
                 <div class="tab-pane active" id="checkout">
-
+                    <span class="alert"></span>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
                         <div class="product-list table-cart">
                             @if ($cart = Session('Cart'))
                                 <table>
                                     @foreach ($cart->products as $product)
                                     <tr>
-
-                                        <td><img src="{{ asset('assets/client/images/product/1-sm.png') }}" alt=""/></td>
-
                                         <td>
-
+                                            <div class="img">
+                                                <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
+                                                    <img src="{{ asset('assets/client/images/product/'.$product['productInfo']->url_image) }}"
+                                                    alt="{{ $product['productInfo']->product_name }}"/>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <div class="des-pro">
-
-                                                <h4>{{ $product['productInfo']->product_name }}</h4><p>LifeStyle</p>
-
+                                                <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
+                                                    <h4>{{ $product['productInfo']->product_name }}</h4>
+                                                </a>
+                                                <p>
+                                                        <span>Size:</span>
+                                                        <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="size form-control">
+                                                            <option value="{{ $product['size'] }}">{{ $product['size'] }}</option>
+                                                        </select>
+                                                        <span>Color:</span>
+                                                        <select data-id="{{ $product['productInfo']->product_id }}" data-sku="{{ $product['sku'] }}" class="color form-control">
+                                                            <option value="{{ $product['color'] }}">{{ $product['color'] }}</option>
+                                                        </select>
+                                                </p>
                                             </div>
-
                                         </td>
-
                                         <td><strong>${{ number_format( $product['productInfo']->price,2) }}</strong></td>
-
                                         <td>
-
                                             <div class="order-pro order1">
-                                                <input type="number" style="height: 100%; width: 100px"  class="quantity" value="{{ $product['quantity'] }}" />
+                                                <input  type="number" style="height: 100%; width: 100px"  class="quantity_order form-control" data-sku="{{ $product['sku'] }}" value="{{ $product['quantity'] }}" />
                                             </div>
                                         </td>
-
                                         <td><span class="prize">${{ number_format($product['price'],2) }}</span></td>
 
                                         <td><i class="fa fa-times close-item" data-sku="{{ $product['sku'] }}"></i></td>
                                     </tr>
                                     @endforeach
-
                                 </table>
                                 <div class="total text-right">
-
                                     <span>Total Price :</span>
                                     <strong>${{ number_format($cart->totalPrice,2) }}</strong>
-
                                 </div>
                                 <div class="next-step text-center">
-
-                                    <button>Next Step</button>
-
+                                    <a href="{{ route('home') }}"><button class="text-success">Tiếp tục mua sắm</button></a>
                                 </div>
                             @else
                                 <div class="container alert alert-danger" >
                                     Giỏ hàng rỗng
                                 </div>
-                                <div class="alert">
-                                    <a href="{{ route('home') }}">Quay lại hàng</a>
+                                <div class="next-step text-center">
+                                    <a href="{{ route('home') }}"><button class="text-success">Tiếp tục mua sắm</button></a>
                                 </div>
                             @endif
                         </div>
                     </div>
-
                 </div>
 
                 <div class="tab-pane" id="shipping">
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                        <div class="form-area row">
-
-                            <h3>Billing Information</h3>
-
-                            <form>
-
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>First Name *</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Last Name *</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Company Name</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>E-mail Address * *</label>
-
-                                        <input type="email">
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Phone *</label>
-
-                                        <input type="number">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Country</label>
-
-                                        <select>
-
-                                            <option>Select Your Country</option>
-
-                                            <option>Bangladesh</option>
-
-                                            <option>China</option>
-
-                                            <option>USA</option>
-
-                                        </select>
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Address</label>
-
-                                        <input type="text">
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-12">
-
-                                        <label>Town / City</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-
-                                    <div class="col-sm-6">
-
-                                        <label>District *</label>
-
-                                        <select>
-
-                                            <option>Select Your District</option>
-
-                                            <option>Dhaka</option>
-
-                                            <option>Khulna</option>
-
-                                            <option>Bagerhat</option>
-
-                                        </select>
-
-                                    </div>
-
-                                    <div class="col-sm-6">
-
-                                        <label>Postcode / ZIP</label>
-
-                                        <input type="text">
-
-                                    </div>
-
-                                </fieldset>
-
-                            </form>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                        <div class="order-list">
-
-                            <h3>Your Order</h3>
-
-                            <table>
-
-                                <tr>
-
-                                    <td>Product</td>
-
-                                    <td>Total</td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>1. Nikki Mike Pro</td>
-
-                                    <td>$ 99.00</td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>2. Nikki Mike Pro </td>
-
-                                    <td>$ 59.00</td>
-
-                                </tr>
-
-                                <tr class="row-bold">
-
-                                    <td>Subtotal</td>
-
-                                    <td>$ 158.00</td>
-
-                                </tr>
-
-                                <tr class="row-bold">
-
-                                    <td>Total</td>
-
-                                    <td>$ 158.00</td>
-
-                                </tr>
-
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 next-step text-center">
-
-                        <button>Next Step</button>
-
-                    </div>
-
-                </div>
-
-                <div class="tab-pane" id="payment">
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="faq">
-                            <div class="faq-content">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                  <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                      <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <span class="pd-l10">Direct Bank Tranfeer</span>
-                                        </a>
-                                      </h4>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                      <div class="panel-body">
-                                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="faq">
+                                <div class="faq-content">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                          <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <span class="pd-l10">Sử dụng thông tin và địa chỉ cũ</span>
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                          <div class="panel-body">
+                                            <form method="Post">
+                                                @csrf
+                                                <input type="hidden" name="infomation" value="old">
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+
+                                                        <label class="form-control">Name: {{ Auth::user()->name }}</label>
+                                                    </div>
+
+                                                </fieldset>
+
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+
+                                                        <label class="form-control">E-mail Address: {{ Auth::user()->email }}</label>
+
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <label class="form-control">Phone: {{ Auth::user()->phone }}</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label class="form-control">Address: {{ Auth::user()->address }}</label>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Đơn vị vận chuyển :</label>
+                                                        <select class="form-control" name="shipper" id="shipper">
+                                                            @foreach ($shippers as $shipper )
+                                                                <option value="{{ $shipper->shipper_id  }}">{{ $shipper->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label>Ghi chú</label>
+                                                        <br>
+                                                        <textarea class="form-control" name="note" id="note" cols="50" rows="3">
+                                                        </textarea>
+                                                    </div>
+                                                </fieldset>
+                                                <br>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <button style="margin-left:40%" type="submit" class="btn btn-success">Check-Out</button>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                          </div>
+                                        </div>
                                       </div>
-                                    </div>
-                                  </div>
-                                  <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingTwo">
-                                      <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                         <span class="pd-l10"> Check Payments</span>
-                                        </a>
-                                      </h4>
-                                    </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                      <div class="panel-body">
-                                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                          <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                             <span class="pd-l10">Sử dụng địa chỉ mới</span>
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                          <div class="panel-body">
+                                            <Form method="Post">
+                                                @csrf
+                                                <input type="hidden" name="infomation" value="new">
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label class="form-control">Tên: {{ Auth::user()->name }}</label>
+                                                    </div>
+                                                </fieldset>
+
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label class="form-control">E-mail: {{ Auth::user()->email }}</label>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label class="form-control">Số điện thoại: {{ Auth::user()->phone }}</label>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label for="address">Address:</label>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <select required data-id="" class="form-control" name="city" id="city">
+                                                                    <option value="">Tỉnh/Thành phố</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <select required data-id="" class="form-control" name="district" id="district">
+                                                                    <option value="">Quận/Huyện</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <select required data-id="" class="form-control" name="ward" id="ward">
+                                                                    <option value="">Xã/Phường</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <label>Đường/Số nhà:</label>
+                                                        @if (isset($error))
+                                                            <span class="alert alert-danger">{{ $error }}</span>
+                                                        @endif
+                                                        <input class="form-control" required type="text" name="address" id="address">
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <label>Đơn vị vận chuyển :</label>
+                                                        <select class="form-control" name="shipper" id="shipper">
+                                                            @foreach ($shippers as $shipper )
+                                                                <option value="{{ $shipper->shipper_id  }}">{{ $shipper->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+
+                                                    <div class="col-sm-12">
+                                                        <label>Ghi chú</label>
+                                                        <br>
+                                                        <textarea class="form-control" name="note" id="note" cols="50" rows="3">
+                                                        </textarea>
+                                                    </div>
+
+                                                </fieldset>
+                                                <br>
+                                                <fieldset>
+                                                    <div class="col-sm-12">
+                                                        <button style="margin-left: 40%" type="submit" class="btn btn-success">Check-Out</button>
+                                                    </div>
+                                                </fieldset>
+                                            </Form>
+                                          </div>
+                                        </div>
                                       </div>
+
                                     </div>
-                                  </div>
-                                  <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingThree">
-                                      <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                         <span class="pd-l10">Cash On Delivery</span>
-                                        </a>
-                                      </h4>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                      <div class="panel-body">
-                                        Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.
-                                      </div>
-                                    </div>
-                                  </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="next-step text-center">
-
-                        <button>Next Step</button>
-
-                    </div>
-
-                    </div>
-
                 </div>
                 @else
-                <div class="container alert alert-danger" >
+
+                <div class="row alert alert-danger" >
                     Giỏ hàng rỗng
                 </div>
-                <div class="alert">
-                    <a class="btn btn-success" href="{{ route('home') }}">Quay lại </a>
+                <div class="next-step text-center">
+                    <a href="{{ route('home') }}"><button class="text-success">Tiếp tục mua sắm</button></a>
                 </div>
                 @endif
 
@@ -485,4 +429,11 @@
 		<!-- main js -->
         <script src="{{ asset('./assets/client/js/main.js')}}"></script>
         <script src="{{ asset('./assets/client/js/jquery.addToCart.js') }}"></script>
+        <script>
+            const urlGetDataProduct = '{{ route('getDataProduct') }}';
+            const urlProductDetail =  '{{ route('product.detail') }}';
+        </script>
+        <script src="{{ asset('assets/client/js/jquery.api.province.js') }}"></script>
+        <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
+        </script>
 @endsection
