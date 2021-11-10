@@ -80,7 +80,7 @@
         </div>
        </div>
     </div>
- </div><!--end row-->
+</div><!--end row-->
 
  <script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
 @endsection

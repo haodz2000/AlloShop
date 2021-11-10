@@ -61,11 +61,9 @@
                               <option selected>Please select category</option>
                               @foreach ($category_name_list as $item)
                                 <option value="{{$item['category_id']}}">{{$item['category_name']}}</option>
-                                {{-- <option value="2">Two</option>
-                                <option value="3">Three</option> --}}
                               @endforeach
                             </select>
-                          </div>
+                          </div>       
                           <div class="col-12 col-lg-3">
                             <label class="form-label">Gender</label>
                             {{-- <input type="text" class="form-control" placeholder="Gender"> --}}
@@ -80,15 +78,25 @@
                             <label class="form-label">Price</label>
                             <input type="text" class="form-control" required placeholder="Price" name="price" id="price">
                           </div>
-                          <div class="col-12 col-lg-3">
+                          <div class="col-6 col-lg-3">
                             <label class="form-label">Discount</label>
                             <input type="text" class="form-control" required placeholder="Discount" name="discount" id="discount">
+                          </div>                         
+                          <hr>
+                          <div class="col-12 col-lg-12">                            
+                            <label class="form-label"><h5>Quantity</h5></label>
                           </div>
-                          {{-- <div class="col-12">
-                            <label class="form-label">Brand</label>
-                            <input type="text" class="form-control" placeholder="Brand">
-                          </div> --}}
-                          <div class="col-12">
+                          @foreach($list_color as $color)
+                            @foreach($list_size as $size)
+                              <div class="col-12 col-lg-2">
+                                <label class="form-label">{{$color->color}}-{{$size->size}}</label>
+                                <input value="0" type="number" min="0" class="form-control" required placeholder="Quantity" name="quantity[]">
+                              </div>
+                            @endforeach
+                          @endforeach
+                          <hr>
+                          
+                          <div class="col-6 col-lg-6">
                             <label class="form-label">Images</label>
                             <input class="form-control" required type="file" name="url_image" id="url_image">
                           </div>

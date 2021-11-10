@@ -74,11 +74,17 @@ Route::group(["prefix" => "admin"], function(){
     Route::get('/logout', 'SignInController@logout')->name('logout');
     
     Route::resource('/post','PostController');
+   
 
-    Route::get('/order/orders', [OrderController::class, 'index'])->name('orders');
-    Route::get('/order/order-details', [OrderDetailController::class, 'index'])->name('order-details');
+    Route::get('/order/orders', [OrderController::class, 'show'])->name('orders');
+    Route::get('/order/order-details/{order_id}/{customer_id}/{shipper_id}', [OrderDetailController::class, 'show'])->name('order-details');
+    Route::post('/order/order-details/update-status/{order_id}', [OrderDetailController::class, 'changeStatus'])->name('changeStatus');
 
-    //Category
+     //Category
     Route::resource('/category','CategoryController');
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
+
+    //Code
+    Route::resource('/code-discount','CodeDiscountController');
+
 });

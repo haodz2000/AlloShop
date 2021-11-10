@@ -4,18 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Model\Category;
 use App\Model\Product;
+use App\Model\Color;
+use App\Model\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function productList(){
-        $product_list =  Product::select('product_id', 'product_name', 'url_image', 'price')->get();
+        $list_color = Color::get();
+        $list_size = Size::get();
+        $product_list =  Product::with(['categories','product_details'])->orderBy('product_id','desc')->paginate(5);   
+        $category_name_list = Category::select('category_name', 'category_id')->get();       
         return view("admin.pages.eCommerce.products-list", [
-            'product_list' => $product_list,
-        ]);
-        return view("admin.pages.eCommerce.products-grid", [
-            'product_grid' => $product_list,
+                'product_list' => $product_list,
+                'category_name_list' => $category_name_list, 
+                'linkFromCategory' => null,
+                'list_size' => $list_size,
+                'list_color' => $list_color
+            ]);
+    }
+
+    public function productListSelectCategory($category) { 
+        $product_list =  Product::with('categories')->orderBy('product_id','desc')->where('category_id','=',$category)->paginate(5);
+        $linkFromCategory = Category::where('category_id','=',$category)->first();
+        $category_name_list = Category::select('category_name', 'category_id')->get();       
+        return view("admin.pages.eCommerce.products-list", [
+                'product_list' => $product_list,'category_name_list' => $category_name_list, 'linkFromCategory' => $linkFromCategory
+            ]);
+    }
+    
+    public function productDetail(Request $request,$slug){
+        $product  = Product::where('slug',$slug)->get()->first();
+        $productDetail = $product->product_details;
+        $size = null;
+        $color =null;
+        $totalQuantity = 0;
+        foreach($productDetail as $value){
+            $totalQuantity += $value->quantity;
+            $idSize = $value->size_id;
+            $idColor = $value->color_id;
+            $size[$idSize] = $value->sizes;
+            $color[$idColor] = $value->colors;
+        }
+        return view('client.pages.products.product-detail',[
+            'product'=>$product,
+            'productDetail'=>$productDetail,
+            'size'=> $size,
+            'color' => $color,
+            'totalQuantity'=>$totalQuantity
         ]);
     }
     public function productGrid(){
@@ -36,15 +73,18 @@ class ProductController extends Controller
     }
     public function listCategory(){
         // $gender_list = Product::select('gender')->get();
+        $color = Color::get();
+        $size = Size::get();
         $category_name_list = Category::select('category_name', 'category_id')->get();
         return view("admin.pages.eCommerce.add-new-product", [
             // 'gender_list' => $gender_list,
             'category_name_list' => $category_name_list,
+            'list_color' => $color,
+            'list_size' => $size
         ]);
     }
-    public function addProductGrid(Request $request){
-        // dd($request->all());
-
+    public function addProduct(Request $request) {
+        //dd( $request->input('quantity') );
         if ($request->has('add')) {
             $product_name = $request->input('product_name');
             $slug = $request->input('slug');
@@ -71,7 +111,28 @@ class ProductController extends Controller
                 'url_image' => $photo,
                 'description' => $description
             ]);
-            return redirect()->route('products-grid')->with('noti', 'Add successfull');
+
+            $list_color = Color::get();
+            $list_size = Size::get();
+            $productNew = Product::orderBy('product_id','desc')->first();
+            $quantity = $request->input('quantity');
+            foreach($list_color as $key_color => $color) {
+                foreach($list_size as $key_size => $size) {                  
+                    $index = $key_color*(count($list_size))+$key_size;
+                    if ($quantity[$index]>0) {
+                        ProductDetail::create([
+                            'product_id' => $productNew->product_id,
+                            'size_id' => $size->size_id,
+                            'color_id' => $color->color_id,
+                            'quantity' => $quantity[$index],
+                            'sku' => '#'.$productNew->product_id.$size->size_id.$color->color_id
+                        ]);
+                    }                  
+                }
+            }
+
+
+            return redirect()->route('products-list')->with('noti', 'Add successfull');
         }
         return redirect()->route('products-grid');
     }

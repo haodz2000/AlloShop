@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductDetail extends Model
 {
     protected $table = "product_details";
-    protected $primaryKey = "product_id";
+    // protected $primaryKey = "product_id";
 
-    protected $fillable = ['size_id','color_id','quantity'];
+    protected $fillable = ['product_id', 'size_id','color_id','quantity','sku'];
     protected $guarded = [];
     public function products(){
         return $this->belongsTo('App\Model\Product', 'product_id', 'product_id');
