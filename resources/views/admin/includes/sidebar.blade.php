@@ -45,7 +45,8 @@
     </li>
     <li class="menu-label">Code-discount</li>
       <li>
-        <a href="{{route('code')}}"><i class="bi"></i>Code-discount</a>
+        <a href="{{route('code-discount.index')}}"><i class="bi"></i>Code-discount</a>
+        <a href="{{route('code-discount.create')}}"><i class="bi"></i>Add Code-discount</a>
           {{-- <a href="javascript:;" class="has-arrow">
               <div class="parent-icon"><i class="bi bi-award"></i>
               </div>
