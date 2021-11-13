@@ -7,8 +7,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{ asset('./assets/admin/images/favicon-32x32.png') }}" type="image/png" />
-  
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
+
   {{-- CSS --}}
    @include('authentication.includes.css')
 
@@ -20,7 +20,7 @@
 
   <!--start wrapper-->
   <div class="wrapper">
-    
+
        <!--start content-->
        <main class="authentication-content">
         <div class="container-fluid">
@@ -137,7 +137,7 @@
           </div>
         </div>
        </main>
-        
+
        <!--end page main-->
 
   </div>
@@ -147,7 +147,7 @@
   {{-- JS --}}
   @include('authentication.includes.js')
 
-  
+
 </body>
 
 

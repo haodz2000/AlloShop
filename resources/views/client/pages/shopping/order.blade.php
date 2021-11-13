@@ -68,10 +68,10 @@
         </div>
     </div>
 </section>
-                <div class="board-view-detail-order hidden">
-                </div>
-                <div class="board-rating-product hidden">
-                </div>
+        <div class="board-view-detail-order hidden">
+        </div>
+        <div class="board-rating-product hidden">
+        </div>
 </section>
 <section class="shipping-area section">
 
@@ -316,7 +316,6 @@
                 </div>
 
             </div>
-
         </div>
 </section>
 @include('client.includes.client-area')
@@ -366,7 +365,6 @@
                         dataType: 'JSON',
                         success: function(data){
                             if(data !=0){
-                                console.log(data);
                                 var customer = data.customer;
                                 var order = data.order;
                                 var product = data.product;
@@ -464,14 +462,14 @@
                                 <div class="row"></div>\
                                 <div class="row">';
                                     $.each(product,function(index,val){
-                                        console.log(val);
+                                        image = JSON.parse(val.url_image)
                                         board += '<div class="product-single">\
                                                 <div class="row">\
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\
                                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">\
                                                         <a href="/products/'+val.slug+'">\
                                                             <figure>\
-                                                                <img style="margin-bottom: 5px" src="/assets/storage/images/product/'+val.url_image+'" alt="'+val.product_name+'">\
+                                                                <img style="margin-bottom: 5px" src="/assets/storage/images/product/'+image[0]+'" alt="'+val.product_name+'">\
                                                             </figure>\
                                                         </a>\
                                                     </div>\

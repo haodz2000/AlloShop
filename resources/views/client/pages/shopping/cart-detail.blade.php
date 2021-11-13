@@ -121,8 +121,10 @@
                                             <td>
                                                 <div class="img">
                                                     <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}">
-                                                        <img  src="{{ asset('assets/storage/images/product/'.$product['productInfo']->url_image) }}"
-                                                        alt="{{ $product['productInfo']->product_name }}"/>
+                                                        @php
+                                                            $image = json_decode($product['productInfo']->url_image)
+                                                        @endphp
+                                                        <img  src="{{ asset('assets/storage/images/product/'.$image[0]) }}"alt="{{ $product['productInfo']->product_name }}"/>
                                                     </a>
                                                 </div>
                                             </td>

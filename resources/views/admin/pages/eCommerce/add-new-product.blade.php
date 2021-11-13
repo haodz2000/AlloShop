@@ -1,5 +1,12 @@
 @extends('admin.index')
 @section('title', "Add new product")
+<style>
+    .box-image figure img{
+        max-width: 100px ;
+        margin: 5px;
+        display: inline;
+    }
+</style>
 @section('content')
 
     <!--breadcrumb-->
@@ -32,13 +39,13 @@
       <div class="row">
          <div class="col-lg-12 mx-auto">
           <div class="card">
-            <div class="card-header py-3 bg-transparent"> 
+            <div class="card-header py-3 bg-transparent">
               <div class="d-sm-flex align-items-center">
                 <h5 class="mb-2 mb-sm-0">Add New Product</h5>
                 <div class="ms-auto">
                   <form action="{{route('products-list')}}">
                     <button type="submit" class="btn btn-primary">List Product</button>
-                  </form>                 
+                  </form>
                 </div>
               </div>
             </div>
@@ -91,8 +98,22 @@
                             <input type="text" class="form-control" placeholder="Brand">
                           </div> --}}
                           <div class="col-12">
-                            <label class="form-label">Images</label>
-                            <input class="form-control" required type="file" name="url_image" id="url_image">
+                              <div class="row">
+                                  <div class="col-12">
+                                    <label class="form-label">Images</label>
+                                    <input class="form-control" required type="file" name="url_image[]" accept="image/*" multiple id="url_image">
+                                  </div>
+                              </div>
+                              <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box-image">
+                                            <div class="col-md-3">
+                                                <figure style="display: flex">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
                           </div>
                           <div class="col-12">
                             <label class="form-label">Full description</label>
@@ -111,5 +132,25 @@
 
 </main>
 <script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
+<script>
+    $(function() {
+            var imagesPreview = function(input, placeToInsertImagePreview) {
 
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#url_image').on('change', function() {
+                $('.box-image figure').html('');
+                imagesPreview(this, '.box-image figure');
+            });
+    });
+</script>
 @endsection

@@ -7,7 +7,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{ asset('./assets/admin/images/favicon-32x32.png') }}" type="image/png" />
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./assets/client/images/fav.png') }}">
   <title>Sign In</title>
 
   {{-- CSS --}}

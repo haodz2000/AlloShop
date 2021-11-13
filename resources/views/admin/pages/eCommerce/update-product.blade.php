@@ -1,5 +1,12 @@
 @extends('admin.index')
 @section('title', 'Update Product')
+<style>
+    .box-image figure img{
+        max-width: 100px ;
+        margin: 5px;
+        display: inline;
+    }
+</style>
 @section('content')
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -11,6 +18,7 @@
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Update Product</li>
                 </ol>
+
             </nav>
         </div>
         <div class="ms-auto">
@@ -21,7 +29,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"> <a class="dropdown-item"
                         href="javascript:;">Action</a>
-                    <a class="dropdown-item" href="javascript:;">Another action</a>
+                    <a class="dropdown-item" href="{{ route('productdetail.create',['id'=>$product->product_id]) }}">Tạo biến thể</a>
                     <a class="dropdown-item" href="javascript:;">Something else here</a>
                     <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated link</a>
                 </div>
@@ -52,12 +60,28 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Images</label>
-                                <input class="form-control" type="file" name="url_image">
+                                <input class="form-control" type="file" name="url_image[]" accept="image/*" multiple id="url_image">
                             </div>
                             <div class="col-12">
                                 <label class="form-label" style="color: red">Now images</label>
-                                <img src="{{ URL::asset('./assets/admin/images/products/' . $product['url_image']) }}"
-                                    alt="" class="form-control">
+                                @php
+                                    $image = json_decode($product->url_image)
+                                @endphp
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box-image">
+                                            <div class="col-md-3">
+                                                <figure style="display: flex">
+                                                    @foreach ($image as $item)
+                                                    <img style="width:100px" src="{{ URL::asset('./assets/storage/images/product/'.$item) }}"
+                                                        alt="{{ $product->product_name }}" class="">
+                                                        <i data-name ="{{ $item }}" class="delete">X</i>
+                                                    @endforeach
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Slug</label>
@@ -117,4 +141,25 @@
         </div>
     </div>
     <script src="{{ asset('./assets/admin/js/convert-slug.js')}}"></script>
+    <script>
+        $(function() {
+            var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#url_image').on('change', function() {
+                $('.box-image figure').html('');
+                imagesPreview(this, '.box-image figure');
+            });
+    });
+    </script>
 @endsection

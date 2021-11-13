@@ -45,6 +45,7 @@ class ProductController extends Controller
                 ->avg('vote');
         $vote['quantity'] = RatingProduct::where('product_id',$idProduct)->count();
         $ratingComment = RatingProduct::where('product_id',$idProduct)->orderBy('vote')->take(5)->get();
+        $arrayImage = json_decode($product->url_image);
         foreach($productDetail as $value){
             $totalQuantity += $value->quantity;
             $idSize = $value->size_id;
@@ -53,6 +54,7 @@ class ProductController extends Controller
             $color[$idColor] = $value->colors;
         }
         return view('client.pages.products.product-detail',[
+            'arrayImage'=>$arrayImage,
             'product'=>$product,
             'productDetail'=>$productDetail,
             'size'=> $size,
@@ -125,24 +127,42 @@ class ProductController extends Controller
             $discount = $request->input('discount');
             $description = $request->input('description');
             // $data = $request->except('_token', 'add');
-            $data = $request->input('url_image');
-            $photo = $request->file('url_image')->getClientOriginalName();
+            if($request->hasFile('url_image')){
+                $image = $request->file('url_image');
+                $arrayFile = null;
+                $i = 0;
+                foreach($image as $item){
+                    $storageFolder = base_path() . '/public/assets/storage/images/product';
+                    $storedPath = $item->move('assets/storage/images/product', $item->getClientOriginalName());
+                    $nameFile = $item->getClientOriginalName();
+                    $arrayFile[$i] = $nameFile;
+                    $i++;
+                }
+            }
+            // $data = $request->input('url_image');
+            // $photo = $request->file('url_image')->getClientOriginalName();
 
-            $destination = base_path() . '/public/assets/admin/images/products';
-            $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
+            // $destination = base_path() . '/public/assets/admin/images/products';
+            // $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
             // dd($data);
             // $create = Product::create($data);
-            Product::create([
-                'product_name' => $product_name,
-                'slug' => $slug,
-                'category_id' => $category_id,
-                'gender' => $gender,
-                'price' => $price,
-                'discount' => $discount,
-                'url_image' => $photo,
-                'description' => $description
-            ]);
-            return redirect()->route('products-list')->with('noti', 'Add successfull');
+            if(isset($arrayFile))
+            {
+                Product::create([
+                    'product_name' => $product_name,
+                    'slug' => $slug,
+                    'category_id' => $category_id,
+                    'gender' => $gender,
+                    'price' => $price,
+                    'discount' => $discount,
+                    'url_image' => json_encode($arrayFile),
+                    'description' => $description
+                ]);
+                return redirect()->route('products-list')->with('noti', 'Add successfull');
+            }
+            else{
+                return redirect()->route('products-list')->with('noti', 'Add Fails');
+            }
         }
         return redirect()->route('products-list');
     }
@@ -172,15 +192,33 @@ class ProductController extends Controller
             $product->gender = $gender;
             $product->price = $price;
             $product->discount = $discount;
-            if ($request->has('url_image')) {
-                $image_path = public_path("/assets/admin/images/products/".$product->url_image);
-                File::delete($image_path);
-                $data = $request->input('url_image');
-                $photo = $request->file('url_image')->getClientOriginalName();
-                $destination = base_path() . '/public/assets/admin/images/products';
-                $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
-                $product->url_image = $photo;
-            };
+            // if ($request->has('url_image')) {
+            //     $image_path = public_path("/assets/admin/images/products/".$product->url_image);
+            //     File::delete($image_path);
+            //     $data = $request->input('url_image');
+            //     $photo = $request->file('url_image')->getClientOriginalName();
+            //     $destination = base_path() . '/public/assets/admin/images/products';
+            //     $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
+            //     $product->url_image = $photo;
+            // };
+            if($request->hasFile('url_image')){
+                $oldImage = json_decode($product->url_image);
+                foreach($oldImage as $img){
+                    $image_path = public_path("/assets/storage/images/product/".$img);
+                    File::delete($image_path);
+                }
+                $image = $request->file('url_image');
+                $arrayFile = null;
+                $i = 0;
+                foreach($image as $item){
+                    $storageFolder = base_path() . '/public/assets/storage/images/product';
+                    $storedPath = $item->move('assets/storage/images/product', $item->getClientOriginalName());
+                    $nameFile = $item->getClientOriginalName();
+                    $arrayFile[$i] = $nameFile;
+                    $i++;
+                }
+                $product->url_image = json_encode($arrayFile);
+            }
             $product->description = $description;
             // dd($product);
             $product->save();

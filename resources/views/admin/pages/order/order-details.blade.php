@@ -9,7 +9,7 @@
           <ol class="breadcrumb mb-0 p-0">
             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Order details</li> 
+            <li class="breadcrumb-item active" aria-current="page">Order details</li>
           </ol>
         </nav>
       </div>
@@ -28,13 +28,13 @@
     </div>
     <!--end breadcrumb-->
       <div class="card">
-        <div class="card-header py-3"> 
+        <div class="card-header py-3">
           <div class="row g-3 align-items-center">
             <div class="col-12 col-lg-4 col-md-6 me-auto">
                 @if ($orders)
                     @foreach ($orders as $item)
                     <h5 class="mb-1">{{$item->created_at}}</h5>
-                    <p class="mb-0">Order ID : #{{$item->order_id}}</p>      
+                    <p class="mb-0">Order ID : #{{$item->order_id}}</p>
                     @endforeach
                 @endif
             </div>
@@ -60,7 +60,7 @@
           </div>
           </div>
          </div>
-         {{-- <div class="card-header py-3"> 
+         {{-- <div class="card-header py-3">
           <div class="row g-3 align-items-center">
             <div class="col-12 col-lg-4 col-md-6 me-auto">
               <h5 class="mb-1">Tue, Apr 15, 2020, 8:44PM</h5>
@@ -163,13 +163,16 @@
                           </thead>
                           <tbody>
                             @foreach ($order_details as $item)
-                            <tr>
+                            <tr style="height: 120px !important">
                               <td>
                                 <div class="orderlist">
                                  <a class="d-flex align-items-center gap-2" href="javascript:;">
                                    <div class="product-box">
-                                      {{-- {{$item->product_image}} --}}
-                                       <img src="{{asset('./assets/admin/images/products/'.$item->product_image)}}" alt="">
+                                      {{-- {{$item->pro duct_image}} --}}
+                                      @php
+                                          $image = json_decode($item->product_image);
+                                      @endphp
+                                       <img  src="{{asset('assets/storage/images/product/'.$image[0])}}" alt="">
                                    </div>
                                    <div>
                                        <P class="mb-0 product-title">{{$item->product_name}}</P>
@@ -218,7 +221,7 @@
                                        <td><span class="badge rounded-pill alert-danger">Hủy đơn hàng</span></td>
                                        @break
                                    @default
-                                       
+
                                @endswitch
                                    @endforeach
                                @endif
