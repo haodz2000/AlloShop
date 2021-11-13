@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use File;
 
 class UserController extends Controller
 {
@@ -34,6 +35,15 @@ class UserController extends Controller
             $user = User::where('email',Auth::user()->email)->first();
             $user->phone = $request->phone;
             $user->address = $request->street .'-'.$request->ward.'-'.$district.'-'.$city;
+            if($request->hasFile('avatar')){
+                $image_path = app_path($user->avatar);
+                $image_path = public_path($user->avatar);
+                File::delete($image_path);
+                $image = $request->file('avatar');
+                $url = 'assets/storage/images/avatar/'.$image->getClientOriginalName();
+                $storedPath = $image->move('assets/storage/images/avatar', $image->getClientOriginalName());
+                $user->avatar = $url;
+            }
             $user->save();
             return redirect()->route('user.profile');
         }

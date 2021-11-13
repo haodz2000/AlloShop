@@ -166,8 +166,18 @@
                                             <div class="product-single">
                                                 <figure class="left">
                                                     <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    @php
+                                                        $image = json_decode($newProducts[$i]->url_image)
+                                                    @endphp
+                                                    @isset($image)
+                                                        @if(count($image) >= 2)
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        @else
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        @endif
+                                                    @endisset
                                                     </a>
 
                                                     <span class="product-position color1">New</span>
@@ -229,8 +239,18 @@
                                             <div class="product-single">
                                                 <figure class="right">
                                                     <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    @php
+                                                        $image = json_decode($newProducts[$i]->url_image)
+                                                    @endphp
+                                                    @isset($image)
+                                                        @if(count($image) >= 2)
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        @else
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        @endif
+                                                    @endisset
                                                     </a>
 
                                                     <span class="product-position color1">New</span>
@@ -258,8 +278,18 @@
                                         <div class="product-single">
                                             <figure>
                                                 <a href="{{ route('products.slug',['slug'=> $newProducts[$i]->slug]) }}">
-                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
-                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$newProducts[$i]->url_image) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                @php
+                                                    $image = json_decode($newProducts[$i]->url_image)
+                                                @endphp
+                                                @isset($image)
+                                                    @if(count($image) >= 2)
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    @else
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $newProducts[$i]->product_name }}"/>
+                                                    @endif
+                                                @endisset
                                                 </a>
 
                                                 <span class="product-position color1">New</span>
@@ -289,8 +319,18 @@
                                         <div class="product-single">
                                             <figure>
                                                 <a {{ route('products.slug',['slug'=> $product->slug]) }}>
-                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                @php
+                                                    $image = json_decode($product->url_image)
+                                                @endphp
+                                                @isset($image)
+                                                    @if(count($image) >= 2)
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                    @else
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                    @endif
+                                                @endisset
                                                 </a>
                                                 <span class="price">${{ $product->price }}</span>
                                                 <ul>
@@ -317,12 +357,22 @@
                                             <div class="product-single">
                                                 <figure>
                                                     <a href="/products/{{ $product->slug }}">
-                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                    @php
+                                                        $image = json_decode($product->url_image)
+                                                    @endphp
+                                                    @isset($image)
+                                                        @if(count($image) >= 2)
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                        @else
+                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                        @endif
+                                                    @endisset
                                                     </a>
                                                     <span class="price">${{ $product->price }}</span>
                                                     <ul>
-                                                        <li data-id="{{ $product->product_id }}" class="shopping-cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a data-id="{{ $product->product_id }}" class="shopping-cart"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
                                                         <li><a href="/products/{{ $product->slug }}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
@@ -372,8 +422,18 @@
                                                 <div class="product-single">
                                                     <figure>
                                                         <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                            <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                            <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                            @php
+                                                                $image = json_decode($product->url_image)
+                                                            @endphp
+                                                            @isset($image)
+                                                                @if(count($image) >= 2)
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                                @else
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                @endif
+                                                            @endisset
                                                         </a>
                                                         <span class="product-position color2">Hot</span>
                                                         <span class="price">${{ $product->price }}</span>
@@ -399,8 +459,18 @@
                                                 <div class="product-single">
                                                     <figure style="max-width: 100%">
                                                         <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                            <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                            <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                            @php
+                                                                $image = json_decode($product->url_image)
+                                                            @endphp
+                                                            @isset($image)
+                                                                @if(count($image) >= 2)
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                                @else
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                @endif
+                                                            @endisset
                                                         </a>
                                                         <span class="product-position color2">Hot</span>
                                                         <span class="price">${{ $product->price }}</span>
@@ -424,12 +494,22 @@
                                 <div class="row accurate">
                                     @isset($bestSellerProduct)
                                         @foreach ( $bestSellerProduct as $product )
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                             <div class="product-single">
                                                     <figure>
                                                         <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                        <img class="normal" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
-                                                        <img class="hover" src="{{asset('./assets/storage/images/product/'.$product->url_image)}}" alt="{{$product->product_name}}"/>
+                                                        @php
+                                                            $image = json_decode($product->url_image)
+                                                        @endphp
+                                                        @isset($image)
+                                                            @if(count($image) >= 2)
+                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                            @else
+                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                            @endif
+                                                        @endisset
                                                         </a>
                                                         <span class="product-position color2">Hot</span>
                                                         <span class="price">${{ $product->price }}</span>
@@ -451,43 +531,41 @@
                             </div>
                             <div class="tab-pane" id="best-rated">
                                 <div class="row accurate">
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                        <div class="product-single">
-                                            <figure>
-                                                <img class="normal" src="{{asset('./assets/storage/images/product/12.jpg')}}" alt=""/>
-                                                <img class="hover" src="{{asset('./assets/storage/images/product/12h.jpg')}}" alt=""/>
-                                                <span class="product-position color1">New</span>
-                                                <span class="price">$59</span>
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                                </ul>
-                                                <div class="product-des">
-                                                    <a href="#"><h4>Rolex Machine</h4></a>
-                                                    <p>Accessories</p>
-                                                </div>
-                                            </figure>
+                                    @isset($bestSellerProduct)
+                                        @foreach ( $bestSellerProduct as $product )
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                            <div class="product-single">
+                                                    <figure>
+                                                        <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
+                                                        @php
+                                                            $image = json_decode($product->url_image)
+                                                        @endphp
+                                                        @isset($image)
+                                                            @if(count($image) >= 2)
+                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                            @else
+                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                            @endif
+                                                        @endisset
+                                                        </a>
+                                                        <span class="product-position color2">Hot</span>
+                                                        <span class="price">${{ $product->price }}</span>
+                                                        <ul>
+                                                            <li><a data-id="{{ $product->product_id }}" class="shopping-cart" ><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><i class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                        <div class="product-des">
+                                                            <a href="{{ route('products.slug',['slug'=>$product->slug]) }}"><h4>{{ $product->product_name }}</h4></a>
+                                                            <p>{{ $product->categories->category_name }}</p>
+                                                        </div>
+                                                    </figure>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 accurate">
-                                        <div class="product-single">
-                                            <figure>
-                                                <img class="normal" src="{{asset('./assets/storage/images/product/11.jpg')}}" alt=""/>
-                                                <img class="hover" src="{{asset('./assets/storage/images/product/11h.jpg')}}" alt=""/>
-                                                <span class="price">$59</span>
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart "></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-heart-o"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-eye"></i></a></li>
-                                                </ul>
-                                                <div class="product-des">
-                                                    <a href="#"><h4>Rolex Machine</h4></a>
-                                                    <p>Accessories</p>
-                                                </div>
-                                            </figure>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endisset
                                 </div>
                             </div>
                         </div>
@@ -575,5 +653,7 @@
         </script>
         <script src="{{ asset('./assets/client/js/jquery.addToCart.js')}}"></script>
         <script src="{{ asset('assets/client/js/jquery.formOrder.js') }}">
+        </script>
+        <script>
         </script>
 @endsection

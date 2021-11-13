@@ -43,7 +43,10 @@
                                             <li>
                                                 <div style="max-width:100px; float: left;">
                                                     <a href="{{ route('products.slug',['slug'=>$product['productInfo']->slug]) }}" title="" class="cart-product-image floatleft">
-                                                        <img src="{{asset('./assets/client/images/product/'.$product['productInfo']->url_image)}}" alt="Product">
+                                                        @php
+                                                            $image = json_decode($product['productInfo']->url_image);
+                                                        @endphp
+                                                        <img src="{{asset('./assets/storage/images/product/'.$image[0])}}" alt="{{ $product['productInfo']->product_name }}">
                                                     </a>
                                                 </div>
                                                 <div style="max-width:140px" class="text">

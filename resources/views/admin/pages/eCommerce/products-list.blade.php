@@ -13,17 +13,17 @@
             <li class="breadcrumb-item active" aria-current="page">Products List</li>
           </ol>
         </nav>
-      </div>    
+      </div>
       <div class="ms-auto">
         <div class="btn-group">
-          @if($linkFromCategory)       
+          @if($linkFromCategory)
             <form action="{{route('products-list')}}">
               <button type="submit" class="btn btn-info">Go to All Product</button>
             </form>
           @endif
           <form action="{{route('add-new-product')}}">
             <button type="submit" class="btn btn-success">Add Product</button>
-          </form>  
+          </form>
           <form action="{{route('category.index')}}">
             <button type="submit" class="btn btn-primary">Go to Category List</button>
           </form>
@@ -91,11 +91,18 @@
                 </thead>
                 <tbody>
                       @foreach ($product_list as $item)
-                        <tr>
+                        <tr style="height: 120px !important">
                           <td class="productlist">
                             <a class="d-flex align-items-center gap-2" href="#">
                               <div class="product-box">
-                                  <img src="{{asset('./assets/admin/images/products/'.$item->url_image)}}" alt="">
+                                  @php
+                                      $image = json_decode($item->url_image)
+                                  @endphp
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                        <img style="max-width:100%" src="{{asset('./assets/storage/images/product/'.$image[0])}}" alt="{{ $item->product_name }}">
+                                      </div>
+                                  </div>
                               </div>
                               <div>
                                   <h6 class="mb-0 product-title">{{$item->product_name}}</h6>
@@ -117,7 +124,7 @@
                                     <span>Cả hai</span>
                                     @break
                                 @default
-                                    
+
                             @endswitch
                           </td>
                           {{-- <td><span>{{$item->size}}</span></td> --}}
@@ -159,7 +166,7 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Gender</label>
-                                        <input readonly="true" type="text" class="form-control" value="@switch($item->gender) @case(1)Nam @break @case(2)Nữ@break @case(3)Cả hai @break @default   @endswitch">                                                                            
+                                        <input readonly="true" type="text" class="form-control" value="@switch($item->gender) @case(1)Nam @break @case(2)Nữ@break @case(3)Cả hai @break @default   @endswitch">
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <label class="form-label">Price</label>
@@ -180,7 +187,7 @@
                         </div>
                       @endforeach
                 </tbody>
-              </table>           
+              </table>
             </div>
             <nav class="float-end mt-4" aria-label="Page navigation">
               <ul class="pagination">
@@ -197,34 +204,34 @@
     <script>
       $(document).ready(function() {
             $('.form-select-category').change(function(){
-                filter_function();      
+                filter_function();
             });
-            $('table tbody tr').show(); 
+            $('table tbody tr').show();
 
             function filter_function(){
                 $('table tbody tr').hide();
-                
+
                 let categoryFlag = 0;
                 let categoryValue = $('.form-select-category').val();
-                
-                $('table tbody tr').each(function() {     
 
-                    if(categoryValue == 0){   
+                $('table tbody tr').each(function() {
+
+                    if(categoryValue == 0){
                         categoryFlag = 1;
                     }
-                    else if(categoryValue == $(this).find('td.category').data('category')){ 
-                        categoryFlag = 1;       
+                    else if(categoryValue == $(this).find('td.category').data('category')){
+                        categoryFlag = 1;
                     }
                     else{
                         categoryFlag = 0;
                     }
                     if(categoryFlag){
-                        $(this).show();  
+                        $(this).show();
                         if (categoryValue != 0) {
-                          $('.pagination').hide();  
+                          $('.pagination').hide();
                         }
-                    }             
-                });                                
+                    }
+                });
             }
       });
     </script>

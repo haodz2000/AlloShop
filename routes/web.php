@@ -53,11 +53,11 @@ Route::prefix('')->group(function () {
 });
 // Facebook Login
 Route::get('/signin/facebook', 'SignInController@redirectToFacebook')->name('facebook.login');
-Route::get('/signin/facebook/callback', 'SignInController@handleFacebookCallback');
+Route::get('/signin/facebook/callback', 'SignInController@handleFacebookCallback')->name('facebook.login.callback');
 
 // Google Login
 Route::get('/signin/google', 'SignInController@redirectToGoogle')->name('google.login');
-Route::get('/signin/google/callback', 'SignInController@handleGoogleCallback');
+Route::get('/signin/google/callback', 'SignInController@handleGoogleCallback')->name('google.login.callback');
 
 
 //Authentication
@@ -111,5 +111,6 @@ Route::group(["prefix" => "admin","middleware" => "auth"], function(){
     Route::get('/category/delete/{id}', 'CategoryController@destroy');
 
     Route::get('/code-discount', [CodeDiscountController::class, 'show'])->name('code');
-
+    Route::get('/productDetail/create/{id}','admin\ProductDetailController@index')->name('productdetail.create');
+    Route::post('/productDetail/create','admin\ProductDetailController@store')->name('productdetail.store');
 });

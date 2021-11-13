@@ -39,7 +39,7 @@
         <div class="row">
 
             <div style="margin:0 auto" class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                <form action="{{ route('user.profile.update') }}" method="POST" id="form-info" role="form">
+                <form action="{{ route('user.profile.update') }}" enctype="multipart/form-data" method="POST" id="form-info" role="form">
                     @csrf
                     @isset($error)
                     <span>{{ $error->error->first('address') }}</span>
@@ -47,14 +47,16 @@
                     <legend><strong style="color: blue">Thông Tin Khách Hàng</strong></legend>
                     <div class="avatar">
                         <div class="row">
-                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                                <figure>
-                                    <img style="max-width: 100%;" src="{{ $user->avatar }}" alt="">
-                                </figure>
-                                <div class="form-group">
-                                    <label for="my-avatar">Avatar</label>
-                                    <input id="my-avatar" name="avatar" class="form-control-file" type="file">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <figure>
+                                            <img style="max-width: 100%" id="avt_preview" src="{{ asset($user->avatar) }}" alt="{{ $user->name }}">
+                                            <input type="file" accept="image/*" name="avatar" id="avatar" style="form-control-file">
+                                        </figure>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -95,7 +97,7 @@
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <select name="ward" id="ward" class="form-control" required="required">
                                     @if (isset($address[1]))
-                                        <option value="1/{{ $address[1] }}">{{ $address[1] }}</option>
+                                        <option value="{{ $address[1] }}">{{ $address[1] }}</option>
                                     @else
                                         <option value="">Xã/Phường</option>
                                     @endif
@@ -175,5 +177,11 @@
             return true;
         }
     })
+    avatar.onchange = evt => {
+            const [file] = avatar.files
+            if (file) {
+              avt_preview.src = URL.createObjectURL(file)
+            }
+          }
 </script>
 @endsection

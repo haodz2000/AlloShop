@@ -94,22 +94,26 @@
                                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                                     </ol>
 
                                     <!-- Wrapper for slides -->
                                     <div style="max-width:100%; margin:0 auto" class="carousel-inner" role="listbox">
                                         <div class="item active">
-                                            <img src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="...">
-                                            <div class="carousel-caption">
-                                                ...
-                                            </div>
-                                            </div>
-                                            <div class="item">
-                                            <img src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="...">
+                                            <img src="{{ asset('assets/storage/images/product/'.$arrayImage[0]) }}" alt="{{ $product->product_name }}">
                                             <div class="carousel-caption">
                                                 ...
                                             </div>
                                         </div>
+                                        @for ($i = 1 ; $i< count($arrayImage);$i++)
+                                        <div class="item">
+                                            <img src="{{ asset('assets/storage/images/product/'.$arrayImage[$i]) }}" alt="{{ $product->product_name }}">
+                                            <div class="carousel-caption">
+                                                ...
+                                            </div>
+                                        </div>
+                                        @endfor
+
                                     </div>
                                     <!-- Controls -->
                                     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -124,34 +128,12 @@
                                 </div>
 
                                 <ul class="preview-thumbnail nav nav-tabs mr-l5">
-
-
-                                    <li class="active">
-
-                                        <a data-target="#pic-1" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}"alt="" /></a>
-
-                                    </li>
-
-                                    <li>
-
-                                        <a data-target="#pic-2" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
-
-                                    </li>
-
-                                    <li>
-
-                                        <a data-target="#pic-3" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
-
-                                    </li>
-
-                                    <li>
-
-                                        <a data-target="#pic-4" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$product->url_image) }}" alt="" /></a>
-
-                                    </li>
-
+                                    @foreach ($arrayImage as $item )
+                                        <li class="">
+                                            <a data-target="#pic-1" data-toggle="tab"><img src="{{ asset('./assets/storage/images/product/'.$item) }}"alt="{{ $product->product_name }}" /></a>
+                                        </li>
+                                    @endforeach
                                 </ul>
-
                             </div>
 
                         </div>
@@ -202,7 +184,6 @@
 
                                 </div>
                                 <div class="pro-deti">
-                                    <p>{{ $product->description }}</p>
                                 </div>
                                 <Form action="{{ route('addItemCart') }}" class="order-direction" method="POST">
                                     @csrf
@@ -291,7 +272,7 @@
 
                                         <h4>Specification:</h4>
 
-                                        <p>{{ $product->description }}</p>
+                                        <p>{!! $product->description !!}</p>
                                         <h4>Features:</h4>
 
                                         <ul>
@@ -397,9 +378,18 @@
                                                     <div class="single-product">
                                                         <figure>
                                                             <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-
-                                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                                @php
+                                                                    $image = json_decode($product->url_image)
+                                                                @endphp
+                                                                @isset($image)
+                                                                    @if(count($image) >= 2)
+                                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                                    @else
+                                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    @endif
+                                                                @endisset
                                                             </a>
                                                             <span class="price">Giá: <strong>${{ $product->price }}</strong></span>
                                                             <span style="float: right">Đã bán:<strong>{{ $product->quanity_orderd?$product->quantity_order:0 }}</strong></span>
@@ -418,7 +408,6 @@
                                                             <h4>{{ $product->product_name }}</h4>
 
                                                             <h5>{{ $product->categories->category_name }}</h5>
-                                                            <p>{{ $product->description }}</p>
                                                         </div>
 
                                                     </div>
@@ -438,9 +427,18 @@
 
                                                     <figure>
                                                         <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                            <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-
-                                                            <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                            @php
+                                                                $image = json_decode($product->url_image)
+                                                            @endphp
+                                                            @isset($image)
+                                                                @if(count($image) >= 2)
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                                @else
+                                                                    <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                    <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                                @endif
+                                                            @endisset
                                                         </a>
                                                         <span class="price">Giá: <strong>${{ $product->price }}</strong></span>
                                                         <span style="float: right">Đã bán:<strong>{{ $product->quanity_orderd?$product->quantity_order:0 }}</strong></span>
@@ -459,7 +457,6 @@
                                                         <h4>{{ $product->product_name }}</h4>
 
                                                         <h5>{{ $product->categories->category_name }}</h5>
-                                                        <p>{{ $product->description }}</p>
                                                     </div>
 
                                                 </div>

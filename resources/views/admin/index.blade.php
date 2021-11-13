@@ -9,8 +9,8 @@
         <title>@yield('title')</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">​
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets/client/images/fav.png') }}">​
         @include('admin.includes.css')
     </head>
     <body>
@@ -36,7 +36,7 @@
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <strong>{{ Session::get('error') }}</strong>
                 </div>
-            @endif 
+            @endif
             @yield('content')
         </main>
        <!--end page main-->
@@ -54,7 +54,7 @@
 <!-- Mirrored from staging-themelocation.com/allo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Aug 2021 16:32:14 GMT -->
 </html>
 
-@else   
+@else
     <h2>Bạn không có quyền truy cập! Quay lại <a href="/">trang chủ</a></h2> hoặc <a href="{{route('logout')}}">đăng nhập</a> bằng tài khoản admin
 @endif
 

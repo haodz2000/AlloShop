@@ -201,9 +201,18 @@
 
                                         <figure>
                                             <a href="{{ route('products.slug',['slug'=>$product->slug]) }}">
-                                                <img class="normal" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
-
-                                                <img class="hover" src="{{ asset('assets/storage/images/product/'.$product->url_image) }}" alt="{{ $product->product_name }}"/>
+                                                @php
+                                                    $image = json_decode($product->url_image)
+                                                @endphp
+                                                @isset($image)
+                                                    @if(count($image) >= 2)
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[1]) }}" alt="{{ $product->product_name }}"/>
+                                                    @else
+                                                        <img class="normal" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                        <img class="hover" src="{{ asset('assets/storage/images/product/'.$image[0]) }}" alt="{{ $product->product_name }}"/>
+                                                    @endif
+                                                @endisset
                                             </a>
                                             <span class="product-position color1">New</span>
 
