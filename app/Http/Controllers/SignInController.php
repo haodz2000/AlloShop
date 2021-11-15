@@ -64,7 +64,7 @@ class SignInController extends Controller
                 return redirect()->back()->with('error','This account was block!');
             }
             if (Auth::user()->level>2) {
-                return view('admin.pages.dashboard.dashboard');
+                return redirect()->route('dashboard');
                 //return view('client.pages.home');
             }
             if (Auth::user()->level==1) {

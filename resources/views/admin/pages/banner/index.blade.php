@@ -49,7 +49,7 @@
                    <div class="col" style="width: 500px">
                     <div class="card border shadow-none mb-0">
                       <div class="card-body text-center">
-                        <img src="{{asset('./assets/admin/images/banners/'.$item['url_banner'])}}" style="width: 500px" class="img-fluid mb-3" alt=""/>
+                        <img src="{{asset('./assets/storage/images/banner/'.$item['url_banner'])}}" style="width: 500px" class="img-fluid mb-3" alt=""/>
                         <h6 class="product-title">{{$item['name']}}</h6>
                         <div class="actions d-flex align-items-center justify-content-center gap-2 mt-3">
                           <a href="{{route('banner.edit',$item['banner_id'])}}" class="btn btn-sm btn-outline-primary" data-id=""><i class="bi bi-pencil-fill"></i>Edit</a>
