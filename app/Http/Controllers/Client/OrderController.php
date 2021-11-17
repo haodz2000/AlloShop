@@ -171,6 +171,8 @@ class OrderController extends Controller
                 $product[$key]['size'] = $value->size;
                 $product[$key]['color'] = $value->color;
                 $product[$key]['totalPrice'] = $value->total_price;
+                $product[$key]['rated'] = $value->status;
+                $product[$key]['sku'] = $value->sku;
             }
             if($order)
             {

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controller\CategoryController;
 use App\Http\Controller\SignUpController;
 use App\Http\Controller\SignInController;
@@ -65,10 +66,7 @@ Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
 
 Route::group(["prefix" => "admin","middleware" => "auth"], function(){
-    Route::get('/', function () {
-        return view('admin.pages.dashboard.dashboard');
-    })->name("dashboard");
-
+    Route::get('/', [DashboardController::class, 'index'])->name("dashboard");
     Route::get('/products-list', [ProductController::class, 'productList'])->name("products-list");
     Route::get('/products-list/category/{category}', [ProductController::class, 'productListSelectCategory'])->name("products-list-select-category");
     Route::get('/products-grid', [ProductController::class, 'productGrid'])->name("products-grid");

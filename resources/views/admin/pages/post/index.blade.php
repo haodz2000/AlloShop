@@ -24,7 +24,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive col-12">
-               <table class="table align-middle" id="data_post" data-public="{{asset('assets/admin/images/posts/')}}">
+               <table class="table align-middle" id="data_post" data-public="{{asset('assets/storage/images/post/')}}">
                  <thead class="table-light">
                    <tr>
                      <th><input class="form-check-input" type="checkbox"></th>
@@ -45,7 +45,7 @@
                      <td>{{$post->Users->name}}</td>
                      <td>{{$post->title}}</td>
                      <td ><textarea disabled rows="4" cols="50">{{$post->content}}</textarea></td>
-                     <td><img src="{{asset('assets/admin/images/posts/'.$post->url_image)}}" width="120px"></td>
+                     <td><img src="{{asset('assets/storage/images/post/'.$post->url_image)}}" width="120px"></td>
                      <td>{{$post->status==1?'Activate':'Disactivate'}}</td>
                      <td>
                       <div class="d-flex align-items-center gap-3 fs-6">

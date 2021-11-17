@@ -43,6 +43,7 @@
                 @foreach ($orders as $item)
             <form method="POST" class="row g-3">
               @csrf
+                @if($item->status != 4) 
                 <div class="col-9 col-lg-9">
                   <select class="form-select status" name="status" class="col-12 col-lg-6">
                     <option>Change Status</option>
@@ -53,6 +54,11 @@
                     <option value="4">Hủy đơn hàng</option>
                   </select>
                 </div>
+                @else 
+                  <div class="col-9 col-lg-9">
+                      <h6 class="text-success">Đã hoàn thành đơn hàng</h6>
+                  </div>
+                @endif
                 <div class="col-3 col-lg-3"><button type="submit" class="btn btn-primary save" name="save" data-id="{{$item->order_id}}">Save</button></div>
             </form>
                 @endforeach

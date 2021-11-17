@@ -62,7 +62,11 @@ $(document).on('submit',"Form.Form-Add-To-Cart",function(e){
                 $(".cart").load(" .cart");
                 $("#shiping").load(" #shiping");
                 $(".order-form").addClass('hidden');
-                alertify.success('Thêm mới thành công');
+                let alert = '<div class="alart">\
+                <span>Thêm mới thành công</span><br>\
+                <a style="padding: 5px; border-radius:5px;background-color:white;color:black" href="'+urlshiping+'">Vào giỏ hàng</a>\
+                </div>';
+                alertify.success(alert);
         },
             error: function (){
                 alertify.error('Thêm mới thất bại');

@@ -47,7 +47,7 @@ class BannerController extends Controller
         );
 
         $get_image      = $request->url_banner;
-        $path           = 'assets/admin/images/banners';
+        $path           = 'assets/storage/images/banner';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image     = current(explode('.', $get_name_image));
         $ext            = $get_image->getClientOriginalExtension();
@@ -114,11 +114,11 @@ class BannerController extends Controller
         // sửa ảnh
         $get_image = $request->url_banner;
         if ($get_image) {
-            $pathRemove = 'assets/admin/images/banners/'.$banner->url_banner;
+            $pathRemove = 'assets/storage/images/banner/'.$banner->url_banner;
             if (file_exists($pathRemove)) {
                 unlink($pathRemove);
             }
-            $path            = 'assets/admin/images/banners';
+            $path            = 'assets/storage/images/banner';
             $get_name_image  = $get_image->getClientOriginalName();
             $name_image      = current(explode('.', $get_name_image));
             $ext             = $get_image->getClientOriginalExtension();
@@ -146,7 +146,7 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banner = Banner::find($id);
-        $path = 'assets/admin/images/banners/'.$banner->url_banner;
+        $path = 'assets/storage/images/banner/'.$banner->url_banner;
         if (file_exists($path)) {
             unlink($path);
         }
