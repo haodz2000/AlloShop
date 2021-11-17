@@ -50,7 +50,7 @@ class PostController extends Controller
 
         // xu ly anh cua post
         $get_image      = $request->url_image;
-        $path           = 'assets/admin/images/posts';
+        $path           = 'assets/storage/images/post';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image     = current(explode('.', $get_name_image));
         $ext            = $get_image->getClientOriginalExtension();
@@ -127,11 +127,11 @@ class PostController extends Controller
         // sửa ảnh
         $get_image = $request->url_image;
         if ($get_image) {
-            $pathRemove = 'assets/admin/images/posts/'.$post->url_image;
+            $pathRemove = 'assets/storage/images/post/'.$post->url_image;
             if (file_exists($pathRemove)) {
                 unlink($pathRemove);
             }
-            $path            = 'assets/admin/images/posts';
+            $path            = 'assets/storage/images/post';
             $get_name_image  = $get_image->getClientOriginalName();
             $name_image      = current(explode('.', $get_name_image));
             $ext             = $get_image->getClientOriginalExtension();
@@ -159,7 +159,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        $path = 'assets/admin/images/posts/'.$post->url_image;
+        $path = 'assets/storage/images/post/'.$post->url_image;
         if (file_exists($path)) {
             unlink($path);
         }

@@ -45,7 +45,7 @@
                         <label class="form-label">Banner</label>
                         <input class="form-control" type="file" name="url_banner" id="">
                         <br><strong class="text-danger">Ảnh hiện tại</strong><br>
-                        <img src="{{asset('assets/admin/images/banners/'.$banner->url_banner)}}" alt="" width="50%">
+                        <img src="{{asset('assets/storage/images/banner/'.$banner->url_banner)}}" alt="" width="50%">
                      </div>
                      @error('url_banner')
                         <div class='alert alert-danger' role='alert'>

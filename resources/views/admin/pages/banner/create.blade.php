@@ -40,8 +40,10 @@
                     </div>    
 
                      <div class="col-12 col-lg-12">
-                        <label class="form-label">Banner</label>
-                        <input class="form-control" required type="file" name="url_banner" id="">
+                       <div class="row">
+                          <label class="form-label">Banner</label>
+                          <input class="form-control" required type="file" name="url_banner">
+                       </div>                     
                      </div>
                      @error('url_banner')
                         <div class='alert alert-danger' role='alert'>
@@ -59,4 +61,5 @@
        </div>
     </div>
  </div><!--end row-->
+
 @endsection
