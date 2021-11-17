@@ -357,6 +357,7 @@
         <script>
             $(document).on('click','table button.view-order',function(){
                 var id = parseInt($(this).data('id'));
+                $('.board-view-detail-order').html('');
                 if(id != ''){
                     $.ajax({
                         type: 'Post',
@@ -372,7 +373,7 @@
                                 $('.board-view-detail-order').removeClass('hidden');
                                 setTimeout(() => {
                                     $('.board-view-detail-order').html(board);
-                                }, 1500);
+                                }, 1000);
 
                             }
                             else{
@@ -500,8 +501,8 @@
                                                         </div>\
                                                     </div>\
                                                 </div>';
-                                        if(order.status == 2){
-                                            board +='<button data-id="'+val.product_id+'" data-order="'+order.order_id+'" class="btn btn-danger rating">Đánh giá</button>';
+                                        if(val.rated == 0){
+                                            board +='<button data-id="'+val.product_id+'" data-sku="'+val.sku+'" data-order="'+order.order_id+'" class="btn btn-danger rating">Đánh giá</button>';
                                         }
                                         board+='</div>\
                                         </div>';
@@ -542,14 +543,15 @@
             $(document).on('click','.board .product-single button.rating',function(){
                 var idProduct = $(this).data('id');
                 var idOrder = $(this).data('order');
-                var boardRating = createBoardRating(idProduct,idOrder);
+                var sku = $(this).data('sku');
+                var boardRating = createBoardRating(idProduct,idOrder,sku);
                 $('.board-rating-product').html(boardRating);
                 $('.board-rating-product').removeClass('hidden');
                 $('.board-view-detail-order').css('z-index','1');
             })
 
             //Tạo board đánh giá
-            function createBoardRating(idProduct,idOrder){
+            function createBoardRating(idProduct,idOrder,sku){
                 var board ='<div class="board">\
                         <div class="row">\
                             <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center">\
@@ -597,7 +599,7 @@
                         <div class="row">\
                             <div class="rating">\
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">\
-                                    <button data-id="'+idProduct+'" data-order="'+idOrder+'" class="btn btn-danger rate">Đánh giá</button>\
+                                    <button data-id="'+idProduct+'" data-sku="'+sku+'" data-order="'+idOrder+'" class="btn btn-danger rate">Đánh giá</button>\
                                 </div>\
                             </div>\
                         </div>\
@@ -712,6 +714,7 @@
                 var idOrder = parseInt($(this).data('order'));
                 var star = $('.board .rating-star input#rate').val();
                 var comment = $('.board .comment-rating textarea#comment').val();
+                var sku = $(this).data('sku');
                 $.ajax({
                     type:'POST',
                     url: urlShippingRating,
@@ -719,7 +722,8 @@
                         idProduct:idProduct,
                         idOrder:idOrder,
                         star:star,
-                        comment:comment
+                        comment:comment,
+                        sku:sku
                         },
                     dataType:'JSON',
                     success: function(data){
@@ -727,6 +731,9 @@
                             $('.board-rating-product').addClass('hidden');
                             $('.board-view-detail-order').addClass('hidden');
                             $('.board-view-detail-order').css('z-index','9999');
+                        }
+                        else{
+                            alert("Không tìm thấy sản phẩm");
                         }
                     },
                     error: function(){

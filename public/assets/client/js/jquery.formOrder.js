@@ -90,7 +90,7 @@ function createFormOrder(product,size,color,quantityStock){
         <br>\
         <strong>Quantity:</strong>\
         <input required="" style="border-radius: 5px;" type="number" name="quantity" min="1" value="1" id="quantity">\
-        <button style="margin-top:10px " type="submit" class="btn btn-primary form-control">Add To Cart</button>\
+        <button style="margin-top:10px " type="submit" class="btn btn-primary form-control">Thêm sản phẩm</button>\
         </form>';
     return form;
 }
