@@ -62,6 +62,9 @@ Route::get('/signin/google/callback', 'SignInController@handleGoogleCallback')->
 
 
 //Authentication
+Route::get('/forgot-password','Auth\ResetPasswordController@index')->name('forgot.password');
+Route::post('reset-password','Auth\ResetPasswordController@sendEmail')->name('reset.password');
+Route::get('reset-password/{token}','Auth\ResetPasswordController@reset');
 Route::resource('/signin','SignInController');
 Route::resource('/signup','SignUpController');
 
