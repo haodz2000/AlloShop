@@ -9,6 +9,7 @@ use App\Model\RatingProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProductController extends Controller
 {
@@ -178,6 +179,7 @@ class ProductController extends Controller
         if ($request->has('update')) {
             // $data = $request->except('_token', 'update');
             // dd($product->product_name);
+
             $product_name = $request->input('product_name');
             $slug = $request->input('slug');
             $category_id = $request->input('category_id');
@@ -186,44 +188,56 @@ class ProductController extends Controller
             $discount = $request->input('discount');
             $description = $request->input('description');
             $product = Product::find($id);
-            $product->product_name = $product_name;
-            $product->slug = $slug;
-            $product->category_id = $category_id;
-            $product->gender = $gender;
-            $product->price = $price;
-            $product->discount = $discount;
-            // if ($request->has('url_image')) {
-            //     $image_path = public_path("/assets/admin/images/products/".$product->url_image);
-            //     File::delete($image_path);
-            //     $data = $request->input('url_image');
-            //     $photo = $request->file('url_image')->getClientOriginalName();
-            //     $destination = base_path() . '/public/assets/admin/images/products';
-            //     $request->file('url_image')->move($destination, $photo); // Xử lý để lưu ảnh
-            //     $product->url_image = $photo;
-            // };
-            if($request->hasFile('url_image')){
-                $oldImage = json_decode($product->url_image);
-                foreach($oldImage as $img){
-                    $image_path = public_path("/assets/storage/images/product/".$img);
-                    File::delete($image_path);
+            try {
+            //     //code...
+                if($request->has('image_delete')){
+                    $data = $request->image_delete;
+                    $oldImage = json_decode($product->url_image);
+                    if($data != null){
+                        $imageDel = explode(',',$data);
+                        // dd($imageDel);
+                        foreach($imageDel as $item){
+                            foreach($oldImage as $key=>$value){
+                                if($value == $item){
+                                    unset($oldImage[$key]);
+                                }
+                            }
+                            $image_path = public_path("/assets/storage/images/product/".$item);
+                            File::delete($image_path);
+                        }
+                    }
+                    if($request->hasFile('url_image')){
+                        $image = $request->file('url_image');
+                        foreach($image as $item){
+                            $storageFolder = base_path() . '/public/assets/storage/images/product';
+                            $storedPath = $item->move('assets/storage/images/product', $item->getClientOriginalName());
+                            $nameFile = $item->getClientOriginalName();
+                            array_push($oldImage,$nameFile);
+                        }
+                    }
+                    $i = 0;
+                    $newUrl = [];
+                    foreach($oldImage as $url){
+                        $newUrl[$i] = $url;
+                        $i++;
+                    }
+                    $product->url_image = json_encode($newUrl);
+                    $product->product_name = $product_name;
+                    $product->slug = $slug;
+                    $product->category_id = $category_id;
+                    $product->gender = $gender;
+                    $product->price = $price;
+                    $product->discount = $discount;
+                    $product->description = $description;
+                    // dd($product);
+                    $product->save();
+                    return redirect()->route('products-grid.update-view',['id'=>$product->product_id])->with('noti', 'Add successfull');
                 }
-                $image = $request->file('url_image');
-                $arrayFile = null;
-                $i = 0;
-                foreach($image as $item){
-                    $storageFolder = base_path() . '/public/assets/storage/images/product';
-                    $storedPath = $item->move('assets/storage/images/product', $item->getClientOriginalName());
-                    $nameFile = $item->getClientOriginalName();
-                    $arrayFile[$i] = $nameFile;
-                    $i++;
-                }
-                $product->url_image = json_encode($arrayFile);
+            } catch (\Throwable $th) {
+                    //throw $th;
+                    return redirect()->route('products-grid.update-view',['id'=>$product->product_id])->with('noti', 'Add Faild');
             }
-            $product->description = $description;
-            // dd($product);
-            $product->save();
-            return redirect()->route('products-list')->with('noti', 'Add successfull');
         }
-        return redirect()->route('products-list');
+
     }
 }

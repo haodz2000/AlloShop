@@ -96,7 +96,7 @@
                             <a class="d-flex align-items-center gap-2" href="#">
                               <div class="product-box">
                                   @php
-                                      $image = json_decode($item->url_image)
+                                      $image = json_decode($item->url_image);
                                   @endphp
                                   <div class="row">
                                       <div class="col-md-12">

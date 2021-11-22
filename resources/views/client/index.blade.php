@@ -9,8 +9,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <div id="fb-root"></div>
-        <meta property="fb:admins" content="&#123;100523459115884&#125;"/>
+        <meta property="fb:app_id" content="&#123;314699203450532&#125;" />
         @yield('css_by_page')
 
 </head>

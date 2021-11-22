@@ -5,6 +5,16 @@
         max-width: 100px ;
         margin: 5px;
         display: inline;
+        border-radius: 5px;
+    }
+    figure i.delete{
+        position: relative;
+        margin-right: -18px;
+        top: 6px;
+        color: red;
+    }
+    .opacity{
+        opacity: 0.1;
     }
 </style>
 @section('content')
@@ -73,15 +83,27 @@
                                             <div class="col-md-3">
                                                 <figure style="display: flex">
                                                     @foreach ($image as $item)
-                                                    <img style="width:100px" src="{{ URL::asset('./assets/storage/images/product/'.$item) }}"
+                                                    <i data-id="{{ '#'.$item }}" data-name ="{{ $item }}" class="delete bi  bi-trash-fill"></i>
+                                                    <img id="{{ $item }}" style="width:100px" src="{{ URL::asset('./assets/storage/images/product/'.$item) }}"
                                                         alt="{{ $product->product_name }}" class="">
-                                                        <i data-name ="{{ $item }}" class="delete">X</i>
                                                     @endforeach
                                                 </figure>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <label id="preview" class="form-label" style="color: red"></label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="box-image box-image2">
+                                            <div class="col-md-3">
+                                                <figure style="display: flex">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="image_delete" id="image-delete">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Slug</label>
@@ -157,9 +179,32 @@
                 }
             };
             $('#url_image').on('change', function() {
-                $('.box-image figure').html('');
-                imagesPreview(this, '.box-image figure');
+                // $('.box-image figure').html('');
+                imagesPreview(this, '.box-image2 figure');
+                $('#preview').html('Images Preview')
             });
-    });
+        });
+        var valueImageDel = []
+        $(document).on('click','figure i.delete',function(){
+            var image = $(this).data('name');
+            var value = [];
+            valueImageDel.push(image)
+            console.log(valueImageDel);
+            $('input#image-delete').val(valueImageDel);
+            value =  $('input#image-delete').val();
+            console.log(value);
+            $(this).removeClass('delete bi bi-trash-fill');
+            $(this).html('Hủy');
+            $(this).addClass('undo')
+        })
+        $(document).on('click','figure i.undo',function(){
+            var image = $(this).data('name');
+            valueImageDel.pop(image)
+            $('input#image-delete').val(valueImageDel);
+            value =  $('input#image-delete').val();
+            $(this).removeClass('undo');
+            $(this).html('');
+            $(this).addClass('delete bi bi-trash-fill');
+        })
     </script>
 @endsection
